@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <div class="dashboard-card">
+
+        <h1>
+            Welcome, {{ user.username }}!
+        </h1>
+
+        <p class="dashboard-message">
+            You are logged in.
+        </p>
+
+        <div class="dashboard-actions">
+
+            <a href="{% url 'create_claim' %}" class="dashboard-button">
+                Submit New Claim
+            </a>
+
+            <a href="{% url 'claim_list' %}" class="dashboard-button">
+                My Claims
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

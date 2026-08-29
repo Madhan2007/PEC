@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Submit Claim
+{% endblock %}
+
+{% block content %}
+
+<div class="claim-form-container">
+
+    <div class="claim-form-card">
+
+        <div class="claim-form-header">
+            <h1>Submit Insurance Claim</h1>
+            <p>Enter the details of your medical claim below.</p>
+        </div>
+
+        <form method="POST" class="claim-form">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="claim-submit-button">
+                Submit Claim
+            </button>
+
+        </form>
+
+        <div class="claim-form-footer">
+            <a href="{% url 'claim_list' %}">
+                ← Back to My Claims
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

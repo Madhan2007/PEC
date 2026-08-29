@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Claims
+{% endblock %}
+
+{% block content %}
+
+<div class="claims-container">
+
+    <div class="claims-header">
+        <div>
+            <h1>My Claims</h1>
+            <p>View and manage your insurance claims.</p>
+        </div>
+
+        <a href="{% url 'create_claim' %}" class="dashboard-button">
+            + Submit New Claim
+        </a>
+    </div>
+
+
+    <div class="claims-list">
+
+        {% for claim in claims %}
+
+            <div class="claim-card">
+
+                <div class="claim-card-header">
+
+                    <a href="{% url 'claim_detail' claim.id %}">
+                        <h2>Claim #{{ claim.id }}</h2>
+                    </a>
+
+                    <span class="claim-status status-{{ claim.status }}">
+                        {{ claim.get_status_display }}
+                    </span>
+
+                </div>
+
+
+                <div class="claim-info">
+
+                    <div>
+                        <span>Patient</span>
+                        <strong>{{ claim.patient_name }}</strong>
+                    </div>
+
+                    <div>
+                        <span>Hospital</span>
+                        <strong>{{ claim.hospital_name }}</strong>
+                    </div>
+
+                    <div>
+                        <span>Procedure</span>
+                        <strong>{{ claim.procedure }}</strong>
+                    </div>
+
+                    <div>
+                        <span>Amount</span>
+                        <strong>₹{{ claim.amount }}</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="claim-card-footer">
+
+                    <a href="{% url 'claim_detail' claim.id %}">
+                        View Claim →
+                    </a>
+
+                    <a href="{% url 'upload_document' claim.id %}">
+                        Upload Document
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="empty-claims">
+                <h2>No claims yet</h2>
+                <p>You haven't submitted any insurance claims.</p>
+
+                <a href="{% url 'create_claim' %}" class="dashboard-button">
+                    Submit Your First Claim
+                </a>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

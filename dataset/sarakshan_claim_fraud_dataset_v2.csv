@@ -1,0 +1,501 @@
+claim_id,patient_name,patient_age,patient_gender,hospital_name,hospital_id,doctor_id,diagnosis,procedure,claim_amount,claim_date,admission_date,discharge_date,days_admitted,insurance_type,previous_claims,previous_claim_amount,documents_verified,duplicate_claim,diagnosis_procedure_match,hospital_claim_count,patient_claim_count,is_fraud,fraud_type,risk_level
+CLM0001,Meera Iyer,48,Female,MIOT International,H003,D023,Cataract,Cataract Surgery,63868.99,2026-01-07,2026-01-07,2026-01-12,5,Family Floater,3,28251,Yes,No,Yes,40,4,0,None,Low
+CLM0002,Ananya Rao,29,Female,MIOT International,H003,D002,Fracture,Orthopedic Surgery,67851.11,2026-02-23,2026-02-21,2026-02-27,6,Corporate Insurance,2,57936,Yes,No,Yes,35,3,0,None,Low
+CLM0003,Arjun Patel,61,Male,St. Thomas Hospital,H004,D021,Diabetes,Diabetes Management,50101.47,2026-07-22,2026-07-20,2026-07-30,10,Health Insurance,1,10065,Yes,No,Yes,102,2,0,None,Low
+CLM0004,Varun Kumar,54,Male,Fortis Hospital,H002,D009,Coronary Artery Disease,Heart Surgery,144307.47,2026-07-25,2026-07-22,2026-07-31,9,Health Insurance,4,75222,Yes,No,Yes,25,5,0,None,Low
+CLM0005,Varun Kumar,54,Male,Kauvery Hospital,H005,D006,Coronary Artery Disease,Heart Surgery,160886.08,2026-06-04,2026-06-01,2026-06-07,6,Health Insurance,3,85156,Yes,No,Yes,35,4,0,None,Low
+CLM0006,Arjun Patel,61,Male,St. Thomas Hospital,H004,D008,Diabetes,Diabetes Management,50565.34,2026-03-06,2026-03-04,2026-03-11,7,Corporate Insurance,3,80295,Yes,No,Yes,48,4,0,None,Low
+CLM0007,Sneha Nair,57,Female,St. Thomas Hospital,H004,D001,Breast Tumor,Tumor Removal,153045.92,2026-03-09,2026-03-09,2026-03-16,7,Family Floater,0,0,Yes,No,Yes,44,1,0,None,Low
+CLM0008,Varun Kumar,54,Male,Apollo Hospital,H001,D010,Coronary Artery Disease,Heart Surgery,135063.46,2026-08-24,2026-08-22,2026-08-30,8,Family Floater,2,47328,Yes,No,Yes,89,3,0,None,Low
+CLM0009,Rahul Kumar,42,Male,MIOT International,H003,D002,Appendicitis,Appendectomy,64777.09,2026-06-03,2026-06-02,2026-06-08,6,Family Floater,2,40636,Yes,No,Yes,33,3,0,None,Low
+CLM0010,Ananya Rao,29,Female,Sunrise Medical Centre,H008,D015,Fracture,Orthopedic Surgery,56899.6,2026-04-16,2026-04-14,2026-04-15,1,Corporate Insurance,4,50566,Yes,No,Yes,38,5,0,None,Low
+CLM0011,Priya Sharma,36,Female,Fortis Hospital,H002,D004,Gallstones,Cholecystectomy,89236.84,2026-06-20,2026-06-20,2026-06-30,10,Corporate Insurance,1,28036,Yes,No,Yes,87,2,0,None,Low
+CLM0012,Ananya Rao,29,Female,Global Hospital,H006,D021,Fracture,Orthopedic Surgery,69256.38,2026-02-13,2026-02-12,2026-02-13,1,Corporate Insurance,0,0,Yes,No,Yes,26,1,0,None,Low
+CLM0013,Priya Sharma,36,Female,Fortis Hospital,H002,D012,Gallstones,Cholecystectomy,95152.82,2026-01-22,2026-01-20,2026-01-26,6,Health Insurance,3,87679,Yes,No,Yes,119,4,0,None,Low
+CLM0014,Sneha Nair,57,Female,Fortis Hospital,H002,D010,Breast Tumor,Tumor Removal,146915.63,2026-03-15,2026-03-14,2026-03-17,3,Family Floater,2,88734,Yes,No,Yes,87,3,0,None,Low
+CLM0015,Meera Iyer,48,Female,Fortis Hospital,H002,D030,Cataract,Cataract Surgery,61204.82,2026-06-08,2026-06-05,2026-06-15,10,Corporate Insurance,4,51744,Yes,No,Yes,26,5,0,None,Low
+CLM0016,Priya Sharma,36,Female,Kauvery Hospital,H005,D004,Gallstones,Cholecystectomy,101711.92,2026-06-24,2026-06-24,2026-07-03,9,Family Floater,2,17559,Yes,No,No,21,3,1,Diagnosis/Procedure Mismatch,High
+CLM0017,Rahul Kumar,42,Male,Global Hospital,H006,D029,Appendicitis,Appendectomy,77244.85,2026-08-06,2026-08-04,2026-08-14,10,Health Insurance,3,49886,Yes,Yes,Yes,93,4,1,Duplicate Claim,High
+CLM0018,Arjun Patel,61,Male,Apollo Hospital,H001,D014,Diabetes,Diabetes Management,51559.49,2026-07-02,2026-06-30,2026-07-10,10,Corporate Insurance,4,17286,Yes,No,Yes,34,5,0,None,Low
+CLM0019,Rahul Kumar,42,Male,MIOT International,H003,D022,Appendicitis,Appendectomy,86578.82,2026-04-15,2026-04-13,2026-04-23,10,Corporate Insurance,1,83308,Yes,No,Yes,39,2,0,None,Low
+CLM0020,Varun Kumar,54,Male,City Care Hospital,H007,D009,Coronary Artery Disease,Heart Surgery,133132.31,2026-03-22,2026-03-22,2026-03-25,3,Corporate Insurance,0,0,Yes,No,Yes,56,1,0,None,Low
+CLM0021,Karthik Singh,33,Male,St. Thomas Hospital,H004,D001,Kidney Stone,Lithotripsy,76526.64,2026-05-31,2026-05-31,2026-06-03,3,Corporate Insurance,3,75293,Yes,No,Yes,48,4,0,None,Medium
+CLM0022,Rahul Kumar,42,Male,City Care Hospital,H007,D002,Appendicitis,Appendectomy,73884.5,2026-02-23,2026-02-22,2026-02-28,6,Health Insurance,1,64696,Yes,No,Yes,89,2,0,None,Low
+CLM0023,Sneha Nair,57,Female,Global Hospital,H006,D017,Breast Tumor,Tumor Removal,143602.59,2026-07-16,2026-07-16,2026-07-22,6,Family Floater,0,0,Yes,No,Yes,37,1,0,None,Low
+CLM0024,Priya Sharma,36,Female,Kauvery Hospital,H005,D024,Gallstones,Cholecystectomy,262099.04,2026-08-07,2026-08-04,2026-08-10,6,Family Floater,1,21112,Yes,No,Yes,77,2,1,Inflated Amount,High
+CLM0025,Arjun Patel,61,Male,Apollo Hospital,H001,D019,Diabetes,Diabetes Management,220000.0,2026-08-09,2026-08-08,2026-08-12,4,Corporate Insurance,3,14072,Yes,No,Yes,110,4,1,Inflated Amount,High
+CLM0026,Ananya Rao,29,Female,Global Hospital,H006,D027,Fracture,Orthopedic Surgery,62859.0,2026-08-23,2026-08-22,2026-08-24,2,Family Floater,1,8571,Yes,No,Yes,76,2,0,None,Low
+CLM0027,Varun Kumar,54,Male,Kauvery Hospital,H005,D015,Coronary Artery Disease,Heart Surgery,129428.88,2026-03-19,2026-03-17,2026-03-19,2,Health Insurance,1,66477,Yes,No,Yes,39,2,0,None,Low
+CLM0028,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D029,Coronary Artery Disease,Heart Surgery,132285.33,2026-08-20,2026-08-18,2026-08-25,7,Corporate Insurance,4,62468,Yes,No,Yes,47,5,0,None,Low
+CLM0029,Rahul Kumar,42,Male,Apollo Hospital,H001,D001,Appendicitis,Appendectomy,85938.86,2026-04-27,2026-04-27,2026-05-04,7,Health Insurance,0,0,Yes,No,Yes,116,1,0,None,Low
+CLM0030,Arjun Patel,61,Male,City Care Hospital,H007,D016,Diabetes,Diabetes Management,41951.74,2026-01-01,2025-12-30,2026-01-03,4,Family Floater,3,19709,Yes,No,Yes,84,4,0,None,Medium
+CLM0031,Arjun Patel,61,Male,Apollo Hospital,H001,D007,Diabetes,Diabetes Management,43882.82,2026-06-10,2026-06-10,2026-06-20,10,Health Insurance,4,28228,Yes,No,Yes,67,5,0,None,Medium
+CLM0032,Priya Sharma,36,Female,Apollo Hospital,H001,D017,Gallstones,Cholecystectomy,85836.27,2026-01-22,2026-01-19,2026-01-26,7,Family Floater,3,74209,Yes,No,Yes,76,4,0,None,Low
+CLM0033,Varun Kumar,54,Male,MIOT International,H003,D026,Coronary Artery Disease,Heart Surgery,139175.53,2026-02-07,2026-02-07,2026-02-13,6,Health Insurance,4,54003,Yes,No,Yes,109,5,0,None,Medium
+CLM0034,Ananya Rao,29,Female,Apollo Hospital,H001,D030,Fracture,Orthopedic Surgery,67138.51,2026-01-20,2026-01-18,2026-01-19,1,Health Insurance,4,33006,Yes,No,Yes,79,5,0,None,Low
+CLM0035,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D017,Kidney Stone,Lithotripsy,70026.78,2026-02-01,2026-01-30,2026-02-02,3,Corporate Insurance,0,0,Yes,No,Yes,90,1,0,None,Low
+CLM0036,Rahul Kumar,42,Male,Sunrise Medical Centre,H008,D007,Appendicitis,Appendectomy,70148.97,2026-07-24,2026-07-24,2026-07-28,4,Health Insurance,0,0,Yes,No,Yes,45,1,0,None,Low
+CLM0037,Meera Iyer,48,Female,MIOT International,H003,D017,Cataract,Cataract Surgery,54171.51,2026-05-18,2026-05-15,2026-05-25,10,Corporate Insurance,4,26834,Yes,No,Yes,40,5,0,None,Low
+CLM0038,Karthik Singh,33,Male,MIOT International,H003,D002,Kidney Stone,Lithotripsy,89312.07,2026-06-29,2026-06-28,2026-07-03,5,Family Floater,2,47994,Yes,No,Yes,114,3,0,None,Low
+CLM0039,Priya Sharma,36,Female,Kauvery Hospital,H005,D014,Gallstones,Cholecystectomy,106040.8,2026-06-04,2026-06-03,2026-06-06,3,Corporate Insurance,0,0,Yes,No,Yes,94,1,0,None,Low
+CLM0040,Arjun Patel,61,Male,Fortis Hospital,H002,D015,Diabetes,Diabetes Management,46036.36,2026-01-25,2026-01-23,2026-01-31,8,Health Insurance,3,21785,Yes,Yes,Yes,91,4,1,Duplicate Claim,High
+CLM0041,Rahul Kumar,42,Male,MIOT International,H003,D007,Appendicitis,Appendectomy,75920.5,2026-02-24,2026-02-21,2026-03-01,8,Family Floater,10,481070,Yes,No,Yes,45,11,1,Excessive Claims,High
+CLM0042,Sneha Nair,57,Female,Apollo Hospital,H001,D028,Breast Tumor,Tumor Removal,127626.59,2026-07-01,2026-06-30,2026-07-02,2,Corporate Insurance,2,84443,Yes,No,Yes,99,3,0,None,Low
+CLM0043,Karthik Singh,33,Male,Fortis Hospital,H002,D024,Kidney Stone,Lithotripsy,83936.29,2026-07-15,2026-07-12,2026-07-19,7,Corporate Insurance,3,18580,Yes,No,Yes,26,4,0,None,Low
+CLM0044,Karthik Singh,33,Male,MIOT International,H003,D026,Kidney Stone,Lithotripsy,68722.42,2026-05-29,2026-05-29,2026-06-06,8,Health Insurance,3,15795,Yes,No,Yes,24,4,0,None,Low
+CLM0045,Sneha Nair,57,Female,Kauvery Hospital,H005,D012,Breast Tumor,Tumor Removal,159764.53,2026-08-22,2026-08-19,2026-08-20,1,Family Floater,0,0,Yes,No,Yes,110,1,0,None,Low
+CLM0046,Ananya Rao,29,Female,Kauvery Hospital,H005,D028,Fracture,Orthopedic Surgery,67813.54,2026-03-15,2026-03-12,2026-03-19,7,Family Floater,3,18178,Yes,No,Yes,47,4,0,None,Low
+CLM0047,Karthik Singh,33,Male,Global Hospital,H006,D025,Kidney Stone,Lithotripsy,75655.43,2026-06-20,2026-06-17,2026-06-27,10,Corporate Insurance,1,50925,Yes,No,Yes,51,2,0,None,Low
+CLM0048,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D021,Kidney Stone,Lithotripsy,77495.19,2026-05-18,2026-05-18,2026-05-24,6,Corporate Insurance,3,41539,Yes,No,Yes,63,4,0,None,Low
+CLM0049,Meera Iyer,48,Female,Kauvery Hospital,H005,D020,Cataract,Cataract Surgery,48830.56,2026-04-25,2026-04-24,2026-04-28,4,Corporate Insurance,1,52849,Yes,No,Yes,64,2,0,None,Low
+CLM0050,Meera Iyer,48,Female,MIOT International,H003,D027,Cataract,Cataract Surgery,58396.45,2026-06-08,2026-06-05,2026-06-13,8,Health Insurance,3,19389,Yes,No,Yes,75,4,0,None,Low
+CLM0051,Arjun Patel,61,Male,St. Thomas Hospital,H004,D027,Diabetes,Diabetes Management,51172.52,2026-06-14,2026-06-14,2026-06-20,6,Family Floater,3,7988,Yes,No,Yes,77,4,0,None,Low
+CLM0052,Rahul Kumar,42,Male,Fortis Hospital,H002,D006,Appendicitis,Appendectomy,65546.75,2026-01-28,2026-01-26,2026-01-30,4,Corporate Insurance,0,0,Yes,No,Yes,64,1,0,None,Low
+CLM0053,Sneha Nair,57,Female,Kauvery Hospital,H005,D023,Breast Tumor,Tumor Removal,145355.7,2026-04-30,2026-04-27,2026-05-06,9,Family Floater,4,21947,Yes,No,Yes,83,5,0,None,Low
+CLM0054,Priya Sharma,36,Female,Kauvery Hospital,H005,D030,Gallstones,Cholecystectomy,78175.15,2026-06-30,2026-06-28,2026-07-07,9,Health Insurance,3,68387,Yes,No,Yes,83,4,0,None,Low
+CLM0055,Rahul Kumar,42,Male,Sunrise Medical Centre,H008,D007,Appendicitis,Appendectomy,81775.9,2026-08-12,2026-08-10,2026-08-17,7,Family Floater,0,0,Yes,No,Yes,51,1,0,None,Low
+CLM0056,Arjun Patel,61,Male,Kauvery Hospital,H005,D007,Diabetes,Diabetes Management,48023.84,2026-08-26,2026-08-26,2026-08-27,1,Corporate Insurance,0,0,Yes,No,Yes,67,1,0,None,Low
+CLM0057,Varun Kumar,54,Male,MIOT International,H003,D011,Coronary Artery Disease,Heart Surgery,164012.56,2026-02-17,2026-02-16,2026-02-20,4,Family Floater,4,83075,Yes,No,Yes,30,5,0,None,Low
+CLM0058,Priya Sharma,36,Female,Global Hospital,H006,D017,Gallstones,Cholecystectomy,92752.65,2026-01-18,2026-01-18,2026-01-28,10,Corporate Insurance,2,88438,Yes,No,Yes,102,3,0,None,Medium
+CLM0059,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D030,Cataract,Cataract Surgery,56018.29,2026-08-17,2026-08-14,2026-08-22,8,Health Insurance,4,70205,Yes,No,Yes,39,5,0,None,Low
+CLM0060,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D028,Coronary Artery Disease,Heart Surgery,153502.48,2026-02-05,2026-02-03,2026-02-04,1,Family Floater,1,44026,Yes,No,Yes,99,2,0,None,Medium
+CLM0061,Karthik Singh,33,Male,MIOT International,H003,D022,Kidney Stone,Lithotripsy,82608.99,2026-02-02,2026-01-30,2026-02-02,3,Health Insurance,3,23041,Yes,No,Yes,37,4,0,None,Low
+CLM0062,Rahul Kumar,42,Male,Sunrise Medical Centre,H008,D020,Appendicitis,Appendectomy,87505.44,2026-04-08,2026-04-08,2026-04-14,6,Health Insurance,0,0,Yes,No,Yes,89,1,0,None,Low
+CLM0063,Rahul Kumar,42,Male,Apollo Hospital,H001,D024,Appendicitis,Appendectomy,68025.39,2026-01-06,2026-01-04,2026-01-14,10,Health Insurance,0,0,Yes,No,Yes,56,1,0,None,Low
+CLM0064,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D020,Coronary Artery Disease,Heart Surgery,127864.98,2026-07-22,2026-07-20,2026-07-23,3,Corporate Insurance,3,86154,Yes,No,Yes,71,4,0,None,Low
+CLM0065,Ananya Rao,29,Female,Sunrise Medical Centre,H008,D019,Fracture,Orthopedic Surgery,76343.82,2026-04-27,2026-04-26,2026-05-06,10,Family Floater,3,75314,Yes,No,Yes,65,4,0,None,Low
+CLM0066,Rahul Kumar,42,Male,City Care Hospital,H007,D004,Appendicitis,Appendectomy,84942.35,2026-02-22,2026-02-20,2026-02-23,3,Corporate Insurance,3,87044,Yes,No,Yes,233,4,1,Suspicious Provider,High
+CLM0067,Meera Iyer,48,Female,Apollo Hospital,H001,D006,Cataract,Cataract Surgery,52730.76,2026-03-08,2026-03-07,2026-03-14,7,Corporate Insurance,0,0,Yes,No,Yes,57,1,0,None,Low
+CLM0068,Priya Sharma,36,Female,Global Hospital,H006,D013,Gallstones,Cholecystectomy,95455.02,2026-04-08,2026-04-08,2026-04-15,7,Health Insurance,1,55294,Yes,No,Yes,42,2,0,None,Low
+CLM0069,Sneha Nair,57,Female,MIOT International,H003,D016,Breast Tumor,Tumor Removal,127083.75,2026-02-13,2026-02-13,2026-02-19,6,Family Floater,4,2270,Yes,No,Yes,73,5,0,None,Low
+CLM0070,Karthik Singh,33,Male,City Care Hospital,H007,D006,Kidney Stone,Lithotripsy,77219.38,2026-03-31,2026-03-28,2026-04-03,6,Corporate Insurance,3,67443,Yes,No,Yes,54,4,0,None,Low
+CLM0071,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D030,Coronary Artery Disease,Heart Surgery,168385.55,2026-03-08,2026-03-08,2026-03-09,1,Corporate Insurance,2,11282,Yes,No,Yes,86,3,0,None,Low
+CLM0072,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D001,Kidney Stone,Lithotripsy,68536.18,2026-06-06,2026-06-05,2026-06-06,1,Health Insurance,2,50287,Yes,No,Yes,27,3,0,None,Low
+CLM0073,Priya Sharma,36,Female,Global Hospital,H006,D003,Gallstones,Cholecystectomy,99994.07,2026-05-09,2026-05-09,2026-05-15,6,Family Floater,3,80237,Yes,No,Yes,33,4,0,None,Low
+CLM0074,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D016,Kidney Stone,Lithotripsy,81500.41,2026-03-08,2026-03-06,2026-03-07,1,Health Insurance,2,75576,Yes,No,Yes,30,3,0,None,Low
+CLM0075,Arjun Patel,61,Male,Global Hospital,H006,D019,Diabetes,Diabetes Management,50902.08,2026-04-22,2026-04-21,2026-04-27,6,Health Insurance,2,89764,Yes,No,Yes,114,3,0,None,Low
+CLM0076,Priya Sharma,36,Female,Fortis Hospital,H002,D002,Gallstones,Cholecystectomy,81626.93,2026-07-21,2026-07-18,2026-07-25,7,Family Floater,2,84384,Yes,No,Yes,109,3,0,None,Low
+CLM0077,Varun Kumar,54,Male,Apollo Hospital,H001,D023,Coronary Artery Disease,Heart Surgery,128586.73,2026-05-26,2026-05-25,2026-05-30,5,Health Insurance,2,78301,Yes,No,Yes,41,3,0,None,Low
+CLM0078,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D010,Kidney Stone,Lithotripsy,88675.6,2026-01-20,2026-01-20,2026-01-25,5,Corporate Insurance,3,78292,Yes,No,Yes,110,4,0,None,Low
+CLM0079,Priya Sharma,36,Female,MIOT International,H003,D020,Gallstones,Cholecystectomy,95821.59,2026-08-23,2026-08-20,2026-08-22,2,Corporate Insurance,0,0,Yes,No,Yes,44,1,0,None,Low
+CLM0080,Sneha Nair,57,Female,MIOT International,H003,D028,Breast Tumor,Tumor Removal,130124.04,2026-01-07,2026-01-05,2026-01-10,5,Family Floater,2,70452,Yes,No,Yes,42,3,0,None,Low
+CLM0081,Varun Kumar,54,Male,Fortis Hospital,H002,D003,Coronary Artery Disease,Heart Surgery,168381.45,2026-07-23,2026-07-22,2026-07-31,9,Health Insurance,3,85080,Yes,No,Yes,120,4,0,None,Low
+CLM0082,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D011,Cataract,Cataract Surgery,64827.87,2026-01-24,2026-01-23,2026-01-31,8,Family Floater,3,42403,Yes,No,Yes,65,4,0,None,Low
+CLM0083,Karthik Singh,33,Male,Fortis Hospital,H002,D030,Kidney Stone,Lithotripsy,93982.7,2026-05-10,2026-05-08,2026-05-11,3,Corporate Insurance,1,77514,Yes,No,Yes,21,2,0,None,Low
+CLM0084,Ananya Rao,29,Female,Kauvery Hospital,H005,D005,Fracture,Orthopedic Surgery,56909.18,2026-04-25,2026-04-24,2026-04-30,6,Corporate Insurance,4,37101,Yes,No,Yes,40,5,0,None,Low
+CLM0085,Karthik Singh,33,Male,Apollo Hospital,H001,D029,Kidney Stone,Lithotripsy,81966.04,2026-03-23,2026-03-23,2026-03-29,6,Corporate Insurance,2,6604,Yes,No,Yes,32,3,0,None,Low
+CLM0086,Varun Kumar,54,Male,Apollo Hospital,H001,D002,Coronary Artery Disease,Heart Surgery,147710.96,2026-05-01,2026-04-30,2026-05-05,5,Health Insurance,2,60298,Yes,No,Yes,118,3,0,None,Low
+CLM0087,Arjun Patel,61,Male,Apollo Hospital,H001,D002,Diabetes,Diabetes Management,42753.25,2026-06-30,2026-06-30,2026-07-05,5,Family Floater,1,21262,Yes,No,Yes,72,2,0,None,Low
+CLM0088,Karthik Singh,33,Male,St. Thomas Hospital,H004,D026,Kidney Stone,Lithotripsy,85781.86,2026-07-02,2026-06-30,2026-07-05,5,Health Insurance,2,53943,Yes,No,Yes,56,3,0,None,Low
+CLM0089,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D029,Cataract,Cataract Surgery,64358.29,2026-05-10,2026-05-08,2026-05-14,6,Health Insurance,4,22556,Yes,No,Yes,226,5,1,Suspicious Provider,High
+CLM0090,Rahul Kumar,42,Male,Global Hospital,H006,D018,Appendicitis,Appendectomy,85413.35,2026-07-17,2026-07-14,2026-07-22,8,Corporate Insurance,0,0,Yes,No,Yes,95,1,0,None,Low
+CLM0091,Ananya Rao,29,Female,Sunrise Medical Centre,H008,D008,Fracture,Orthopedic Surgery,56924.7,2026-02-21,2026-02-21,2026-02-23,2,Health Insurance,1,45939,Yes,No,Yes,37,2,0,None,Low
+CLM0092,Arjun Patel,61,Male,Fortis Hospital,H002,D004,Diabetes,Diabetes Management,51231.89,2026-08-28,2026-08-26,2026-09-04,9,Corporate Insurance,2,40977,Yes,No,Yes,84,3,0,None,Low
+CLM0093,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D024,Cataract,Cataract Surgery,57231.31,2026-03-04,2026-03-01,2026-03-10,9,Corporate Insurance,0,0,Yes,No,Yes,77,1,0,None,Low
+CLM0094,Karthik Singh,33,Male,MIOT International,H003,D024,Kidney Stone,Lithotripsy,82946.99,2026-04-23,2026-04-20,2026-04-25,5,Family Floater,1,7495,Yes,No,Yes,68,2,0,None,Low
+CLM0095,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D008,Coronary Artery Disease,Heart Surgery,128130.93,2026-03-01,2026-03-01,2026-03-05,4,Family Floater,2,19780,Yes,No,Yes,77,3,0,None,Low
+CLM0096,Rahul Kumar,42,Male,Kauvery Hospital,H005,D024,Appendicitis,Appendectomy,69847.56,2026-06-24,2026-06-22,2026-06-28,6,Family Floater,0,0,Yes,No,Yes,106,1,0,None,Low
+CLM0097,Karthik Singh,33,Male,MIOT International,H003,D009,Kidney Stone,Lithotripsy,80544.27,2026-03-31,2026-03-31,2026-04-03,3,Family Floater,4,76241,Yes,No,Yes,35,5,0,None,Low
+CLM0098,Ananya Rao,29,Female,Kauvery Hospital,H005,D007,Fracture,Orthopedic Surgery,71082.12,2026-04-07,2026-04-06,2026-04-16,10,Corporate Insurance,3,9390,Yes,No,Yes,64,4,0,None,Low
+CLM0099,Sneha Nair,57,Female,Apollo Hospital,H001,D021,Breast Tumor,Tumor Removal,149001.44,2026-02-17,2026-02-15,2026-02-22,7,Family Floater,3,5090,Yes,No,Yes,23,4,0,None,Low
+CLM0100,Arjun Patel,61,Male,MIOT International,H003,D001,Diabetes,Diabetes Management,48888.13,2026-05-01,2026-04-29,2026-05-09,10,Corporate Insurance,4,39532,Yes,No,Yes,50,5,0,None,Low
+CLM0101,Meera Iyer,48,Female,Apollo Hospital,H001,D004,Cataract,Cataract Surgery,63325.86,2026-08-07,2026-08-07,2026-08-11,4,Family Floater,2,49344,Yes,No,Yes,77,3,0,None,Low
+CLM0102,Sneha Nair,57,Female,Kauvery Hospital,H005,D004,Breast Tumor,Tumor Removal,146534.49,2026-06-27,2026-06-27,2026-07-03,6,Health Insurance,1,88404,Yes,No,Yes,91,2,0,None,Low
+CLM0103,Sneha Nair,57,Female,Fortis Hospital,H002,D030,Breast Tumor,Tumor Removal,134029.89,2026-07-23,2026-07-23,2026-07-28,5,Corporate Insurance,1,37247,Yes,No,Yes,73,2,0,None,Low
+CLM0104,Priya Sharma,36,Female,Fortis Hospital,H002,D019,Gallstones,Cholecystectomy,83849.75,2026-04-02,2026-04-01,2026-04-02,1,Health Insurance,2,58273,Yes,No,Yes,89,3,0,None,Low
+CLM0105,Sneha Nair,57,Female,St. Thomas Hospital,H004,D022,Breast Tumor,Tumor Removal,132856.74,2026-03-15,2026-03-13,2026-03-21,8,Health Insurance,0,0,Yes,No,Yes,29,1,0,None,Low
+CLM0106,Sneha Nair,57,Female,St. Thomas Hospital,H004,D006,Breast Tumor,Tumor Removal,145855.81,2026-01-05,2026-01-04,2026-01-13,9,Family Floater,9,303235,Yes,No,Yes,98,10,1,Excessive Claims,High
+CLM0107,Rahul Kumar,42,Male,Global Hospital,H006,D005,Appendicitis,Appendectomy,89050.37,2026-07-10,2026-07-10,2026-07-20,10,Family Floater,4,51124,Yes,No,Yes,93,5,0,None,Low
+CLM0108,Sneha Nair,57,Female,Sunrise Medical Centre,H008,D025,Breast Tumor,Tumor Removal,133174.63,2026-05-13,2026-05-11,2026-05-21,10,Corporate Insurance,3,62158,Yes,No,Yes,98,4,0,None,Low
+CLM0109,Sneha Nair,57,Female,MIOT International,H003,D007,Breast Tumor,Tumor Removal,119868.17,2026-08-12,2026-08-11,2026-08-13,2,Corporate Insurance,4,71890,Yes,No,Yes,36,5,0,None,Low
+CLM0110,Ananya Rao,29,Female,City Care Hospital,H007,D008,Fracture,Orthopedic Surgery,70553.51,2026-01-20,2026-01-19,2026-01-26,7,Corporate Insurance,1,75347,Yes,No,Yes,65,2,0,None,Low
+CLM0111,Karthik Singh,33,Male,St. Thomas Hospital,H004,D018,Kidney Stone,Lithotripsy,89108.04,2026-07-06,2026-07-03,2026-07-10,7,Family Floater,3,53375,Yes,No,Yes,25,4,0,None,Low
+CLM0112,Sneha Nair,57,Female,City Care Hospital,H007,D001,Breast Tumor,Tumor Removal,156207.39,2026-05-24,2026-05-23,2026-05-28,5,Corporate Insurance,3,49652,Yes,No,Yes,31,4,0,None,Low
+CLM0113,Meera Iyer,48,Female,City Care Hospital,H007,D006,Cataract,Cataract Surgery,220000.0,2026-07-31,2026-07-31,2026-08-03,3,Corporate Insurance,3,67917,Yes,No,Yes,92,4,1,Inflated Amount,High
+CLM0114,Sneha Nair,57,Female,MIOT International,H003,D002,Breast Tumor,Tumor Removal,118486.04,2026-02-12,2026-02-11,2026-02-12,1,Family Floater,4,56390,Yes,No,Yes,100,5,0,None,Low
+CLM0115,Rahul Kumar,42,Male,City Care Hospital,H007,D024,Appendicitis,Appendectomy,80852.29,2026-07-06,2026-07-04,2026-07-07,3,Family Floater,3,6796,Yes,No,Yes,85,4,0,None,Low
+CLM0116,Priya Sharma,36,Female,Global Hospital,H006,D007,Gallstones,Cholecystectomy,303646.32,2026-01-09,2026-01-08,2026-01-12,4,Health Insurance,2,79481,Yes,No,Yes,120,3,1,Inflated Amount,High
+CLM0117,Karthik Singh,33,Male,Fortis Hospital,H002,D007,Kidney Stone,Lithotripsy,68191.37,2026-03-09,2026-03-06,2026-03-08,2,Corporate Insurance,3,24429,Yes,No,Yes,58,4,0,None,Low
+CLM0118,Priya Sharma,36,Female,Fortis Hospital,H002,D026,Gallstones,Cholecystectomy,86264.76,2026-06-08,2026-06-06,2026-06-09,3,Family Floater,4,85854,Yes,No,Yes,98,5,0,None,Low
+CLM0119,Rahul Kumar,42,Male,MIOT International,H003,D016,Appendicitis,Appendectomy,77435.21,2026-03-24,2026-03-22,2026-03-25,3,Family Floater,4,66593,Yes,No,Yes,91,5,0,None,Low
+CLM0120,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D020,Coronary Artery Disease,Heart Surgery,141463.51,2026-05-29,2026-05-29,2026-05-31,2,Family Floater,1,59643,Yes,No,Yes,23,2,0,None,Low
+CLM0121,Meera Iyer,48,Female,Global Hospital,H006,D022,Cataract,Cataract Surgery,55669.94,2026-02-09,2026-02-08,2026-02-13,5,Corporate Insurance,3,29924,Yes,No,Yes,35,4,0,None,Low
+CLM0122,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D016,Kidney Stone,Lithotripsy,76385.71,2026-05-15,2026-05-15,2026-05-24,9,Health Insurance,4,84704,Yes,No,Yes,97,5,0,None,Low
+CLM0123,Arjun Patel,61,Male,St. Thomas Hospital,H004,D017,Diabetes,Diabetes Management,46507.25,2026-03-08,2026-03-05,2026-03-12,7,Health Insurance,2,78366,Yes,No,Yes,26,3,0,None,Medium
+CLM0124,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D002,Cataract,Cataract Surgery,61865.59,2026-05-18,2026-05-15,2026-05-21,6,Corporate Insurance,1,4976,Yes,No,Yes,31,2,0,None,Low
+CLM0125,Rahul Kumar,42,Male,Kauvery Hospital,H005,D004,Appendicitis,Appendectomy,67671.2,2026-01-29,2026-01-27,2026-02-03,7,Corporate Insurance,2,85496,Yes,No,Yes,42,3,0,None,Low
+CLM0126,Priya Sharma,36,Female,Global Hospital,H006,D029,Gallstones,Cholecystectomy,100316.62,2026-01-27,2026-01-24,2026-02-01,8,Family Floater,2,74987,Yes,No,Yes,54,3,0,None,Low
+CLM0127,Sneha Nair,57,Female,Sunrise Medical Centre,H008,D002,Breast Tumor,Tumor Removal,136449.99,2026-04-17,2026-04-17,2026-04-20,3,Family Floater,1,78993,Yes,No,Yes,107,2,0,None,Low
+CLM0128,Priya Sharma,36,Female,Kauvery Hospital,H005,D004,Gallstones,Cholecystectomy,97041.37,2026-06-10,2026-06-09,2026-06-15,6,Family Floater,1,41310,Yes,No,Yes,59,2,0,None,Low
+CLM0129,Arjun Patel,61,Male,Apollo Hospital,H001,D021,Diabetes,Diabetes Management,53555.56,2026-06-29,2026-06-27,2026-07-06,9,Corporate Insurance,1,30242,Yes,No,Yes,34,2,0,None,Low
+CLM0130,Sneha Nair,57,Female,City Care Hospital,H007,D006,Breast Tumor,Tumor Removal,135704.79,2026-02-19,2026-02-18,2026-02-27,9,Health Insurance,0,0,Yes,No,Yes,290,1,1,Suspicious Provider,High
+CLM0131,Sneha Nair,57,Female,Fortis Hospital,H002,D019,Breast Tumor,Tumor Removal,151468.62,2026-01-17,2026-01-16,2026-01-23,7,Family Floater,2,39333,Yes,No,Yes,22,3,0,None,Low
+CLM0132,Varun Kumar,54,Male,City Care Hospital,H007,D009,Coronary Artery Disease,Heart Surgery,155574.76,2026-08-10,2026-08-10,2026-08-14,4,Family Floater,3,28121,Yes,No,Yes,89,4,0,None,Low
+CLM0133,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D025,Coronary Artery Disease,Heart Surgery,171189.79,2026-01-04,2026-01-01,2026-01-08,7,Corporate Insurance,1,9263,Yes,No,Yes,104,2,0,None,Low
+CLM0134,Ananya Rao,29,Female,City Care Hospital,H007,D020,Fracture,Orthopedic Surgery,58833.65,2026-02-17,2026-02-15,2026-02-19,4,Corporate Insurance,2,50238,Yes,No,Yes,97,3,0,None,Low
+CLM0135,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D017,Coronary Artery Disease,Heart Surgery,168078.35,2026-07-27,2026-07-27,2026-08-04,8,Corporate Insurance,2,51090,Yes,No,Yes,36,3,0,None,Medium
+CLM0136,Sneha Nair,57,Female,Kauvery Hospital,H005,D029,Breast Tumor,Tumor Removal,141629.02,2026-01-22,2026-01-21,2026-01-25,4,Family Floater,2,41223,Yes,No,Yes,63,3,0,None,Low
+CLM0137,Karthik Singh,33,Male,St. Thomas Hospital,H004,D021,Kidney Stone,Lithotripsy,84090.8,2026-05-08,2026-05-06,2026-05-13,7,Corporate Insurance,1,30370,Yes,No,Yes,109,2,0,None,Low
+CLM0138,Sneha Nair,57,Female,St. Thomas Hospital,H004,D027,Breast Tumor,Tumor Removal,121882.56,2026-08-27,2026-08-26,2026-09-02,7,Health Insurance,0,0,Yes,No,Yes,66,1,0,None,Low
+CLM0139,Sneha Nair,57,Female,Global Hospital,H006,D007,Breast Tumor,Tumor Removal,151590.13,2026-05-24,2026-05-23,2026-05-27,4,Health Insurance,4,19455,Yes,No,Yes,104,5,0,None,Low
+CLM0140,Varun Kumar,54,Male,Fortis Hospital,H002,D013,Coronary Artery Disease,Heart Surgery,175512.77,2026-08-25,2026-08-25,2026-09-02,8,Corporate Insurance,0,0,Yes,No,Yes,85,1,0,None,Low
+CLM0141,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D014,Kidney Stone,Lithotripsy,82539.46,2026-03-21,2026-03-20,2026-03-28,8,Health Insurance,4,63367,Yes,No,Yes,103,5,0,None,Low
+CLM0142,Varun Kumar,54,Male,Fortis Hospital,H002,D010,Coronary Artery Disease,Heart Surgery,160891.81,2026-03-28,2026-03-26,2026-04-05,10,Corporate Insurance,0,0,Yes,Yes,Yes,74,1,1,Duplicate Claim,High
+CLM0143,Sneha Nair,57,Female,Apollo Hospital,H001,D006,Breast Tumor,Tumor Removal,148564.88,2026-07-22,2026-07-21,2026-07-31,10,Corporate Insurance,4,7366,Yes,No,Yes,99,5,0,None,Low
+CLM0144,Priya Sharma,36,Female,Global Hospital,H006,D027,Gallstones,Cholecystectomy,95636.35,2026-07-15,2026-07-12,2026-07-18,6,Family Floater,0,0,Yes,No,Yes,113,1,0,None,Low
+CLM0145,Karthik Singh,33,Male,Global Hospital,H006,D005,Kidney Stone,Lithotripsy,87967.7,2026-08-18,2026-08-15,2026-08-18,3,Corporate Insurance,4,82269,Yes,No,Yes,31,5,0,None,Low
+CLM0146,Priya Sharma,36,Female,City Care Hospital,H007,D024,Gallstones,Cholecystectomy,105582.19,2026-08-14,2026-08-11,2026-08-15,4,Corporate Insurance,1,46019,Yes,Yes,Yes,25,2,1,Duplicate Claim,High
+CLM0147,Arjun Patel,61,Male,Apollo Hospital,H001,D023,Diabetes,Diabetes Management,39454.47,2026-04-29,2026-04-29,2026-05-03,4,Family Floater,0,0,Yes,No,Yes,52,1,0,None,Low
+CLM0148,Rahul Kumar,42,Male,Sunrise Medical Centre,H008,D020,Appendicitis,Appendectomy,77930.24,2026-05-04,2026-05-01,2026-05-02,1,Corporate Insurance,0,0,Yes,No,Yes,250,1,1,Suspicious Provider,High
+CLM0149,Priya Sharma,36,Female,Sunrise Medical Centre,H008,D012,Gallstones,Cholecystectomy,101636.29,2026-04-04,2026-04-04,2026-04-13,9,Corporate Insurance,4,10067,Yes,No,Yes,27,5,0,None,Low
+CLM0150,Arjun Patel,61,Male,City Care Hospital,H007,D023,Diabetes,Diabetes Management,45150.65,2026-04-16,2026-04-13,2026-04-23,10,Family Floater,11,378486,Yes,No,Yes,109,12,1,Excessive Claims,High
+CLM0151,Sneha Nair,57,Female,City Care Hospital,H007,D027,Breast Tumor,Tumor Removal,128640.11,2026-05-26,2026-05-23,2026-06-02,10,Family Floater,1,26099,Yes,No,Yes,50,2,0,None,Low
+CLM0152,Sneha Nair,57,Female,Apollo Hospital,H001,D003,Breast Tumor,Tumor Removal,137834.07,2026-03-24,2026-03-21,2026-03-27,6,Corporate Insurance,3,88476,Yes,No,Yes,120,4,0,None,Low
+CLM0153,Arjun Patel,61,Male,MIOT International,H003,D025,Diabetes,Diabetes Management,39666.38,2026-04-26,2026-04-26,2026-05-01,5,Family Floater,1,54133,Yes,No,Yes,120,2,0,None,Low
+CLM0154,Varun Kumar,54,Male,City Care Hospital,H007,D029,Coronary Artery Disease,Heart Surgery,149042.01,2026-07-14,2026-07-12,2026-07-21,9,Health Insurance,4,51116,Yes,No,Yes,93,5,0,None,Low
+CLM0155,Sneha Nair,57,Female,Kauvery Hospital,H005,D014,Breast Tumor,Tumor Removal,130360.12,2026-03-13,2026-03-13,2026-03-18,5,Family Floater,3,86318,Yes,No,Yes,106,4,0,None,Low
+CLM0156,Varun Kumar,54,Male,St. Thomas Hospital,H004,D013,Coronary Artery Disease,Heart Surgery,155994.93,2026-02-13,2026-02-13,2026-02-19,6,Corporate Insurance,1,40291,Yes,No,Yes,111,2,0,None,Low
+CLM0157,Priya Sharma,36,Female,Global Hospital,H006,D025,Gallstones,Cholecystectomy,107822.23,2026-03-01,2026-02-28,2026-03-02,2,Family Floater,4,33487,Yes,No,Yes,82,5,0,None,Low
+CLM0158,Priya Sharma,36,Female,City Care Hospital,H007,D009,Gallstones,Cholecystectomy,77219.41,2026-06-14,2026-06-11,2026-06-18,7,Corporate Insurance,2,8505,Yes,No,Yes,23,3,0,None,Low
+CLM0159,Varun Kumar,54,Male,MIOT International,H003,D016,Coronary Artery Disease,Heart Surgery,140982.11,2026-03-31,2026-03-28,2026-03-31,3,Health Insurance,4,23105,Yes,No,Yes,119,5,0,None,Low
+CLM0160,Sneha Nair,57,Female,Apollo Hospital,H001,D016,Breast Tumor,Tumor Removal,131550.07,2026-01-22,2026-01-22,2026-02-01,10,Health Insurance,1,89682,Yes,No,Yes,67,2,0,None,Low
+CLM0161,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D013,Cataract,Cataract Surgery,49992.04,2026-01-22,2026-01-22,2026-01-23,1,Family Floater,4,87955,Yes,No,Yes,248,5,1,Suspicious Provider,High
+CLM0162,Priya Sharma,36,Female,Sunrise Medical Centre,H008,D026,Gallstones,Cholecystectomy,89836.9,2026-01-13,2026-01-12,2026-01-19,7,Family Floater,1,70721,Yes,No,Yes,83,2,0,None,Low
+CLM0163,Ananya Rao,29,Female,MIOT International,H003,D002,Fracture,Orthopedic Surgery,66149.45,2026-01-12,2026-01-12,2026-01-18,6,Health Insurance,0,0,Yes,No,Yes,97,1,0,None,Low
+CLM0164,Meera Iyer,48,Female,MIOT International,H003,D006,Cataract,Cataract Surgery,56322.94,2026-02-11,2026-02-11,2026-02-14,3,Health Insurance,4,17468,Yes,No,Yes,86,5,0,None,Low
+CLM0165,Arjun Patel,61,Male,Global Hospital,H006,D029,Diabetes,Diabetes Management,48733.22,2026-07-11,2026-07-09,2026-07-14,5,Corporate Insurance,4,24419,Yes,No,Yes,71,5,0,None,Low
+CLM0166,Meera Iyer,48,Female,Fortis Hospital,H002,D018,Cataract,Cataract Surgery,55796.16,2026-01-12,2026-01-11,2026-01-12,1,Health Insurance,3,68219,Yes,No,Yes,112,4,0,None,Low
+CLM0167,Meera Iyer,48,Female,Global Hospital,H006,D002,Cataract,Cataract Surgery,61237.17,2026-01-28,2026-01-25,2026-01-28,3,Health Insurance,3,36944,Yes,No,Yes,77,4,0,None,Low
+CLM0168,Rahul Kumar,42,Male,Global Hospital,H006,D003,Appendicitis,Appendectomy,87144.17,2026-02-22,2026-02-22,2026-02-25,3,Corporate Insurance,3,604,Yes,No,Yes,98,4,0,None,Medium
+CLM0169,Varun Kumar,54,Male,Fortis Hospital,H002,D006,Coronary Artery Disease,Heart Surgery,168708.89,2026-03-30,2026-03-30,2026-04-06,7,Family Floater,4,56073,Yes,No,Yes,87,5,0,None,Low
+CLM0170,Priya Sharma,36,Female,City Care Hospital,H007,D029,Gallstones,Cholecystectomy,104610.32,2026-05-28,2026-05-25,2026-05-30,5,Health Insurance,0,0,Yes,No,Yes,104,1,0,None,Low
+CLM0171,Karthik Singh,33,Male,City Care Hospital,H007,D020,Kidney Stone,Lithotripsy,79812.14,2026-04-01,2026-04-01,2026-04-04,3,Health Insurance,2,33231,Yes,No,Yes,63,3,0,None,Low
+CLM0172,Varun Kumar,54,Male,Apollo Hospital,H001,D011,Coronary Artery Disease,Heart Surgery,162648.57,2026-01-12,2026-01-09,2026-01-15,6,Family Floater,0,0,Yes,No,Yes,52,1,0,None,Low
+CLM0173,Meera Iyer,48,Female,Fortis Hospital,H002,D001,Cataract,Cataract Surgery,52215.05,2026-05-15,2026-05-12,2026-05-16,4,Health Insurance,0,0,Yes,No,Yes,22,1,0,None,Low
+CLM0174,Arjun Patel,61,Male,Apollo Hospital,H001,D001,Diabetes,Diabetes Management,46720.2,2026-06-11,2026-06-11,2026-06-16,5,Health Insurance,0,0,Yes,No,Yes,34,1,0,None,Low
+CLM0175,Rahul Kumar,42,Male,Kauvery Hospital,H005,D021,Appendicitis,Appendectomy,81807.24,2026-08-06,2026-08-05,2026-08-14,9,Family Floater,3,31129,Yes,No,Yes,75,4,0,None,Medium
+CLM0176,Karthik Singh,33,Male,City Care Hospital,H007,D008,Kidney Stone,Lithotripsy,91145.31,2026-06-02,2026-06-02,2026-06-12,10,Corporate Insurance,3,29736,Yes,No,Yes,28,4,0,None,Low
+CLM0177,Sneha Nair,57,Female,Apollo Hospital,H001,D020,Breast Tumor,Tumor Removal,156724.21,2026-05-16,2026-05-16,2026-05-26,10,Corporate Insurance,3,6301,Yes,No,Yes,43,4,0,None,Medium
+CLM0178,Priya Sharma,36,Female,Global Hospital,H006,D012,Gallstones,Cholecystectomy,76904.28,2026-05-11,2026-05-10,2026-05-11,1,Health Insurance,2,67576,Yes,No,Yes,76,3,0,None,Low
+CLM0179,Varun Kumar,54,Male,Global Hospital,H006,D011,Coronary Artery Disease,Heart Surgery,168558.01,2026-04-08,2026-04-08,2026-04-18,10,Health Insurance,3,32647,Yes,No,Yes,49,4,0,None,Low
+CLM0180,Rahul Kumar,42,Male,Fortis Hospital,H002,D007,Appendicitis,Appendectomy,79531.72,2026-03-07,2026-03-07,2026-03-15,8,Health Insurance,2,87224,Yes,No,Yes,33,3,0,None,Low
+CLM0181,Priya Sharma,36,Female,MIOT International,H003,D028,Gallstones,Cholecystectomy,92142.57,2026-04-18,2026-04-16,2026-04-22,6,Family Floater,2,86821,Yes,No,Yes,24,3,0,None,Low
+CLM0182,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D005,Diabetes,Diabetes Management,42537.96,2026-01-26,2026-01-25,2026-01-30,5,Family Floater,4,42494,Yes,No,Yes,70,5,0,None,Low
+CLM0183,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D024,Cataract,Cataract Surgery,48739.75,2026-07-18,2026-07-18,2026-07-28,10,Family Floater,0,0,Yes,No,Yes,84,1,0,None,Low
+CLM0184,Varun Kumar,54,Male,Apollo Hospital,H001,D014,Coronary Artery Disease,Heart Surgery,157326.87,2026-03-26,2026-03-26,2026-03-29,3,Corporate Insurance,4,60329,Yes,No,Yes,102,5,0,None,Low
+CLM0185,Meera Iyer,48,Female,St. Thomas Hospital,H004,D008,Cataract,Cataract Surgery,50237.35,2026-05-09,2026-05-06,2026-05-09,3,Family Floater,1,56147,Yes,No,Yes,117,2,0,None,Low
+CLM0186,Priya Sharma,36,Female,Apollo Hospital,H001,D008,Gallstones,Cholecystectomy,105688.63,2026-04-06,2026-04-05,2026-04-14,9,Corporate Insurance,0,0,Yes,No,No,51,1,1,Diagnosis/Procedure Mismatch,High
+CLM0187,Rahul Kumar,42,Male,City Care Hospital,H007,D019,Appendicitis,Appendectomy,72732.82,2026-03-24,2026-03-23,2026-03-27,4,Corporate Insurance,4,10894,Yes,No,No,116,5,1,Diagnosis/Procedure Mismatch,High
+CLM0188,Rahul Kumar,42,Male,Global Hospital,H006,D005,Appendicitis,Appendectomy,80524.23,2026-02-05,2026-02-02,2026-02-03,1,Health Insurance,0,0,Yes,No,Yes,76,1,0,None,Medium
+CLM0189,Sneha Nair,57,Female,Apollo Hospital,H001,D013,Breast Tumor,Tumor Removal,140041.12,2026-06-01,2026-06-01,2026-06-03,2,Health Insurance,4,80738,Yes,No,Yes,78,5,0,None,Low
+CLM0190,Priya Sharma,36,Female,Apollo Hospital,H001,D002,Gallstones,Cholecystectomy,86410.47,2026-08-08,2026-08-06,2026-08-16,10,Health Insurance,0,0,Yes,No,Yes,98,1,0,None,Low
+CLM0191,Varun Kumar,54,Male,MIOT International,H003,D022,Coronary Artery Disease,Heart Surgery,178277.6,2026-03-24,2026-03-21,2026-03-24,3,Health Insurance,2,60866,Yes,No,Yes,21,3,0,None,Low
+CLM0192,Rahul Kumar,42,Male,Apollo Hospital,H001,D010,Appendicitis,Appendectomy,83148.4,2026-06-19,2026-06-19,2026-06-28,9,Health Insurance,3,9710,Yes,No,Yes,71,4,0,None,Low
+CLM0193,Karthik Singh,33,Male,City Care Hospital,H007,D014,Kidney Stone,Lithotripsy,69981.67,2026-05-28,2026-05-26,2026-05-31,5,Family Floater,0,0,Yes,No,Yes,84,1,0,None,Low
+CLM0194,Ananya Rao,29,Female,MIOT International,H003,D016,Fracture,Orthopedic Surgery,66336.52,2026-02-06,2026-02-03,2026-02-13,10,Health Insurance,3,795,Yes,No,Yes,97,4,0,None,Low
+CLM0195,Meera Iyer,48,Female,Kauvery Hospital,H005,D026,Cataract,Cataract Surgery,63235.4,2026-05-27,2026-05-27,2026-06-01,5,Family Floater,4,17548,Yes,No,Yes,100,5,0,None,Low
+CLM0196,Ananya Rao,29,Female,Fortis Hospital,H002,D022,Fracture,Orthopedic Surgery,68718.84,2026-06-22,2026-06-22,2026-06-30,8,Corporate Insurance,0,0,Yes,No,Yes,105,1,0,None,Low
+CLM0197,Varun Kumar,54,Male,City Care Hospital,H007,D010,Coronary Artery Disease,Heart Surgery,145089.75,2026-07-27,2026-07-25,2026-07-30,5,Family Floater,4,73867,Yes,No,Yes,75,5,0,None,Low
+CLM0198,Arjun Patel,61,Male,Apollo Hospital,H001,D014,Diabetes,Diabetes Management,50012.28,2026-08-17,2026-08-17,2026-08-18,1,Family Floater,2,77583,Yes,No,No,79,3,1,Diagnosis/Procedure Mismatch,High
+CLM0199,Sneha Nair,57,Female,Kauvery Hospital,H005,D022,Breast Tumor,Tumor Removal,155948.81,2026-05-07,2026-05-05,2026-05-06,1,Corporate Insurance,0,0,Yes,No,Yes,110,1,0,None,Low
+CLM0200,Arjun Patel,61,Male,City Care Hospital,H007,D009,Diabetes,Diabetes Management,47429.74,2026-06-13,2026-06-12,2026-06-18,6,Family Floater,3,83801,Yes,No,Yes,38,4,0,None,Medium
+CLM0201,Meera Iyer,48,Female,St. Thomas Hospital,H004,D020,Cataract,Cataract Surgery,47136.57,2026-05-21,2026-05-18,2026-05-19,1,Family Floater,0,0,Yes,No,Yes,25,1,0,None,Low
+CLM0202,Ananya Rao,29,Female,Fortis Hospital,H002,D016,Fracture,Orthopedic Surgery,220000.0,2026-06-25,2026-06-25,2026-07-04,9,Family Floater,1,35087,Yes,No,Yes,116,2,1,Inflated Amount,High
+CLM0203,Meera Iyer,48,Female,Apollo Hospital,H001,D007,Cataract,Cataract Surgery,49063.74,2026-05-31,2026-05-29,2026-06-01,3,Corporate Insurance,2,58440,Yes,No,Yes,94,3,0,None,Low
+CLM0204,Rahul Kumar,42,Male,St. Thomas Hospital,H004,D025,Appendicitis,Appendectomy,70948.32,2026-05-06,2026-05-04,2026-05-10,6,Corporate Insurance,3,68245,Yes,No,Yes,113,4,0,None,Low
+CLM0205,Arjun Patel,61,Male,Apollo Hospital,H001,D017,Diabetes,Diabetes Management,52005.91,2026-05-29,2026-05-26,2026-05-30,4,Corporate Insurance,0,0,Yes,No,Yes,30,1,0,None,Low
+CLM0206,Priya Sharma,36,Female,City Care Hospital,H007,D008,Gallstones,Cholecystectomy,98390.42,2026-04-21,2026-04-20,2026-04-29,9,Family Floater,1,62248,Yes,No,Yes,239,2,1,Suspicious Provider,High
+CLM0207,Varun Kumar,54,Male,Fortis Hospital,H002,D024,Coronary Artery Disease,Heart Surgery,141858.83,2026-01-05,2026-01-03,2026-01-06,3,Corporate Insurance,2,77079,Yes,Yes,Yes,49,3,1,Duplicate Claim,High
+CLM0208,Rahul Kumar,42,Male,Kauvery Hospital,H005,D009,Appendicitis,Appendectomy,82443.11,2026-01-12,2026-01-09,2026-01-19,10,Family Floater,2,32549,Yes,No,Yes,69,3,0,None,Medium
+CLM0209,Meera Iyer,48,Female,Fortis Hospital,H002,D013,Cataract,Cataract Surgery,51015.26,2026-01-14,2026-01-11,2026-01-14,3,Corporate Insurance,2,8613,Yes,No,Yes,41,3,0,None,Low
+CLM0210,Ananya Rao,29,Female,Kauvery Hospital,H005,D027,Fracture,Orthopedic Surgery,68406.12,2026-04-28,2026-04-26,2026-05-02,6,Health Insurance,1,36920,Yes,Yes,Yes,52,2,1,Duplicate Claim,High
+CLM0211,Ananya Rao,29,Female,City Care Hospital,H007,D002,Fracture,Orthopedic Surgery,70822.58,2026-02-22,2026-02-22,2026-02-24,2,Health Insurance,0,0,Yes,No,Yes,96,1,0,None,Low
+CLM0212,Ananya Rao,29,Female,City Care Hospital,H007,D018,Fracture,Orthopedic Surgery,70228.82,2026-03-31,2026-03-31,2026-04-02,2,Corporate Insurance,2,62175,Yes,No,Yes,24,3,0,None,Low
+CLM0213,Priya Sharma,36,Female,City Care Hospital,H007,D009,Gallstones,Cholecystectomy,84474.27,2026-01-29,2026-01-29,2026-01-30,1,Corporate Insurance,4,490,Yes,No,Yes,79,5,0,None,Low
+CLM0214,Sneha Nair,57,Female,MIOT International,H003,D009,Breast Tumor,Tumor Removal,147745.56,2026-04-12,2026-04-12,2026-04-19,7,Family Floater,3,73883,Yes,Yes,Yes,92,4,1,Duplicate Claim,High
+CLM0215,Meera Iyer,48,Female,Global Hospital,H006,D024,Cataract,Cataract Surgery,51559.46,2026-05-18,2026-05-17,2026-05-21,4,Corporate Insurance,2,62543,Yes,No,Yes,68,3,0,None,Low
+CLM0216,Ananya Rao,29,Female,City Care Hospital,H007,D025,Fracture,Orthopedic Surgery,59569.71,2026-01-09,2026-01-07,2026-01-15,8,Health Insurance,0,0,Yes,No,Yes,44,1,0,None,Low
+CLM0217,Ananya Rao,29,Female,Fortis Hospital,H002,D016,Fracture,Orthopedic Surgery,63452.75,2026-05-16,2026-05-14,2026-05-18,4,Health Insurance,0,0,Yes,No,Yes,112,1,0,None,Low
+CLM0218,Rahul Kumar,42,Male,City Care Hospital,H007,D006,Appendicitis,Appendectomy,72096.25,2026-03-20,2026-03-19,2026-03-21,2,Family Floater,2,75649,Yes,No,Yes,92,3,0,None,Low
+CLM0219,Karthik Singh,33,Male,St. Thomas Hospital,H004,D021,Kidney Stone,Lithotripsy,72029.26,2026-02-04,2026-02-01,2026-02-02,1,Corporate Insurance,4,3262,Yes,No,Yes,112,5,0,None,Low
+CLM0220,Varun Kumar,54,Male,MIOT International,H003,D021,Coronary Artery Disease,Heart Surgery,179106.11,2026-08-23,2026-08-22,2026-08-30,8,Family Floater,2,71947,Yes,No,Yes,60,3,0,None,Low
+CLM0221,Karthik Singh,33,Male,Fortis Hospital,H002,D025,Kidney Stone,Lithotripsy,81492.43,2026-07-20,2026-07-19,2026-07-28,9,Health Insurance,1,45875,Yes,No,Yes,97,2,0,None,Medium
+CLM0222,Sneha Nair,57,Female,Kauvery Hospital,H005,D006,Breast Tumor,Tumor Removal,136210.52,2026-04-11,2026-04-11,2026-04-17,6,Family Floater,1,60190,Yes,No,Yes,80,2,0,None,Low
+CLM0223,Karthik Singh,33,Male,Apollo Hospital,H001,D026,Kidney Stone,Lithotripsy,71699.65,2026-08-24,2026-08-22,2026-08-24,2,Family Floater,3,86808,Yes,No,Yes,119,4,0,None,Low
+CLM0224,Meera Iyer,48,Female,MIOT International,H003,D028,Cataract,Cataract Surgery,63439.59,2026-07-15,2026-07-15,2026-07-25,10,Corporate Insurance,4,47519,Yes,No,Yes,75,5,0,None,Medium
+CLM0225,Varun Kumar,54,Male,Fortis Hospital,H002,D027,Coronary Artery Disease,Heart Surgery,135091.93,2026-02-11,2026-02-10,2026-02-20,10,Corporate Insurance,2,59284,Yes,No,Yes,24,3,0,None,Low
+CLM0226,Priya Sharma,36,Female,Sunrise Medical Centre,H008,D005,Gallstones,Cholecystectomy,78322.91,2026-01-05,2026-01-02,2026-01-12,10,Health Insurance,1,8661,Yes,No,Yes,46,2,0,None,Low
+CLM0227,Sneha Nair,57,Female,Apollo Hospital,H001,D030,Breast Tumor,Tumor Removal,124336.07,2026-02-23,2026-02-23,2026-02-25,2,Health Insurance,3,85221,Yes,No,Yes,90,4,0,None,Low
+CLM0228,Priya Sharma,36,Female,Apollo Hospital,H001,D001,Gallstones,Cholecystectomy,98937.83,2026-08-22,2026-08-19,2026-08-22,3,Family Floater,2,31449,Yes,No,Yes,108,3,0,None,Medium
+CLM0229,Ananya Rao,29,Female,Apollo Hospital,H001,D024,Fracture,Orthopedic Surgery,67442.57,2026-05-09,2026-05-06,2026-05-08,2,Corporate Insurance,3,9743,Yes,No,Yes,46,4,0,None,Low
+CLM0230,Sneha Nair,57,Female,St. Thomas Hospital,H004,D025,Breast Tumor,Tumor Removal,157028.79,2026-04-07,2026-04-07,2026-04-11,4,Health Insurance,1,42746,Yes,No,Yes,70,2,0,None,Low
+CLM0231,Arjun Patel,61,Male,Fortis Hospital,H002,D006,Diabetes,Diabetes Management,49052.51,2026-05-02,2026-05-02,2026-05-10,8,Family Floater,4,63925,Yes,No,Yes,62,5,0,None,Medium
+CLM0232,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D028,Diabetes,Diabetes Management,38909.38,2026-01-20,2026-01-20,2026-01-21,1,Corporate Insurance,2,81033,Yes,No,Yes,44,3,0,None,Low
+CLM0233,Rahul Kumar,42,Male,Apollo Hospital,H001,D006,Appendicitis,Appendectomy,82662.33,2026-03-30,2026-03-30,2026-04-06,7,Corporate Insurance,1,88282,Yes,No,Yes,111,2,0,None,Low
+CLM0234,Rahul Kumar,42,Male,City Care Hospital,H007,D014,Appendicitis,Appendectomy,83832.02,2026-06-30,2026-06-30,2026-07-05,5,Corporate Insurance,1,36789,Yes,No,No,40,2,1,Diagnosis/Procedure Mismatch,High
+CLM0235,Arjun Patel,61,Male,MIOT International,H003,D008,Diabetes,Diabetes Management,42780.09,2026-03-05,2026-03-03,2026-03-08,5,Family Floater,2,88752,Yes,No,Yes,62,3,0,None,Low
+CLM0236,Priya Sharma,36,Female,MIOT International,H003,D004,Gallstones,Cholecystectomy,105518.02,2026-05-28,2026-05-26,2026-06-05,10,Corporate Insurance,2,9551,Yes,No,Yes,92,3,0,None,Low
+CLM0237,Ananya Rao,29,Female,City Care Hospital,H007,D015,Fracture,Orthopedic Surgery,70474.09,2026-04-26,2026-04-25,2026-05-01,6,Corporate Insurance,1,46964,Yes,No,Yes,117,2,0,None,Low
+CLM0238,Priya Sharma,36,Female,Fortis Hospital,H002,D020,Gallstones,Cholecystectomy,85873.35,2026-02-15,2026-02-15,2026-02-17,2,Health Insurance,4,82447,Yes,No,Yes,48,5,0,None,Low
+CLM0239,Rahul Kumar,42,Male,Kauvery Hospital,H005,D013,Appendicitis,Appendectomy,67219.6,2026-01-04,2026-01-02,2026-01-06,4,Health Insurance,4,72195,Yes,No,Yes,114,5,0,None,Low
+CLM0240,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D014,Kidney Stone,Lithotripsy,83291.72,2026-06-01,2026-06-01,2026-06-11,10,Family Floater,0,0,Yes,No,Yes,71,1,0,None,Low
+CLM0241,Varun Kumar,54,Male,Apollo Hospital,H001,D014,Coronary Artery Disease,Heart Surgery,542002.89,2026-02-03,2026-02-01,2026-02-03,2,Family Floater,3,50829,Yes,No,Yes,43,4,1,Inflated Amount,High
+CLM0242,Meera Iyer,48,Female,Apollo Hospital,H001,D029,Cataract,Cataract Surgery,56815.58,2026-08-10,2026-08-08,2026-08-12,4,Family Floater,1,83,Yes,No,Yes,51,2,0,None,Low
+CLM0243,Arjun Patel,61,Male,Kauvery Hospital,H005,D024,Diabetes,Diabetes Management,41002.01,2026-04-23,2026-04-23,2026-04-28,5,Health Insurance,0,0,Yes,No,Yes,36,1,0,None,Low
+CLM0244,Arjun Patel,61,Male,Global Hospital,H006,D027,Diabetes,Diabetes Management,45770.55,2026-02-09,2026-02-06,2026-02-08,2,Family Floater,1,19811,Yes,No,No,24,2,1,Diagnosis/Procedure Mismatch,High
+CLM0245,Priya Sharma,36,Female,MIOT International,H003,D030,Gallstones,Cholecystectomy,99767.5,2026-05-01,2026-05-01,2026-05-02,1,Health Insurance,1,81297,Yes,No,Yes,63,2,0,None,Low
+CLM0246,Ananya Rao,29,Female,MIOT International,H003,D006,Fracture,Orthopedic Surgery,77356.06,2026-05-21,2026-05-18,2026-05-26,8,Family Floater,0,0,Yes,No,Yes,36,1,0,None,Low
+CLM0247,Karthik Singh,33,Male,St. Thomas Hospital,H004,D027,Kidney Stone,Lithotripsy,79743.8,2026-05-11,2026-05-11,2026-05-17,6,Family Floater,4,36839,Yes,No,Yes,20,5,0,None,Low
+CLM0248,Meera Iyer,48,Female,Kauvery Hospital,H005,D005,Cataract,Cataract Surgery,61641.37,2026-07-09,2026-07-09,2026-07-11,2,Corporate Insurance,4,40906,Yes,No,Yes,105,5,0,None,Low
+CLM0249,Priya Sharma,36,Female,Apollo Hospital,H001,D024,Gallstones,Cholecystectomy,104707.03,2026-04-26,2026-04-24,2026-04-25,1,Corporate Insurance,1,71952,Yes,No,Yes,105,2,0,None,Low
+CLM0250,Karthik Singh,33,Male,Kauvery Hospital,H005,D022,Kidney Stone,Lithotripsy,83800.52,2026-02-13,2026-02-13,2026-02-19,6,Family Floater,4,5259,Yes,No,Yes,77,5,0,None,Low
+CLM0251,Arjun Patel,61,Male,City Care Hospital,H007,D020,Diabetes,Diabetes Management,53274.58,2026-07-14,2026-07-13,2026-07-16,3,Family Floater,0,0,Yes,No,Yes,78,1,0,None,Medium
+CLM0252,Ananya Rao,29,Female,City Care Hospital,H007,D001,Fracture,Orthopedic Surgery,63505.17,2026-05-14,2026-05-12,2026-05-18,6,Corporate Insurance,3,45965,Yes,No,Yes,41,4,0,None,Low
+CLM0253,Rahul Kumar,42,Male,Apollo Hospital,H001,D012,Appendicitis,Appendectomy,65053.58,2026-04-16,2026-04-13,2026-04-17,4,Corporate Insurance,1,82459,Yes,No,Yes,44,2,0,None,Low
+CLM0254,Ananya Rao,29,Female,City Care Hospital,H007,D025,Fracture,Orthopedic Surgery,59132.25,2026-07-30,2026-07-27,2026-07-28,1,Corporate Insurance,0,0,Yes,No,Yes,36,1,0,None,Low
+CLM0255,Meera Iyer,48,Female,St. Thomas Hospital,H004,D026,Cataract,Cataract Surgery,50453.12,2026-06-30,2026-06-27,2026-07-07,10,Corporate Insurance,2,49452,Yes,No,Yes,59,3,0,None,Low
+CLM0256,Rahul Kumar,42,Male,Apollo Hospital,H001,D006,Appendicitis,Appendectomy,65288.09,2026-04-07,2026-04-04,2026-04-13,9,Corporate Insurance,0,0,Yes,No,Yes,109,1,0,None,Low
+CLM0257,Arjun Patel,61,Male,Kauvery Hospital,H005,D010,Diabetes,Diabetes Management,50314.03,2026-06-02,2026-05-31,2026-06-06,6,Family Floater,1,14183,Yes,No,Yes,30,2,0,None,Low
+CLM0258,Meera Iyer,48,Female,St. Thomas Hospital,H004,D003,Cataract,Cataract Surgery,64540.16,2026-06-04,2026-06-02,2026-06-03,1,Corporate Insurance,13,241704,Yes,No,Yes,101,14,1,Excessive Claims,High
+CLM0259,Meera Iyer,48,Female,Kauvery Hospital,H005,D006,Cataract,Cataract Surgery,47780.65,2026-04-21,2026-04-19,2026-04-25,6,Family Floater,1,15249,Yes,No,Yes,104,2,0,None,Low
+CLM0260,Ananya Rao,29,Female,City Care Hospital,H007,D019,Fracture,Orthopedic Surgery,68287.52,2026-04-02,2026-04-01,2026-04-02,1,Health Insurance,0,0,Yes,No,Yes,249,1,1,Suspicious Provider,High
+CLM0261,Meera Iyer,48,Female,Global Hospital,H006,D008,Cataract,Cataract Surgery,61937.48,2026-07-29,2026-07-26,2026-07-31,5,Family Floater,0,0,Yes,No,Yes,100,1,0,None,Low
+CLM0262,Arjun Patel,61,Male,City Care Hospital,H007,D030,Diabetes,Diabetes Management,53052.98,2026-01-26,2026-01-26,2026-01-27,1,Corporate Insurance,2,68800,Yes,No,Yes,60,3,0,None,Low
+CLM0263,Priya Sharma,36,Female,Fortis Hospital,H002,D029,Gallstones,Cholecystectomy,91737.76,2026-05-30,2026-05-28,2026-06-06,9,Corporate Insurance,4,38619,Yes,No,Yes,22,5,0,None,Low
+CLM0264,Ananya Rao,29,Female,St. Thomas Hospital,H004,D019,Fracture,Orthopedic Surgery,65414.17,2026-03-21,2026-03-18,2026-03-24,6,Health Insurance,0,0,Yes,No,Yes,77,1,0,None,Low
+CLM0265,Meera Iyer,48,Female,Global Hospital,H006,D027,Cataract,Cataract Surgery,57119.08,2026-03-06,2026-03-06,2026-03-16,10,Corporate Insurance,4,1071,Yes,No,Yes,28,5,0,None,Low
+CLM0266,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D002,Coronary Artery Disease,Heart Surgery,137468.58,2026-07-13,2026-07-10,2026-07-18,8,Health Insurance,1,4538,Yes,No,Yes,103,2,0,None,Low
+CLM0267,Karthik Singh,33,Male,Kauvery Hospital,H005,D002,Kidney Stone,Lithotripsy,79263.17,2026-03-21,2026-03-20,2026-03-26,6,Health Insurance,4,77787,Yes,No,Yes,102,5,0,None,Medium
+CLM0268,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D021,Cataract,Cataract Surgery,54643.7,2026-02-23,2026-02-22,2026-02-23,1,Family Floater,1,89510,Yes,Yes,Yes,68,2,1,Duplicate Claim,High
+CLM0269,Priya Sharma,36,Female,Global Hospital,H006,D012,Gallstones,Cholecystectomy,78402.06,2026-02-02,2026-01-30,2026-02-04,5,Health Insurance,2,41340,Yes,No,Yes,83,3,0,None,Low
+CLM0270,Varun Kumar,54,Male,St. Thomas Hospital,H004,D002,Coronary Artery Disease,Heart Surgery,159817.22,2026-06-15,2026-06-12,2026-06-22,10,Corporate Insurance,2,37074,Yes,No,Yes,109,3,0,None,Low
+CLM0271,Ananya Rao,29,Female,Kauvery Hospital,H005,D027,Fracture,Orthopedic Surgery,72290.85,2026-01-03,2026-01-03,2026-01-08,5,Corporate Insurance,4,47387,Yes,No,Yes,114,5,0,None,Low
+CLM0272,Varun Kumar,54,Male,Global Hospital,H006,D004,Coronary Artery Disease,Heart Surgery,144435.06,2026-07-10,2026-07-08,2026-07-11,3,Health Insurance,2,48150,Yes,No,Yes,33,3,0,None,Low
+CLM0273,Sneha Nair,57,Female,Kauvery Hospital,H005,D001,Breast Tumor,Tumor Removal,124386.29,2026-08-07,2026-08-04,2026-08-13,9,Family Floater,2,66206,Yes,No,Yes,28,3,0,None,Low
+CLM0274,Ananya Rao,29,Female,Apollo Hospital,H001,D003,Fracture,Orthopedic Surgery,66628.12,2026-02-06,2026-02-06,2026-02-10,4,Family Floater,2,10918,Yes,No,Yes,82,3,0,None,Low
+CLM0275,Karthik Singh,33,Male,City Care Hospital,H007,D011,Kidney Stone,Lithotripsy,87374.09,2026-03-30,2026-03-30,2026-04-09,10,Health Insurance,3,83562,Yes,No,Yes,106,4,0,None,Low
+CLM0276,Ananya Rao,29,Female,Sunrise Medical Centre,H008,D006,Fracture,Orthopedic Surgery,64943.21,2026-03-28,2026-03-27,2026-04-01,5,Health Insurance,3,80811,Yes,No,Yes,33,4,0,None,Low
+CLM0277,Sneha Nair,57,Female,City Care Hospital,H007,D022,Breast Tumor,Tumor Removal,123835.65,2026-02-25,2026-02-22,2026-03-02,8,Health Insurance,2,33466,Yes,No,Yes,74,3,0,None,Low
+CLM0278,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D012,Coronary Artery Disease,Heart Surgery,150284.47,2026-02-05,2026-02-03,2026-02-10,7,Family Floater,0,0,Yes,No,Yes,241,1,1,Suspicious Provider,High
+CLM0279,Meera Iyer,48,Female,City Care Hospital,H007,D017,Cataract,Cataract Surgery,47274.31,2026-02-01,2026-01-29,2026-02-03,5,Corporate Insurance,0,0,Yes,No,Yes,89,1,0,None,Low
+CLM0280,Priya Sharma,36,Female,MIOT International,H003,D009,Gallstones,Cholecystectomy,91347.88,2026-08-23,2026-08-20,2026-08-25,5,Health Insurance,4,23227,Yes,No,Yes,61,5,0,None,Low
+CLM0281,Sneha Nair,57,Female,City Care Hospital,H007,D002,Breast Tumor,Tumor Removal,159846.36,2026-02-03,2026-02-02,2026-02-05,3,Corporate Insurance,0,0,Yes,No,Yes,50,1,0,None,Low
+CLM0282,Meera Iyer,48,Female,Kauvery Hospital,H005,D002,Cataract,Cataract Surgery,60233.76,2026-03-28,2026-03-27,2026-04-04,8,Family Floater,0,0,Yes,No,Yes,32,1,0,None,Low
+CLM0283,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D009,Diabetes,Diabetes Management,42947.56,2026-05-08,2026-05-08,2026-05-17,9,Corporate Insurance,0,0,Yes,No,Yes,88,1,0,None,Low
+CLM0284,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D010,Diabetes,Diabetes Management,44300.05,2026-05-15,2026-05-15,2026-05-24,9,Health Insurance,1,61199,Yes,No,Yes,24,2,0,None,Low
+CLM0285,Sneha Nair,57,Female,Sunrise Medical Centre,H008,D014,Breast Tumor,Tumor Removal,140759.6,2026-01-17,2026-01-17,2026-01-19,2,Family Floater,0,0,Yes,No,Yes,35,1,0,None,Medium
+CLM0286,Arjun Patel,61,Male,City Care Hospital,H007,D025,Diabetes,Diabetes Management,40773.36,2026-02-23,2026-02-21,2026-02-25,4,Corporate Insurance,2,18141,Yes,Yes,Yes,65,3,1,Duplicate Claim,High
+CLM0287,Karthik Singh,33,Male,Fortis Hospital,H002,D003,Kidney Stone,Lithotripsy,93080.35,2026-04-30,2026-04-28,2026-05-01,3,Health Insurance,4,20268,Yes,No,Yes,109,5,0,None,Low
+CLM0288,Karthik Singh,33,Male,City Care Hospital,H007,D027,Kidney Stone,Lithotripsy,95284.0,2026-01-29,2026-01-29,2026-02-05,7,Family Floater,3,86955,Yes,No,Yes,95,4,0,None,Low
+CLM0289,Arjun Patel,61,Male,Fortis Hospital,H002,D011,Diabetes,Diabetes Management,40463.83,2026-02-27,2026-02-24,2026-03-06,10,Health Insurance,0,0,Yes,No,Yes,97,1,0,None,Low
+CLM0290,Meera Iyer,48,Female,City Care Hospital,H007,D002,Cataract,Cataract Surgery,62018.18,2026-06-10,2026-06-09,2026-06-12,3,Health Insurance,2,59567,Yes,No,Yes,47,3,0,None,Low
+CLM0291,Priya Sharma,36,Female,Kauvery Hospital,H005,D022,Gallstones,Cholecystectomy,83254.56,2026-05-22,2026-05-19,2026-05-21,2,Corporate Insurance,4,89422,Yes,No,Yes,62,5,0,None,Low
+CLM0292,Ananya Rao,29,Female,Kauvery Hospital,H005,D010,Fracture,Orthopedic Surgery,62279.98,2026-02-15,2026-02-14,2026-02-22,8,Family Floater,2,21760,Yes,No,Yes,30,3,0,None,Low
+CLM0293,Karthik Singh,33,Male,Fortis Hospital,H002,D018,Kidney Stone,Lithotripsy,84670.34,2026-02-10,2026-02-07,2026-02-15,8,Family Floater,2,38990,Yes,No,Yes,48,3,0,None,Low
+CLM0294,Arjun Patel,61,Male,Global Hospital,H006,D007,Diabetes,Diabetes Management,46438.92,2026-05-15,2026-05-13,2026-05-21,8,Health Insurance,2,80449,Yes,No,Yes,72,3,0,None,Low
+CLM0295,Priya Sharma,36,Female,City Care Hospital,H007,D023,Gallstones,Cholecystectomy,101401.33,2026-07-09,2026-07-08,2026-07-16,8,Health Insurance,2,86129,Yes,No,Yes,66,3,0,None,Low
+CLM0296,Priya Sharma,36,Female,Global Hospital,H006,D015,Gallstones,Cholecystectomy,81353.86,2026-01-21,2026-01-19,2026-01-25,6,Corporate Insurance,4,42214,Yes,No,Yes,88,5,0,None,Low
+CLM0297,Varun Kumar,54,Male,Global Hospital,H006,D012,Coronary Artery Disease,Heart Surgery,150350.72,2026-08-19,2026-08-17,2026-08-25,8,Corporate Insurance,1,37140,Yes,No,Yes,46,2,0,None,Low
+CLM0298,Priya Sharma,36,Female,Global Hospital,H006,D026,Gallstones,Cholecystectomy,94346.86,2026-08-11,2026-08-10,2026-08-20,10,Health Insurance,2,50159,Yes,No,Yes,54,3,0,None,Low
+CLM0299,Rahul Kumar,42,Male,Apollo Hospital,H001,D003,Appendicitis,Appendectomy,84626.42,2026-02-02,2026-01-30,2026-02-05,6,Corporate Insurance,1,42008,Yes,No,Yes,37,2,0,None,Low
+CLM0300,Sneha Nair,57,Female,Kauvery Hospital,H005,D025,Breast Tumor,Tumor Removal,153415.94,2026-06-14,2026-06-13,2026-06-22,9,Health Insurance,0,0,Yes,No,Yes,69,1,0,None,Low
+CLM0301,Varun Kumar,54,Male,MIOT International,H003,D001,Coronary Artery Disease,Heart Surgery,172949.22,2026-05-10,2026-05-09,2026-05-16,7,Corporate Insurance,3,79010,Yes,No,Yes,20,4,0,None,Low
+CLM0302,Sneha Nair,57,Female,Fortis Hospital,H002,D020,Breast Tumor,Tumor Removal,136119.41,2026-04-28,2026-04-25,2026-05-03,8,Family Floater,1,85584,Yes,No,Yes,20,2,0,None,Low
+CLM0303,Meera Iyer,48,Female,Apollo Hospital,H001,D029,Cataract,Cataract Surgery,54928.7,2026-01-16,2026-01-14,2026-01-20,6,Health Insurance,2,9239,Yes,No,Yes,27,3,0,None,Low
+CLM0304,Rahul Kumar,42,Male,St. Thomas Hospital,H004,D008,Appendicitis,Appendectomy,86314.51,2026-05-23,2026-05-21,2026-05-23,2,Health Insurance,0,0,Yes,No,Yes,35,1,0,None,Low
+CLM0305,Sneha Nair,57,Female,Global Hospital,H006,D006,Breast Tumor,Tumor Removal,133115.94,2026-05-11,2026-05-10,2026-05-12,2,Health Insurance,4,21291,Yes,No,Yes,33,5,0,None,Low
+CLM0306,Ananya Rao,29,Female,Apollo Hospital,H001,D015,Fracture,Orthopedic Surgery,66179.81,2026-05-15,2026-05-14,2026-05-15,1,Corporate Insurance,4,28243,Yes,No,Yes,25,5,0,None,Low
+CLM0307,Rahul Kumar,42,Male,City Care Hospital,H007,D013,Appendicitis,Appendectomy,72463.82,2026-03-23,2026-03-22,2026-03-24,2,Health Insurance,4,34182,Yes,No,Yes,38,5,0,None,Low
+CLM0308,Arjun Patel,61,Male,MIOT International,H003,D016,Diabetes,Diabetes Management,43325.07,2026-08-17,2026-08-16,2026-08-19,3,Corporate Insurance,1,34179,Yes,No,Yes,72,2,0,None,Low
+CLM0309,Karthik Singh,33,Male,MIOT International,H003,D007,Kidney Stone,Lithotripsy,91435.5,2026-07-23,2026-07-23,2026-07-30,7,Health Insurance,0,0,Yes,No,Yes,96,1,0,None,Medium
+CLM0310,Varun Kumar,54,Male,City Care Hospital,H007,D013,Coronary Artery Disease,Heart Surgery,147979.27,2026-03-01,2026-03-01,2026-03-10,9,Corporate Insurance,3,45801,Yes,No,Yes,22,4,0,None,Low
+CLM0311,Varun Kumar,54,Male,MIOT International,H003,D024,Coronary Artery Disease,Heart Surgery,155033.52,2026-07-08,2026-07-07,2026-07-14,7,Corporate Insurance,3,70291,Yes,No,Yes,77,4,0,None,Low
+CLM0312,Sneha Nair,57,Female,City Care Hospital,H007,D008,Breast Tumor,Tumor Removal,142969.85,2026-02-15,2026-02-14,2026-02-17,3,Corporate Insurance,4,81384,Yes,No,Yes,90,5,0,None,Medium
+CLM0313,Varun Kumar,54,Male,MIOT International,H003,D007,Coronary Artery Disease,Heart Surgery,132736.09,2026-05-15,2026-05-14,2026-05-16,2,Family Floater,1,13878,Yes,No,Yes,66,2,0,None,Low
+CLM0314,Rahul Kumar,42,Male,Fortis Hospital,H002,D011,Appendicitis,Appendectomy,78099.0,2026-01-25,2026-01-23,2026-01-26,3,Family Floater,3,16329,Yes,Yes,Yes,34,4,1,Duplicate Claim,High
+CLM0315,Meera Iyer,48,Female,St. Thomas Hospital,H004,D009,Cataract,Cataract Surgery,62021.66,2026-07-08,2026-07-08,2026-07-16,8,Family Floater,4,42047,Yes,No,Yes,72,5,0,None,Low
+CLM0316,Varun Kumar,54,Male,MIOT International,H003,D007,Coronary Artery Disease,Heart Surgery,163495.35,2026-06-03,2026-06-02,2026-06-09,7,Corporate Insurance,0,0,Yes,No,Yes,75,1,0,None,Low
+CLM0317,Ananya Rao,29,Female,Kauvery Hospital,H005,D006,Fracture,Orthopedic Surgery,63234.73,2026-07-05,2026-07-02,2026-07-06,4,Corporate Insurance,3,2409,Yes,No,Yes,111,4,0,None,Low
+CLM0318,Ananya Rao,29,Female,City Care Hospital,H007,D005,Fracture,Orthopedic Surgery,64877.25,2026-03-27,2026-03-25,2026-03-31,6,Corporate Insurance,2,28355,Yes,No,Yes,45,3,0,None,Medium
+CLM0319,Sneha Nair,57,Female,Apollo Hospital,H001,D022,Breast Tumor,Tumor Removal,120329.31,2026-03-03,2026-03-03,2026-03-06,3,Family Floater,2,14851,Yes,No,Yes,58,3,0,None,Low
+CLM0320,Varun Kumar,54,Male,Global Hospital,H006,D027,Coronary Artery Disease,Heart Surgery,165132.21,2026-04-08,2026-04-06,2026-04-07,1,Corporate Insurance,0,0,Yes,No,Yes,90,1,0,None,Low
+CLM0321,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D022,Diabetes,Diabetes Management,48398.13,2026-01-25,2026-01-25,2026-02-02,8,Family Floater,1,35952,Yes,No,Yes,40,2,0,None,Low
+CLM0322,Priya Sharma,36,Female,St. Thomas Hospital,H004,D019,Gallstones,Cholecystectomy,106587.79,2026-07-09,2026-07-06,2026-07-14,8,Health Insurance,2,23705,Yes,No,Yes,59,3,0,None,Low
+CLM0323,Arjun Patel,61,Male,Fortis Hospital,H002,D004,Diabetes,Diabetes Management,49636.2,2026-04-18,2026-04-18,2026-04-26,8,Family Floater,2,57546,Yes,No,Yes,24,3,0,None,Medium
+CLM0324,Arjun Patel,61,Male,City Care Hospital,H007,D005,Diabetes,Diabetes Management,49424.34,2026-06-23,2026-06-21,2026-06-28,7,Health Insurance,3,35807,Yes,No,Yes,41,4,0,None,Low
+CLM0325,Meera Iyer,48,Female,St. Thomas Hospital,H004,D018,Cataract,Cataract Surgery,54746.72,2026-03-25,2026-03-23,2026-03-31,8,Family Floater,3,58672,Yes,No,Yes,65,4,0,None,Low
+CLM0326,Varun Kumar,54,Male,City Care Hospital,H007,D023,Coronary Artery Disease,Heart Surgery,165334.02,2026-07-16,2026-07-13,2026-07-22,9,Corporate Insurance,3,16244,Yes,No,Yes,95,4,0,None,Low
+CLM0327,Ananya Rao,29,Female,MIOT International,H003,D008,Fracture,Orthopedic Surgery,77200.6,2026-02-02,2026-02-01,2026-02-02,1,Corporate Insurance,1,77799,Yes,No,Yes,55,2,0,None,Low
+CLM0328,Priya Sharma,36,Female,City Care Hospital,H007,D003,Gallstones,Cholecystectomy,90097.59,2026-01-14,2026-01-14,2026-01-17,3,Corporate Insurance,0,0,Yes,No,Yes,42,1,0,None,Low
+CLM0329,Varun Kumar,54,Male,St. Thomas Hospital,H004,D030,Coronary Artery Disease,Heart Surgery,153911.87,2026-04-22,2026-04-22,2026-04-30,8,Health Insurance,0,0,Yes,No,Yes,76,1,0,None,Low
+CLM0330,Meera Iyer,48,Female,Kauvery Hospital,H005,D025,Cataract,Cataract Surgery,62157.8,2026-05-16,2026-05-16,2026-05-18,2,Family Floater,0,0,Yes,No,Yes,103,1,0,None,Low
+CLM0331,Arjun Patel,61,Male,Global Hospital,H006,D009,Diabetes,Diabetes Management,53624.21,2026-01-06,2026-01-03,2026-01-11,8,Corporate Insurance,4,30586,Yes,No,Yes,24,5,0,None,Low
+CLM0332,Karthik Singh,33,Male,Global Hospital,H006,D028,Kidney Stone,Lithotripsy,78055.73,2026-06-28,2026-06-28,2026-07-08,10,Corporate Insurance,4,23896,Yes,No,Yes,95,5,0,None,Low
+CLM0333,Ananya Rao,29,Female,City Care Hospital,H007,D004,Fracture,Orthopedic Surgery,60433.08,2026-03-06,2026-03-03,2026-03-07,4,Health Insurance,2,31462,Yes,No,Yes,103,3,0,None,Low
+CLM0334,Varun Kumar,54,Male,Global Hospital,H006,D013,Coronary Artery Disease,Heart Surgery,158228.52,2026-06-19,2026-06-16,2026-06-20,4,Family Floater,2,1083,Yes,No,No,49,3,1,Diagnosis/Procedure Mismatch,High
+CLM0335,Ananya Rao,29,Female,Kauvery Hospital,H005,D029,Fracture,Orthopedic Surgery,60581.67,2026-05-03,2026-05-03,2026-05-07,4,Family Floater,3,58728,Yes,No,Yes,113,4,0,None,Medium
+CLM0336,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D014,Coronary Artery Disease,Heart Surgery,142348.18,2026-05-26,2026-05-24,2026-05-28,4,Health Insurance,4,89033,Yes,No,Yes,298,5,1,Suspicious Provider,High
+CLM0337,Karthik Singh,33,Male,Kauvery Hospital,H005,D030,Kidney Stone,Lithotripsy,76612.11,2026-07-09,2026-07-07,2026-07-09,2,Corporate Insurance,2,82281,Yes,No,Yes,46,3,0,None,Low
+CLM0338,Arjun Patel,61,Male,Kauvery Hospital,H005,D019,Diabetes,Diabetes Management,46453.7,2026-02-22,2026-02-21,2026-02-23,2,Health Insurance,2,33075,Yes,No,Yes,43,3,0,None,Low
+CLM0339,Ananya Rao,29,Female,Fortis Hospital,H002,D004,Fracture,Orthopedic Surgery,257659.39,2026-08-29,2026-08-27,2026-09-01,5,Corporate Insurance,3,43429,Yes,No,Yes,95,4,1,Inflated Amount,High
+CLM0340,Sneha Nair,57,Female,Global Hospital,H006,D003,Breast Tumor,Tumor Removal,115002.2,2026-02-25,2026-02-25,2026-03-06,9,Corporate Insurance,0,0,Yes,No,Yes,29,1,0,None,Low
+CLM0341,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D030,Coronary Artery Disease,Heart Surgery,158443.67,2026-02-17,2026-02-17,2026-02-21,4,Corporate Insurance,4,63969,Yes,No,Yes,44,5,0,None,Low
+CLM0342,Sneha Nair,57,Female,Fortis Hospital,H002,D013,Breast Tumor,Tumor Removal,133964.14,2026-04-08,2026-04-07,2026-04-14,7,Family Floater,4,3311,Yes,No,Yes,64,5,0,None,Low
+CLM0343,Priya Sharma,36,Female,City Care Hospital,H007,D015,Gallstones,Cholecystectomy,98153.82,2026-01-31,2026-01-28,2026-01-31,3,Corporate Insurance,0,0,Yes,No,Yes,86,1,0,None,Low
+CLM0344,Sneha Nair,57,Female,Apollo Hospital,H001,D012,Breast Tumor,Tumor Removal,155622.38,2026-06-11,2026-06-09,2026-06-16,7,Family Floater,2,73167,Yes,No,No,46,3,1,Diagnosis/Procedure Mismatch,High
+CLM0345,Priya Sharma,36,Female,Sunrise Medical Centre,H008,D008,Gallstones,Cholecystectomy,96479.58,2026-02-23,2026-02-20,2026-02-24,4,Health Insurance,11,420804,Yes,No,Yes,57,12,1,Excessive Claims,High
+CLM0346,Priya Sharma,36,Female,Fortis Hospital,H002,D020,Gallstones,Cholecystectomy,105301.12,2026-07-31,2026-07-28,2026-08-02,5,Corporate Insurance,2,28415,Yes,No,Yes,91,3,0,None,Low
+CLM0347,Priya Sharma,36,Female,Sunrise Medical Centre,H008,D023,Gallstones,Cholecystectomy,89324.16,2026-02-03,2026-02-01,2026-02-07,6,Health Insurance,1,86649,Yes,No,Yes,107,2,0,None,Low
+CLM0348,Karthik Singh,33,Male,Global Hospital,H006,D024,Kidney Stone,Lithotripsy,80118.01,2026-03-16,2026-03-15,2026-03-18,3,Family Floater,3,74404,Yes,No,Yes,69,4,0,None,Low
+CLM0349,Rahul Kumar,42,Male,Kauvery Hospital,H005,D019,Appendicitis,Appendectomy,220000.0,2026-02-15,2026-02-15,2026-02-16,1,Health Insurance,2,84199,Yes,No,Yes,71,3,1,Inflated Amount,High
+CLM0350,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D029,Kidney Stone,Lithotripsy,86290.76,2026-06-25,2026-06-25,2026-07-01,6,Family Floater,1,26314,Yes,No,Yes,47,2,0,None,Low
+CLM0351,Karthik Singh,33,Male,City Care Hospital,H007,D030,Kidney Stone,Lithotripsy,70076.19,2026-08-17,2026-08-17,2026-08-21,4,Family Floater,3,37168,Yes,No,Yes,288,4,1,Suspicious Provider,High
+CLM0352,Karthik Singh,33,Male,St. Thomas Hospital,H004,D025,Kidney Stone,Lithotripsy,92152.8,2026-07-23,2026-07-22,2026-07-27,5,Family Floater,3,15461,Yes,No,Yes,45,4,0,None,Low
+CLM0353,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D023,Diabetes,Diabetes Management,39372.0,2026-04-03,2026-04-02,2026-04-03,1,Corporate Insurance,3,76695,Yes,No,Yes,41,4,0,None,Medium
+CLM0354,Rahul Kumar,42,Male,Apollo Hospital,H001,D008,Appendicitis,Appendectomy,86328.42,2026-04-25,2026-04-25,2026-04-30,5,Family Floater,4,46970,Yes,No,Yes,117,5,0,None,Low
+CLM0355,Arjun Patel,61,Male,Apollo Hospital,H001,D017,Diabetes,Diabetes Management,43165.33,2026-01-11,2026-01-09,2026-01-15,6,Health Insurance,2,18897,Yes,No,Yes,69,3,0,None,Low
+CLM0356,Ananya Rao,29,Female,St. Thomas Hospital,H004,D020,Fracture,Orthopedic Surgery,72301.1,2026-08-17,2026-08-15,2026-08-24,9,Corporate Insurance,2,65579,Yes,No,No,28,3,1,Diagnosis/Procedure Mismatch,High
+CLM0357,Rahul Kumar,42,Male,Global Hospital,H006,D010,Appendicitis,Appendectomy,88968.49,2026-02-08,2026-02-08,2026-02-18,10,Corporate Insurance,3,84658,Yes,No,Yes,66,4,0,None,Low
+CLM0358,Ananya Rao,29,Female,Sunrise Medical Centre,H008,D005,Fracture,Orthopedic Surgery,64759.7,2026-06-20,2026-06-17,2026-06-25,8,Corporate Insurance,3,3530,Yes,No,Yes,108,4,0,None,Low
+CLM0359,Varun Kumar,54,Male,Kauvery Hospital,H005,D009,Coronary Artery Disease,Heart Surgery,160766.35,2026-06-04,2026-06-04,2026-06-05,1,Corporate Insurance,2,43157,Yes,No,Yes,48,3,0,None,Low
+CLM0360,Ananya Rao,29,Female,Fortis Hospital,H002,D029,Fracture,Orthopedic Surgery,70192.85,2026-01-25,2026-01-23,2026-01-30,7,Family Floater,1,26482,Yes,No,Yes,112,2,0,None,Low
+CLM0361,Varun Kumar,54,Male,Apollo Hospital,H001,D025,Coronary Artery Disease,Heart Surgery,162563.82,2026-03-19,2026-03-17,2026-03-25,8,Health Insurance,4,39489,Yes,No,Yes,48,5,0,None,Low
+CLM0362,Karthik Singh,33,Male,Apollo Hospital,H001,D011,Kidney Stone,Lithotripsy,75492.51,2026-07-02,2026-06-29,2026-07-05,6,Corporate Insurance,1,51957,Yes,No,Yes,38,2,0,None,Low
+CLM0363,Ananya Rao,29,Female,Global Hospital,H006,D007,Fracture,Orthopedic Surgery,70079.71,2026-02-22,2026-02-21,2026-02-23,2,Health Insurance,0,0,Yes,No,Yes,62,1,0,None,Low
+CLM0364,Sneha Nair,57,Female,St. Thomas Hospital,H004,D007,Breast Tumor,Tumor Removal,144431.58,2026-07-16,2026-07-16,2026-07-21,5,Family Floater,3,24943,Yes,No,Yes,96,4,0,None,Low
+CLM0365,Varun Kumar,54,Male,St. Thomas Hospital,H004,D005,Coronary Artery Disease,Heart Surgery,149500.63,2026-08-17,2026-08-15,2026-08-23,8,Health Insurance,3,1757,Yes,No,Yes,37,4,0,None,Low
+CLM0366,Rahul Kumar,42,Male,Sunrise Medical Centre,H008,D006,Appendicitis,Appendectomy,77328.06,2026-01-08,2026-01-07,2026-01-12,5,Family Floater,3,58212,Yes,No,Yes,81,4,0,None,Low
+CLM0367,Rahul Kumar,42,Male,Fortis Hospital,H002,D005,Appendicitis,Appendectomy,63938.41,2026-04-19,2026-04-19,2026-04-29,10,Health Insurance,0,0,Yes,No,Yes,99,1,0,None,Low
+CLM0368,Karthik Singh,33,Male,St. Thomas Hospital,H004,D019,Kidney Stone,Lithotripsy,82375.62,2026-01-23,2026-01-21,2026-01-23,2,Corporate Insurance,4,31806,Yes,No,Yes,66,5,0,None,Low
+CLM0369,Sneha Nair,57,Female,St. Thomas Hospital,H004,D026,Breast Tumor,Tumor Removal,117907.38,2026-04-13,2026-04-13,2026-04-17,4,Corporate Insurance,2,75510,Yes,No,Yes,119,3,0,None,Low
+CLM0370,Priya Sharma,36,Female,Fortis Hospital,H002,D007,Gallstones,Cholecystectomy,96431.32,2026-02-07,2026-02-06,2026-02-14,8,Corporate Insurance,1,22576,Yes,No,Yes,95,2,0,None,Low
+CLM0371,Varun Kumar,54,Male,Fortis Hospital,H002,D015,Coronary Artery Disease,Heart Surgery,129394.49,2026-07-15,2026-07-14,2026-07-18,4,Health Insurance,1,39537,Yes,No,Yes,111,2,0,None,Medium
+CLM0372,Karthik Singh,33,Male,Fortis Hospital,H002,D016,Kidney Stone,Lithotripsy,84215.3,2026-08-09,2026-08-09,2026-08-10,1,Health Insurance,0,0,Yes,No,Yes,26,1,0,None,Low
+CLM0373,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D025,Cataract,Cataract Surgery,49966.73,2026-07-24,2026-07-24,2026-08-02,9,Corporate Insurance,3,31713,Yes,No,Yes,120,4,0,None,Low
+CLM0374,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D009,Kidney Stone,Lithotripsy,302773.18,2026-04-20,2026-04-18,2026-04-24,6,Health Insurance,4,75920,Yes,No,Yes,98,5,1,Inflated Amount,High
+CLM0375,Karthik Singh,33,Male,City Care Hospital,H007,D008,Kidney Stone,Lithotripsy,91999.67,2026-08-09,2026-08-07,2026-08-16,9,Health Insurance,1,9103,Yes,No,Yes,273,2,1,Suspicious Provider,High
+CLM0376,Varun Kumar,54,Male,Global Hospital,H006,D020,Coronary Artery Disease,Heart Surgery,129562.38,2026-08-07,2026-08-05,2026-08-08,3,Health Insurance,1,8342,Yes,No,Yes,25,2,0,None,Low
+CLM0377,Sneha Nair,57,Female,St. Thomas Hospital,H004,D002,Breast Tumor,Tumor Removal,140997.78,2026-06-18,2026-06-17,2026-06-25,8,Family Floater,3,4664,Yes,No,Yes,118,4,0,None,Low
+CLM0378,Sneha Nair,57,Female,MIOT International,H003,D023,Breast Tumor,Tumor Removal,127418.07,2026-04-04,2026-04-04,2026-04-06,2,Health Insurance,3,5940,Yes,No,Yes,102,4,0,None,Low
+CLM0379,Priya Sharma,36,Female,City Care Hospital,H007,D021,Gallstones,Cholecystectomy,106387.13,2026-01-05,2026-01-05,2026-01-14,9,Family Floater,2,89245,Yes,No,Yes,32,3,0,None,Low
+CLM0380,Sneha Nair,57,Female,City Care Hospital,H007,D011,Breast Tumor,Tumor Removal,152816.24,2026-01-02,2025-12-31,2026-01-01,1,Family Floater,4,6327,Yes,No,Yes,118,5,0,None,Low
+CLM0381,Rahul Kumar,42,Male,Kauvery Hospital,H005,D004,Appendicitis,Appendectomy,78296.35,2026-07-30,2026-07-28,2026-08-06,9,Health Insurance,4,55870,Yes,No,Yes,110,5,0,None,Low
+CLM0382,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D009,Kidney Stone,Lithotripsy,90024.79,2026-02-16,2026-02-13,2026-02-19,6,Corporate Insurance,2,59326,Yes,No,Yes,118,3,0,None,Low
+CLM0383,Rahul Kumar,42,Male,Global Hospital,H006,D010,Appendicitis,Appendectomy,76850.11,2026-04-23,2026-04-21,2026-04-29,8,Family Floater,4,80121,Yes,No,Yes,45,5,0,None,Low
+CLM0384,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D029,Coronary Artery Disease,Heart Surgery,143595.47,2026-04-17,2026-04-17,2026-04-23,6,Health Insurance,4,10231,Yes,No,Yes,34,5,0,None,Low
+CLM0385,Meera Iyer,48,Female,St. Thomas Hospital,H004,D007,Cataract,Cataract Surgery,48997.49,2026-02-25,2026-02-25,2026-02-28,3,Family Floater,0,0,Yes,No,Yes,80,1,0,None,Low
+CLM0386,Ananya Rao,29,Female,St. Thomas Hospital,H004,D015,Fracture,Orthopedic Surgery,76203.43,2026-08-07,2026-08-07,2026-08-15,8,Health Insurance,4,42015,Yes,No,Yes,50,5,0,None,Low
+CLM0387,Rahul Kumar,42,Male,Sunrise Medical Centre,H008,D005,Appendicitis,Appendectomy,89183.75,2026-08-15,2026-08-13,2026-08-15,2,Family Floater,2,58160,Yes,No,Yes,58,3,0,None,Low
+CLM0388,Sneha Nair,57,Female,Global Hospital,H006,D012,Breast Tumor,Tumor Removal,142823.65,2026-04-25,2026-04-25,2026-05-04,9,Family Floater,1,11782,Yes,No,Yes,70,2,0,None,Low
+CLM0389,Meera Iyer,48,Female,St. Thomas Hospital,H004,D028,Cataract,Cataract Surgery,63025.26,2026-03-18,2026-03-15,2026-03-19,4,Family Floater,2,64509,Yes,No,Yes,34,3,0,None,Low
+CLM0390,Meera Iyer,48,Female,Fortis Hospital,H002,D004,Cataract,Cataract Surgery,58951.84,2026-05-21,2026-05-21,2026-05-28,7,Corporate Insurance,2,49005,Yes,No,Yes,71,3,0,None,Low
+CLM0391,Meera Iyer,48,Female,Kauvery Hospital,H005,D007,Cataract,Cataract Surgery,63602.76,2026-02-15,2026-02-15,2026-02-20,5,Corporate Insurance,0,0,Yes,No,Yes,25,1,0,None,Low
+CLM0392,Karthik Singh,33,Male,Kauvery Hospital,H005,D003,Kidney Stone,Lithotripsy,85129.01,2026-05-13,2026-05-11,2026-05-18,7,Family Floater,2,6075,Yes,No,No,103,3,1,Diagnosis/Procedure Mismatch,High
+CLM0393,Meera Iyer,48,Female,City Care Hospital,H007,D021,Cataract,Cataract Surgery,53820.69,2026-02-05,2026-02-03,2026-02-08,5,Corporate Insurance,2,63574,Yes,No,Yes,22,3,0,None,Low
+CLM0394,Sneha Nair,57,Female,St. Thomas Hospital,H004,D004,Breast Tumor,Tumor Removal,128620.69,2026-02-12,2026-02-12,2026-02-21,9,Corporate Insurance,1,68696,Yes,Yes,Yes,70,2,1,Duplicate Claim,High
+CLM0395,Meera Iyer,48,Female,Global Hospital,H006,D018,Cataract,Cataract Surgery,49834.1,2026-01-11,2026-01-08,2026-01-10,2,Family Floater,12,334215,Yes,No,Yes,32,13,1,Excessive Claims,High
+CLM0396,Rahul Kumar,42,Male,City Care Hospital,H007,D023,Appendicitis,Appendectomy,74673.0,2026-02-12,2026-02-10,2026-02-12,2,Corporate Insurance,1,60651,Yes,No,Yes,84,2,0,None,Low
+CLM0397,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D023,Diabetes,Diabetes Management,41697.94,2026-01-21,2026-01-21,2026-01-24,3,Health Insurance,0,0,Yes,No,Yes,90,1,0,None,Low
+CLM0398,Varun Kumar,54,Male,Kauvery Hospital,H005,D016,Coronary Artery Disease,Heart Surgery,169482.3,2026-05-01,2026-04-30,2026-05-03,3,Family Floater,0,0,Yes,No,Yes,87,1,0,None,Low
+CLM0399,Priya Sharma,36,Female,Fortis Hospital,H002,D027,Gallstones,Cholecystectomy,85080.26,2026-04-10,2026-04-10,2026-04-15,5,Health Insurance,3,78096,Yes,No,Yes,81,4,0,None,Low
+CLM0400,Varun Kumar,54,Male,Global Hospital,H006,D007,Coronary Artery Disease,Heart Surgery,165869.22,2026-04-18,2026-04-16,2026-04-24,8,Health Insurance,10,227355,Yes,No,Yes,44,11,1,Excessive Claims,High
+CLM0401,Sneha Nair,57,Female,Apollo Hospital,H001,D003,Breast Tumor,Tumor Removal,136836.97,2026-05-23,2026-05-22,2026-05-28,6,Family Floater,11,272413,Yes,No,Yes,110,12,1,Excessive Claims,High
+CLM0402,Sneha Nair,57,Female,City Care Hospital,H007,D015,Breast Tumor,Tumor Removal,127942.49,2026-04-04,2026-04-02,2026-04-03,1,Health Insurance,2,31906,Yes,No,Yes,72,3,0,None,Low
+CLM0403,Ananya Rao,29,Female,Apollo Hospital,H001,D015,Fracture,Orthopedic Surgery,57470.8,2026-07-12,2026-07-10,2026-07-14,4,Corporate Insurance,15,351847,Yes,No,Yes,116,16,1,Excessive Claims,High
+CLM0404,Rahul Kumar,42,Male,Kauvery Hospital,H005,D002,Appendicitis,Appendectomy,81406.83,2026-02-27,2026-02-24,2026-02-28,4,Family Floater,15,402183,Yes,No,Yes,22,16,1,Excessive Claims,High
+CLM0405,Meera Iyer,48,Female,Apollo Hospital,H001,D002,Cataract,Cataract Surgery,63613.23,2026-02-28,2026-02-28,2026-03-05,5,Health Insurance,2,45431,Yes,No,Yes,79,3,0,None,Low
+CLM0406,Karthik Singh,33,Male,St. Thomas Hospital,H004,D025,Kidney Stone,Lithotripsy,88940.08,2026-07-09,2026-07-06,2026-07-12,6,Health Insurance,13,465083,Yes,No,Yes,77,14,1,Excessive Claims,High
+CLM0407,Sneha Nair,57,Female,St. Thomas Hospital,H004,D030,Breast Tumor,Tumor Removal,144474.38,2026-02-23,2026-02-20,2026-02-26,6,Health Insurance,2,20083,Yes,No,Yes,105,3,0,None,Low
+CLM0408,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D013,Cataract,Cataract Surgery,51520.99,2026-01-18,2026-01-18,2026-01-28,10,Health Insurance,0,0,Yes,No,Yes,56,1,0,None,Low
+CLM0409,Priya Sharma,36,Female,Kauvery Hospital,H005,D012,Gallstones,Cholecystectomy,105653.35,2026-08-02,2026-07-31,2026-08-08,8,Health Insurance,0,0,Yes,No,Yes,59,1,0,None,Low
+CLM0410,Meera Iyer,48,Female,Fortis Hospital,H002,D005,Cataract,Cataract Surgery,51821.51,2026-03-22,2026-03-22,2026-03-24,2,Corporate Insurance,2,2928,Yes,No,Yes,64,3,0,None,Low
+CLM0411,Ananya Rao,29,Female,MIOT International,H003,D002,Fracture,Orthopedic Surgery,73728.78,2026-01-08,2026-01-08,2026-01-14,6,Corporate Insurance,3,25472,Yes,No,Yes,65,4,0,None,Low
+CLM0412,Priya Sharma,36,Female,Fortis Hospital,H002,D030,Gallstones,Cholecystectomy,86739.26,2026-05-12,2026-05-09,2026-05-17,8,Corporate Insurance,1,44229,Yes,No,Yes,93,2,0,None,Low
+CLM0413,Arjun Patel,61,Male,Fortis Hospital,H002,D016,Diabetes,Diabetes Management,47600.65,2026-03-05,2026-03-03,2026-03-08,5,Corporate Insurance,0,0,Yes,No,No,119,1,1,Diagnosis/Procedure Mismatch,High
+CLM0414,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D003,Cataract,Cataract Surgery,50021.02,2026-06-01,2026-06-01,2026-06-11,10,Family Floater,3,443,Yes,No,Yes,291,4,1,Suspicious Provider,High
+CLM0415,Varun Kumar,54,Male,MIOT International,H003,D011,Coronary Artery Disease,Heart Surgery,159202.18,2026-04-14,2026-04-14,2026-04-23,9,Health Insurance,2,55447,Yes,Yes,Yes,56,3,1,Duplicate Claim,High
+CLM0416,Priya Sharma,36,Female,Kauvery Hospital,H005,D005,Gallstones,Cholecystectomy,94395.9,2026-06-22,2026-06-22,2026-06-24,2,Health Insurance,3,33566,Yes,No,Yes,110,4,0,None,Low
+CLM0417,Ananya Rao,29,Female,Kauvery Hospital,H005,D025,Fracture,Orthopedic Surgery,73261.4,2026-07-19,2026-07-18,2026-07-24,6,Family Floater,2,16786,Yes,No,Yes,120,3,0,None,Low
+CLM0418,Karthik Singh,33,Male,Apollo Hospital,H001,D020,Kidney Stone,Lithotripsy,71730.26,2026-04-21,2026-04-21,2026-04-30,9,Health Insurance,2,34796,Yes,No,Yes,36,3,0,None,Medium
+CLM0419,Varun Kumar,54,Male,City Care Hospital,H007,D006,Coronary Artery Disease,Heart Surgery,130451.11,2026-03-19,2026-03-19,2026-03-29,10,Family Floater,1,22548,Yes,No,Yes,68,2,0,None,Low
+CLM0420,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D026,Diabetes,Diabetes Management,46172.18,2026-02-24,2026-02-22,2026-02-25,3,Family Floater,2,51818,Yes,No,Yes,35,3,0,None,Low
+CLM0421,Meera Iyer,48,Female,Apollo Hospital,H001,D001,Cataract,Cataract Surgery,59972.19,2026-06-20,2026-06-20,2026-06-22,2,Health Insurance,4,17900,Yes,No,Yes,91,5,0,None,Low
+CLM0422,Varun Kumar,54,Male,St. Thomas Hospital,H004,D017,Coronary Artery Disease,Heart Surgery,149187.07,2026-07-03,2026-07-01,2026-07-09,8,Family Floater,1,55451,Yes,No,Yes,107,2,0,None,Medium
+CLM0423,Meera Iyer,48,Female,City Care Hospital,H007,D008,Cataract,Cataract Surgery,51649.14,2026-08-06,2026-08-06,2026-08-08,2,Corporate Insurance,0,0,Yes,No,Yes,35,1,0,None,Low
+CLM0424,Arjun Patel,61,Male,MIOT International,H003,D012,Diabetes,Diabetes Management,42413.59,2026-04-21,2026-04-21,2026-04-25,4,Corporate Insurance,3,39163,Yes,No,Yes,44,4,0,None,Low
+CLM0425,Sneha Nair,57,Female,MIOT International,H003,D020,Breast Tumor,Tumor Removal,125557.09,2026-04-16,2026-04-16,2026-04-23,7,Family Floater,3,57682,Yes,No,Yes,35,4,0,None,Low
+CLM0426,Varun Kumar,54,Male,St. Thomas Hospital,H004,D008,Coronary Artery Disease,Heart Surgery,168205.65,2026-02-26,2026-02-25,2026-03-02,5,Family Floater,1,50414,Yes,No,Yes,48,2,0,None,Low
+CLM0427,Sneha Nair,57,Female,Global Hospital,H006,D017,Breast Tumor,Tumor Removal,136052.63,2026-08-04,2026-08-02,2026-08-09,7,Health Insurance,2,5869,Yes,No,Yes,35,3,0,None,Low
+CLM0428,Sneha Nair,57,Female,Fortis Hospital,H002,D003,Breast Tumor,Tumor Removal,121382.07,2026-04-09,2026-04-06,2026-04-09,3,Health Insurance,4,83976,Yes,No,Yes,84,5,0,None,Low
+CLM0429,Priya Sharma,36,Female,Kauvery Hospital,H005,D006,Gallstones,Cholecystectomy,292594.08,2026-07-24,2026-07-22,2026-07-23,1,Corporate Insurance,1,48347,Yes,No,Yes,70,2,1,Inflated Amount,High
+CLM0430,Karthik Singh,33,Male,MIOT International,H003,D016,Kidney Stone,Lithotripsy,70516.88,2026-01-01,2026-01-01,2026-01-03,2,Health Insurance,1,69016,Yes,No,Yes,101,2,0,None,Medium
+CLM0431,Priya Sharma,36,Female,City Care Hospital,H007,D025,Gallstones,Cholecystectomy,102646.44,2026-02-05,2026-02-04,2026-02-10,6,Corporate Insurance,3,36491,Yes,No,Yes,78,4,0,None,Low
+CLM0432,Meera Iyer,48,Female,St. Thomas Hospital,H004,D013,Cataract,Cataract Surgery,55350.97,2026-02-16,2026-02-15,2026-02-20,5,Health Insurance,2,38345,Yes,No,Yes,35,3,0,None,Low
+CLM0433,Priya Sharma,36,Female,City Care Hospital,H007,D013,Gallstones,Cholecystectomy,104749.88,2026-01-02,2026-01-01,2026-01-08,7,Family Floater,1,54915,Yes,No,Yes,50,2,0,None,Low
+CLM0434,Arjun Patel,61,Male,Global Hospital,H006,D029,Diabetes,Diabetes Management,46975.17,2026-07-31,2026-07-29,2026-08-02,4,Health Insurance,10,265625,Yes,No,Yes,88,11,1,Excessive Claims,High
+CLM0435,Arjun Patel,61,Male,Apollo Hospital,H001,D014,Diabetes,Diabetes Management,49624.87,2026-02-20,2026-02-19,2026-02-25,6,Corporate Insurance,2,37594,Yes,No,Yes,75,3,0,None,Low
+CLM0436,Varun Kumar,54,Male,City Care Hospital,H007,D002,Coronary Artery Disease,Heart Surgery,137765.65,2026-05-12,2026-05-09,2026-05-10,1,Corporate Insurance,2,12463,Yes,No,Yes,99,3,0,None,Low
+CLM0437,Meera Iyer,48,Female,St. Thomas Hospital,H004,D011,Cataract,Cataract Surgery,64249.08,2026-05-02,2026-04-29,2026-05-09,10,Corporate Insurance,4,15891,Yes,No,Yes,25,5,0,None,Medium
+CLM0438,Priya Sharma,36,Female,City Care Hospital,H007,D029,Gallstones,Cholecystectomy,98266.32,2026-02-10,2026-02-08,2026-02-15,7,Health Insurance,0,0,Yes,No,Yes,120,1,0,None,Low
+CLM0439,Priya Sharma,36,Female,City Care Hospital,H007,D021,Gallstones,Cholecystectomy,92084.99,2026-02-25,2026-02-24,2026-03-06,10,Corporate Insurance,1,53938,Yes,No,Yes,33,2,0,None,Low
+CLM0440,Arjun Patel,61,Male,MIOT International,H003,D016,Diabetes,Diabetes Management,48331.38,2026-03-03,2026-02-28,2026-03-10,10,Corporate Insurance,1,34641,Yes,No,Yes,28,2,0,None,Medium
+CLM0441,Rahul Kumar,42,Male,Fortis Hospital,H002,D008,Appendicitis,Appendectomy,72196.02,2026-05-26,2026-05-24,2026-06-03,10,Health Insurance,0,0,Yes,No,Yes,41,1,0,None,Low
+CLM0442,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D015,Cataract,Cataract Surgery,65043.81,2026-05-11,2026-05-08,2026-05-15,7,Health Insurance,2,77037,Yes,No,Yes,103,3,0,None,Low
+CLM0443,Sneha Nair,57,Female,MIOT International,H003,D005,Breast Tumor,Tumor Removal,141357.08,2026-08-27,2026-08-24,2026-09-01,8,Family Floater,2,72187,Yes,No,Yes,43,3,0,None,Medium
+CLM0444,Varun Kumar,54,Male,Kauvery Hospital,H005,D026,Coronary Artery Disease,Heart Surgery,160758.79,2026-06-05,2026-06-02,2026-06-07,5,Family Floater,4,60640,Yes,No,Yes,99,5,0,None,Low
+CLM0445,Sneha Nair,57,Female,Kauvery Hospital,H005,D008,Breast Tumor,Tumor Removal,116752.01,2026-03-03,2026-03-03,2026-03-09,6,Corporate Insurance,2,23840,Yes,No,Yes,101,3,0,None,Low
+CLM0446,Rahul Kumar,42,Male,Kauvery Hospital,H005,D025,Appendicitis,Appendectomy,72312.28,2026-06-07,2026-06-06,2026-06-14,8,Corporate Insurance,4,34889,Yes,No,Yes,76,5,0,None,Low
+CLM0447,Sneha Nair,57,Female,St. Thomas Hospital,H004,D009,Breast Tumor,Tumor Removal,125959.53,2026-03-29,2026-03-27,2026-04-02,6,Corporate Insurance,0,0,Yes,No,Yes,59,1,0,None,Medium
+CLM0448,Karthik Singh,33,Male,Fortis Hospital,H002,D017,Kidney Stone,Lithotripsy,69176.83,2026-06-12,2026-06-10,2026-06-16,6,Corporate Insurance,4,38841,Yes,No,Yes,117,5,0,None,Medium
+CLM0449,Arjun Patel,61,Male,City Care Hospital,H007,D018,Diabetes,Diabetes Management,40034.66,2026-06-24,2026-06-21,2026-06-23,2,Family Floater,4,5952,Yes,No,Yes,28,5,0,None,Low
+CLM0450,Varun Kumar,54,Male,Sunrise Medical Centre,H008,D023,Coronary Artery Disease,Heart Surgery,128350.07,2026-04-17,2026-04-15,2026-04-16,1,Health Insurance,0,0,Yes,No,Yes,120,1,0,None,Low
+CLM0451,Ananya Rao,29,Female,Sunrise Medical Centre,H008,D022,Fracture,Orthopedic Surgery,67263.33,2026-04-01,2026-03-31,2026-04-08,8,Health Insurance,1,88037,Yes,No,Yes,90,2,0,None,Low
+CLM0452,Ananya Rao,29,Female,Fortis Hospital,H002,D030,Fracture,Orthopedic Surgery,77117.42,2026-02-23,2026-02-21,2026-03-01,8,Health Insurance,1,85493,Yes,No,Yes,89,2,0,None,Low
+CLM0453,Priya Sharma,36,Female,Apollo Hospital,H001,D017,Gallstones,Cholecystectomy,85872.36,2026-02-19,2026-02-16,2026-02-26,10,Family Floater,0,0,Yes,No,Yes,53,1,0,None,Low
+CLM0454,Ananya Rao,29,Female,Fortis Hospital,H002,D005,Fracture,Orthopedic Surgery,69962.34,2026-06-29,2026-06-27,2026-07-07,10,Family Floater,4,38754,Yes,No,Yes,108,5,0,None,Low
+CLM0455,Rahul Kumar,42,Male,City Care Hospital,H007,D023,Appendicitis,Appendectomy,89328.31,2026-05-05,2026-05-05,2026-05-08,3,Family Floater,1,67244,Yes,No,Yes,87,2,0,None,Low
+CLM0456,Karthik Singh,33,Male,Global Hospital,H006,D011,Kidney Stone,Lithotripsy,90008.94,2026-05-25,2026-05-25,2026-05-26,1,Family Floater,1,70306,Yes,No,Yes,61,2,0,None,Low
+CLM0457,Arjun Patel,61,Male,Sunrise Medical Centre,H008,D022,Diabetes,Diabetes Management,48090.81,2026-05-02,2026-04-30,2026-05-10,10,Corporate Insurance,4,18289,Yes,No,Yes,55,5,0,None,Low
+CLM0458,Karthik Singh,33,Male,Kauvery Hospital,H005,D006,Kidney Stone,Lithotripsy,95983.11,2026-01-10,2026-01-07,2026-01-15,8,Health Insurance,4,32150,Yes,No,Yes,65,5,0,None,Low
+CLM0459,Arjun Patel,61,Male,Fortis Hospital,H002,D003,Diabetes,Diabetes Management,47726.24,2026-06-01,2026-05-30,2026-05-31,1,Corporate Insurance,3,72430,Yes,No,Yes,100,4,0,None,Low
+CLM0460,Karthik Singh,33,Male,Kauvery Hospital,H005,D019,Kidney Stone,Lithotripsy,249967.93,2026-05-22,2026-05-19,2026-05-25,6,Family Floater,0,0,Yes,No,Yes,108,1,1,Inflated Amount,High
+CLM0461,Varun Kumar,54,Male,City Care Hospital,H007,D026,Coronary Artery Disease,Heart Surgery,138158.93,2026-03-14,2026-03-11,2026-03-13,2,Family Floater,0,0,Yes,No,Yes,103,1,0,None,Low
+CLM0462,Meera Iyer,48,Female,Fortis Hospital,H002,D005,Cataract,Cataract Surgery,55697.91,2026-03-10,2026-03-09,2026-03-11,2,Corporate Insurance,2,67073,Yes,No,Yes,98,3,0,None,Low
+CLM0463,Ananya Rao,29,Female,St. Thomas Hospital,H004,D008,Fracture,Orthopedic Surgery,61380.88,2026-07-17,2026-07-14,2026-07-16,2,Corporate Insurance,0,0,Yes,No,Yes,73,1,0,None,Low
+CLM0464,Rahul Kumar,42,Male,Kauvery Hospital,H005,D021,Appendicitis,Appendectomy,65368.6,2026-07-02,2026-06-29,2026-07-08,9,Family Floater,2,4886,Yes,No,Yes,31,3,0,None,Low
+CLM0465,Priya Sharma,36,Female,Global Hospital,H006,D014,Gallstones,Cholecystectomy,105641.62,2026-02-15,2026-02-13,2026-02-21,8,Family Floater,2,66542,Yes,No,Yes,60,3,0,None,Low
+CLM0466,Arjun Patel,61,Male,Global Hospital,H006,D010,Diabetes,Diabetes Management,49401.6,2026-02-13,2026-02-11,2026-02-12,1,Family Floater,4,25393,Yes,No,Yes,74,5,0,None,Medium
+CLM0467,Rahul Kumar,42,Male,Fortis Hospital,H002,D019,Appendicitis,Appendectomy,88387.26,2026-08-24,2026-08-23,2026-08-28,5,Health Insurance,4,56033,Yes,No,Yes,83,5,0,None,Low
+CLM0468,Meera Iyer,48,Female,Sunrise Medical Centre,H008,D001,Cataract,Cataract Surgery,52040.1,2026-08-16,2026-08-13,2026-08-23,10,Family Floater,0,0,Yes,No,Yes,66,1,0,None,Low
+CLM0469,Rahul Kumar,42,Male,Global Hospital,H006,D004,Appendicitis,Appendectomy,71950.08,2026-04-25,2026-04-22,2026-04-25,3,Health Insurance,1,27868,Yes,No,Yes,91,2,0,None,Medium
+CLM0470,Meera Iyer,48,Female,Global Hospital,H006,D001,Cataract,Cataract Surgery,60914.18,2026-03-13,2026-03-10,2026-03-16,6,Family Floater,1,51262,Yes,No,Yes,41,2,0,None,Low
+CLM0471,Sneha Nair,57,Female,Fortis Hospital,H002,D026,Breast Tumor,Tumor Removal,339973.06,2026-02-11,2026-02-09,2026-02-11,2,Family Floater,4,4403,Yes,No,Yes,22,5,1,Inflated Amount,High
+CLM0472,Sneha Nair,57,Female,MIOT International,H003,D011,Breast Tumor,Tumor Removal,134400.07,2026-03-13,2026-03-11,2026-03-17,6,Family Floater,4,77292,Yes,No,Yes,39,5,0,None,Medium
+CLM0473,Sneha Nair,57,Female,MIOT International,H003,D014,Breast Tumor,Tumor Removal,125227.31,2026-03-31,2026-03-30,2026-04-07,8,Health Insurance,1,13340,Yes,No,Yes,118,2,0,None,Low
+CLM0474,Karthik Singh,33,Male,Sunrise Medical Centre,H008,D007,Kidney Stone,Lithotripsy,77342.77,2026-07-20,2026-07-20,2026-07-23,3,Health Insurance,1,88600,Yes,No,Yes,30,2,0,None,Low
+CLM0475,Rahul Kumar,42,Male,Kauvery Hospital,H005,D029,Appendicitis,Appendectomy,68622.98,2026-02-11,2026-02-08,2026-02-13,5,Health Insurance,2,11699,Yes,No,Yes,111,3,0,None,Low
+CLM0476,Ananya Rao,29,Female,City Care Hospital,H007,D026,Fracture,Orthopedic Surgery,69818.06,2026-03-14,2026-03-13,2026-03-19,6,Family Floater,2,32759,Yes,No,Yes,117,3,0,None,Low
+CLM0477,Priya Sharma,36,Female,Apollo Hospital,H001,D022,Gallstones,Cholecystectomy,87501.33,2026-02-06,2026-02-05,2026-02-13,8,Health Insurance,4,28439,Yes,No,Yes,80,5,0,None,Low
+CLM0478,Sneha Nair,57,Female,Global Hospital,H006,D023,Breast Tumor,Tumor Removal,128558.34,2026-04-15,2026-04-13,2026-04-21,8,Family Floater,4,86201,Yes,No,Yes,38,5,0,None,Low
+CLM0479,Rahul Kumar,42,Male,Global Hospital,H006,D005,Appendicitis,Appendectomy,71072.45,2026-04-05,2026-04-02,2026-04-03,1,Corporate Insurance,0,0,Yes,No,Yes,33,1,0,None,Low
+CLM0480,Ananya Rao,29,Female,Fortis Hospital,H002,D008,Fracture,Orthopedic Surgery,70183.27,2026-06-20,2026-06-18,2026-06-26,8,Corporate Insurance,4,22,Yes,No,Yes,119,5,0,None,Low
+CLM0481,Priya Sharma,36,Female,City Care Hospital,H007,D027,Gallstones,Cholecystectomy,98144.02,2026-04-11,2026-04-10,2026-04-20,10,Health Insurance,1,50683,Yes,No,Yes,92,2,0,None,Low
+CLM0482,Arjun Patel,61,Male,Global Hospital,H006,D011,Diabetes,Diabetes Management,46209.88,2026-08-12,2026-08-09,2026-08-11,2,Family Floater,3,35039,Yes,No,Yes,65,4,0,None,Low
+CLM0483,Meera Iyer,48,Female,City Care Hospital,H007,D022,Cataract,Cataract Surgery,52550.61,2026-01-07,2026-01-05,2026-01-07,2,Family Floater,1,16616,Yes,No,Yes,72,2,0,None,Low
+CLM0484,Karthik Singh,33,Male,St. Thomas Hospital,H004,D013,Kidney Stone,Lithotripsy,87935.96,2026-08-28,2026-08-26,2026-08-30,4,Family Floater,2,48914,Yes,No,Yes,63,3,0,None,Medium
+CLM0485,Varun Kumar,54,Male,St. Thomas Hospital,H004,D030,Coronary Artery Disease,Heart Surgery,127504.84,2026-03-23,2026-03-20,2026-03-29,9,Family Floater,0,0,Yes,No,Yes,43,1,0,None,Medium
+CLM0486,Arjun Patel,61,Male,Apollo Hospital,H001,D022,Diabetes,Diabetes Management,48017.48,2026-04-17,2026-04-15,2026-04-19,4,Health Insurance,0,0,Yes,No,Yes,108,1,0,None,Low
+CLM0487,Arjun Patel,61,Male,MIOT International,H003,D030,Diabetes,Diabetes Management,42046.64,2026-05-26,2026-05-26,2026-06-03,8,Health Insurance,1,8839,Yes,No,Yes,64,2,0,None,Low
+CLM0488,Rahul Kumar,42,Male,City Care Hospital,H007,D006,Appendicitis,Appendectomy,68912.68,2026-06-30,2026-06-29,2026-07-08,9,Family Floater,4,32065,Yes,No,Yes,117,5,0,None,Low
+CLM0489,Priya Sharma,36,Female,Sunrise Medical Centre,H008,D012,Gallstones,Cholecystectomy,104542.19,2026-01-06,2026-01-05,2026-01-14,9,Health Insurance,2,9593,Yes,No,Yes,83,3,0,None,Low
+CLM0490,Meera Iyer,48,Female,MIOT International,H003,D028,Cataract,Cataract Surgery,60637.17,2026-01-22,2026-01-19,2026-01-23,4,Family Floater,0,0,Yes,No,Yes,84,1,0,None,Medium
+CLM0491,Rahul Kumar,42,Male,MIOT International,H003,D006,Appendicitis,Appendectomy,86889.67,2026-01-03,2026-01-01,2026-01-07,6,Health Insurance,4,63516,Yes,No,Yes,81,5,0,None,Low
+CLM0492,Karthik Singh,33,Male,Fortis Hospital,H002,D026,Kidney Stone,Lithotripsy,73387.03,2026-08-28,2026-08-25,2026-08-29,4,Health Insurance,4,68716,Yes,No,Yes,105,5,0,None,Low
+CLM0493,Karthik Singh,33,Male,Apollo Hospital,H001,D022,Kidney Stone,Lithotripsy,86847.52,2026-01-22,2026-01-22,2026-01-28,6,Corporate Insurance,3,45725,Yes,No,Yes,24,4,0,None,Low
+CLM0494,Rahul Kumar,42,Male,Apollo Hospital,H001,D029,Appendicitis,Appendectomy,65454.84,2026-01-27,2026-01-27,2026-01-28,1,Corporate Insurance,2,83036,Yes,No,Yes,21,3,0,None,Low
+CLM0495,Karthik Singh,33,Male,Global Hospital,H006,D013,Kidney Stone,Lithotripsy,92190.67,2026-08-09,2026-08-06,2026-08-07,1,Corporate Insurance,4,70078,Yes,No,Yes,67,5,0,None,Medium
+CLM0496,Sneha Nair,57,Female,Global Hospital,H006,D007,Breast Tumor,Tumor Removal,157708.52,2026-05-18,2026-05-16,2026-05-18,2,Health Insurance,1,74678,Yes,No,Yes,63,2,0,None,Medium
+CLM0497,Karthik Singh,33,Male,Kauvery Hospital,H005,D018,Kidney Stone,Lithotripsy,79310.67,2026-02-12,2026-02-10,2026-02-16,6,Health Insurance,3,21858,Yes,No,Yes,91,4,0,None,Low
+CLM0498,Karthik Singh,33,Male,MIOT International,H003,D022,Kidney Stone,Lithotripsy,75796.25,2026-01-01,2025-12-30,2026-01-07,8,Corporate Insurance,2,41780,Yes,No,No,51,3,1,Diagnosis/Procedure Mismatch,High
+CLM0499,Arjun Patel,61,Male,Global Hospital,H006,D019,Diabetes,Diabetes Management,51668.17,2026-02-01,2026-02-01,2026-02-05,4,Corporate Insurance,1,4278,Yes,No,Yes,73,2,0,None,Low
+CLM0500,Meera Iyer,48,Female,MIOT International,H003,D021,Cataract,Cataract Surgery,50279.57,2026-05-06,2026-05-05,2026-05-12,7,Health Insurance,3,45341,Yes,No,Yes,58,4,0,None,Low

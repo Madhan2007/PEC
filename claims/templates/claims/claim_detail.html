@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+
+{% block title %}
+Claim #{{ claim.id }}
+{% endblock %}
+
+{% block content %}
+
+<div class="claim-detail-container">
+
+    <!-- Claim Header -->
+    <div class="claim-detail-header">
+
+        <div>
+            <a href="{% url 'claim_list' %}" class="back-link">
+                ← Back to My Claims
+            </a>
+
+            <h1>Claim #{{ claim.id }}</h1>
+            <p>Insurance claim details and documents.</p>
+        </div>
+
+        <span class="claim-status status-{{ claim.status }}">
+            {{ claim.get_status_display }}
+        </span>
+
+    </div>
+
+
+    <!-- Claim Information -->
+    <div class="claim-detail-card">
+
+        <h2>Claim Information</h2>
+
+        <div class="claim-detail-grid">
+
+            <div>
+                <span>Patient</span>
+                <strong>{{ claim.patient_name }}</strong>
+            </div>
+
+            <div>
+                <span>Hospital</span>
+                <strong>{{ claim.hospital_name }}</strong>
+            </div>
+
+            <div>
+                <span>Procedure</span>
+                <strong>{{ claim.procedure }}</strong>
+            </div>
+
+            <div>
+                <span>Amount</span>
+                <strong>₹{{ claim.amount }}</strong>
+            </div>
+
+            <div>
+                <span>Submitted</span>
+                <strong>{{ claim.created_at }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Fraud Risk Analysis -->
+    <div class="claim-detail-card">
+
+        <div class="section-header">
+            <div>
+                <h2>Fraud Risk Analysis</h2>
+                <p>Automated risk assessment for this claim.</p>
+            </div>
+
+            {% if fraud_result.risk_level == "high" %}
+
+            <span class="badge bg-danger fs-6 px-3 py-2">
+                HIGH RISK
+            </span>
+
+            {% elif fraud_result.risk_level == "medium" %}
+
+            <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                MEDIUM RISK
+            </span>
+
+            {% else %}
+
+            <span class="badge bg-success fs-6 px-3 py-2">
+                LOW RISK
+            </span>
+
+            {% endif %}
+        </div>
+
+
+        <!-- Risk Score -->
+        <div class="mt-4">
+
+            <div class="d-flex justify-content-between mb-2">
+
+                <span>
+                    <strong>Risk Score</strong>
+                </span>
+
+                <span>
+                    <strong>{{ fraud_result.risk_score }} / 100</strong>
+                </span>
+
+            </div>
+
+            <div class="progress" style="height: 12px;">
+
+                {% if fraud_result.risk_level == "high" %}
+
+                <div class="progress-bar bg-danger" style="width: {{ fraud_result.risk_score }}%;">
+                </div>
+
+                {% elif fraud_result.risk_level == "medium" %}
+
+                <div class="progress-bar bg-warning" style="width: {{ fraud_result.risk_score }}%;">
+                </div>
+
+                {% else %}
+
+                <div class="progress-bar bg-success" style="width: {{ fraud_result.risk_score }}%;">
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- Fraud Status -->
+        <div class="mt-4">
+
+            {% if fraud_result.fraud_detected %}
+
+            <div class="alert alert-danger mb-0">
+                <strong>⚠ Fraud Detected</strong>
+                <br>
+                This claim requires further investigation.
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-success mb-0">
+                <strong>✓ No Fraud Detected</strong>
+                <br>
+                No significant fraud indicators were identified.
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Risk Indicators -->
+        {% if fraud_result.reasons %}
+
+        <div class="mt-4">
+
+            <h5>Risk Indicators</h5>
+
+            {% for reason in fraud_result.reasons %}
+
+            <div class="alert alert-warning py-2 mb-2">
+                ⚠ {{ reason }}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Documents -->
+    <div class="claim-detail-card">
+
+        <div class="section-header">
+            <div>
+                <h2>Documents</h2>
+                <p>Documents attached to this claim.</p>
+            </div>
+
+            <a href="{% url 'upload_document' claim.id %}" class="dashboard-button">
+                + Upload Document
+            </a>
+        </div>
+
+
+        <div class="documents-list">
+
+            {% for document in claim.documents.all %}
+
+            <div class="document-item">
+
+                <div>
+                    <strong>
+                        {{ document.get_document_type_display }}
+                    </strong>
+
+                    <span>
+                        Uploaded {{ document.uploaded_at }}
+                    </span>
+                </div>
+
+                <a href="{{ document.file.url }}" target="_blank" class="document-link">
+                    View Document →
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-documents">
+                <p>No documents uploaded yet.</p>
+
+                <a href="{% url 'upload_document' claim.id %}">
+                    Upload your first document
+                </a>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- Claim Actions -->
+    {% if claim.status == "draft" %}
+
+    <div class="claim-action-card">
+
+        <div>
+            <h2>Ready to submit?</h2>
+
+            <p>
+                Make sure all required documents have been uploaded.
+            </p>
+        </div>
+
+        <a href="{% url 'submit_claim' claim.id %}" class="claim-submit-button">
+            Submit Claim
+        </a>
+
+    </div>
+
+    {% elif claim.status == "submitted" %}
+
+    <div class="claim-action-card">
+
+        <div>
+            <h2>Claim submitted</h2>
+
+            <p>
+                Your claim is ready for processing.
+            </p>
+        </div>
+
+        <a href="{% url 'process_claim' claim.id %}" class="claim-submit-button">
+            Process Claim
+        </a>
+
+    </div>
+
+    {% elif claim.status == "processing" %}
+
+    <div class="claim-action-card">
+        <div>
+            <h2>Claim is being processed</h2>
+            <p>Your claim is currently being validated.</p>
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
