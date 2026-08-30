@@ -1,0 +1,18 @@
+# Worktrees & Build
+.worktrees/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Environment Variables & Secret Keys
+.env
+.env.local
+.env.*.local
+
+# Storage & Cache Directories
+cache/
+data/
+logs/
+scratch/
