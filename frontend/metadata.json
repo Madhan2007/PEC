@@ -1,0 +1,6 @@
+{
+  "name": "ClaimEase AI",
+  "description": "AI-powered Health Insurance Claims Management System featuring role-based portals for Patients, Hospitals, Insurance Providers, and Admins with automated OCR, RAG clause matching, and instant fraud verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}AI Fraud Radar & Anomaly Detection - HealthGuard PEC{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 px-md-5">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+        <div>
+            <span class="badge bg-danger rounded-pill px-3 py-2 mb-2">AI / ML Intelligence</span>
+            <h2 class="fw-bold text-dark mb-1">Healthcare Fraud Radar & Anomaly Scanner</h2>
+            <p class="text-muted mb-0">Automated risk scoring, procedure cost anomaly benchmarks, and explainable AI indicators</p>
+        </div>
+        <div>
+            <a href="{% url 'api_explorer' %}" class="btn btn-outline-dark rounded-pill px-3">
+                🔌 Test via AI REST API
+            </a>
+        </div>
+    </div>
+
+    <!-- Fraud Analytics Overview Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white border-start border-danger border-4">
+                <span class="text-muted small fw-semibold">High Risk Anomaly Claims</span>
+                <h3 class="fw-bold text-danger mt-1 mb-0">{{ analytics.high_risk_count|default:analytics.fraud_cases_count }}</h3>
+                <span class="text-muted extra-small">Score &gt;= 60 (Auto-Flagged)</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white border-start border-warning border-4">
+                <span class="text-muted small fw-semibold">Medium Risk / Audit Queue</span>
+                <h3 class="fw-bold text-warning mt-1 mb-0">{{ analytics.medium_risk_count|default:"0" }}</h3>
+                <span class="text-muted extra-small">Score 30 - 59 (Manual Audit)</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white border-start border-success border-4">
+                <span class="text-muted small fw-semibold">Low Risk / Clean Claims</span>
+                <h3 class="fw-bold text-success mt-1 mb-0">{{ analytics.low_risk_count|default:analytics.total_claims }}</h3>
+                <span class="text-muted extra-small">Score &lt; 30 (Auto-Approved)</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white border-start border-primary border-4">
+                <span class="text-muted small fw-semibold">Total Scanned Volume</span>
+                <h3 class="fw-bold text-primary mt-1 mb-0">{{ analytics.total_claims }}</h3>
+                <span class="text-muted extra-small">Across dataset & live claims</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anomaly Queues & Risk Categories -->
+    <div class="row g-4 mb-4">
+        <!-- High Risk Claims Queue -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold text-dark mb-0">High-Risk Anomaly Queue (Auditor Inspection)</h5>
+                    <span class="badge bg-danger rounded-pill px-3">Priority Review</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light small text-muted">
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Patient</th>
+                                <th>Procedure</th>
+                                <th>Amount</th>
+                                <th>Risk Score</th>
+                                <th>Triggered Reasons</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for analysis in high_risk_analyses %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'claim_detail' analysis.claim.id %}" class="fw-bold text-danger text-decoration-none">
+                                        #{{ analysis.claim.id }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <strong>{{ analysis.claim.patient_name }}</strong>
+                                </td>
+                                <td>
+                                    <span class="small">{{ analysis.claim.procedure }}</span>
+                                </td>
+                                <td>
+                                    <strong>₹{{ analysis.claim.amount }}</strong>
+                                </td>
+                                <td>
+                                    <span class="badge bg-danger rounded-pill px-3 py-1">
+                                        {{ analysis.risk_score }}/100
+                                    </span>
+                                </td>
+                                <td class="small text-muted" style="max-width: 250px;">
+                                    {% for r in analysis.reasons %}
+                                    <div class="text-truncate">• {{ r }}</div>
+                                    {% empty %}
+                                    <span>High composite feature density</span>
+                                    {% endfor %}
+                                </td>
+                                <td class="text-end">
+                                    <a href="{% url 'claim_detail' analysis.claim.id %}" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                                        Inspect
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center py-5 text-muted">
+                                    <p class="mb-2">No active high-risk anomalies pending in current batch.</p>
+                                    <p class="small">Claims will populate here dynamically upon AI scoring.</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk Breakdown & Statistical Benchmark Insights -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+                <h5 class="fw-bold text-dark mb-3">AI Engine Architecture</h5>
+                <ul class="list-group list-group-flush small">
+                    <li class="list-group-item px-0 d-flex justify-content-between">
+                        <span>Duplicate Claim Detector:</span>
+                        <strong class="text-danger">+80 Pts</strong>
+                    </li>
+                    <li class="list-group-item px-0 d-flex justify-content-between">
+                        <span>Diagnosis-Procedure Mismatch:</span>
+                        <strong class="text-danger">+70 Pts</strong>
+                    </li>
+                    <li class="list-group-item px-0 d-flex justify-content-between">
+                        <span>Inflated Amount &gt; 1.8x Benchmark:</span>
+                        <strong class="text-warning">+45 Pts</strong>
+                    </li>
+                    <li class="list-group-item px-0 d-flex justify-content-between">
+                        <span>High Hospital Spike Volume:</span>
+                        <strong class="text-warning">+50 Pts</strong>
+                    </li>
+                    <li class="list-group-item px-0 d-flex justify-content-between">
+                        <span>Unverified OCR Documents:</span>
+                        <strong class="text-info">+15 Pts</strong>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 bg-light p-4">
+                <h6 class="fw-bold text-dark mb-2">Procedure Benchmarks:</h6>
+                <div class="extra-small text-muted mb-2">Statistical baseline calculated from dataset:</div>
+                <div class="d-flex justify-content-between small py-1 border-bottom">
+                    <span>Heart Surgery:</span>
+                    <strong>₹1,50,000 avg</strong>
+                </div>
+                <div class="d-flex justify-content-between small py-1 border-bottom">
+                    <span>Orthopedic Surgery:</span>
+                    <strong>₹75,000 avg</strong>
+                </div>
+                <div class="d-flex justify-content-between small py-1 border-bottom">
+                    <span>Cataract Surgery:</span>
+                    <strong>₹65,000 avg</strong>
+                </div>
+                <div class="d-flex justify-content-between small py-1">
+                    <span>Appendectomy:</span>
+                    <strong>₹65,000 avg</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,286 +1,245 @@
 {% extends "base.html" %}
 
-{% block title %}
-Claim #{{ claim.id }}
-{% endblock %}
+{% block title %}Claim #{{ claim.id }} - HealthGuard PEC{% endblock %}
 
 {% block content %}
+<div class="container-fluid py-4 px-md-5">
 
-<div class="claim-detail-container">
-
-    <!-- Claim Header -->
-    <div class="claim-detail-header">
-
+    <!-- Top Navigation & Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
-            <a href="{% url 'claim_list' %}" class="back-link">
-                ← Back to My Claims
+            <a href="{% url 'claim_list' %}" class="text-decoration-none text-muted small fw-bold mb-1 d-inline-block">
+                ← Back to Claims Directory
             </a>
-
-            <h1>Claim #{{ claim.id }}</h1>
-            <p>Insurance claim details and documents.</p>
-        </div>
-
-        <span class="claim-status status-{{ claim.status }}">
-            {{ claim.get_status_display }}
-        </span>
-
-    </div>
-
-
-    <!-- Claim Information -->
-    <div class="claim-detail-card">
-
-        <h2>Claim Information</h2>
-
-        <div class="claim-detail-grid">
-
-            <div>
-                <span>Patient</span>
-                <strong>{{ claim.patient_name }}</strong>
-            </div>
-
-            <div>
-                <span>Hospital</span>
-                <strong>{{ claim.hospital_name }}</strong>
-            </div>
-
-            <div>
-                <span>Procedure</span>
-                <strong>{{ claim.procedure }}</strong>
-            </div>
-
-            <div>
-                <span>Amount</span>
-                <strong>₹{{ claim.amount }}</strong>
-            </div>
-
-            <div>
-                <span>Submitted</span>
-                <strong>{{ claim.created_at }}</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Fraud Risk Analysis -->
-    <div class="claim-detail-card">
-
-        <div class="section-header">
-            <div>
-                <h2>Fraud Risk Analysis</h2>
-                <p>Automated risk assessment for this claim.</p>
-            </div>
-
-            {% if fraud_result.risk_level == "high" %}
-
-            <span class="badge bg-danger fs-6 px-3 py-2">
-                HIGH RISK
-            </span>
-
-            {% elif fraud_result.risk_level == "medium" %}
-
-            <span class="badge bg-warning text-dark fs-6 px-3 py-2">
-                MEDIUM RISK
-            </span>
-
-            {% else %}
-
-            <span class="badge bg-success fs-6 px-3 py-2">
-                LOW RISK
-            </span>
-
-            {% endif %}
-        </div>
-
-
-        <!-- Risk Score -->
-        <div class="mt-4">
-
-            <div class="d-flex justify-content-between mb-2">
-
-                <span>
-                    <strong>Risk Score</strong>
-                </span>
-
-                <span>
-                    <strong>{{ fraud_result.risk_score }} / 100</strong>
-                </span>
-
-            </div>
-
-            <div class="progress" style="height: 12px;">
-
-                {% if fraud_result.risk_level == "high" %}
-
-                <div class="progress-bar bg-danger" style="width: {{ fraud_result.risk_score }}%;">
-                </div>
-
-                {% elif fraud_result.risk_level == "medium" %}
-
-                <div class="progress-bar bg-warning" style="width: {{ fraud_result.risk_score }}%;">
-                </div>
-
-                {% else %}
-
-                <div class="progress-bar bg-success" style="width: {{ fraud_result.risk_score }}%;">
-                </div>
-
+            <div class="d-flex align-items-center gap-3">
+                <h2 class="fw-bold text-dark mb-0">Claim #{{ claim.id }}</h2>
+                {% if claim.dataset_claim_id %}
+                <span class="badge bg-secondary font-monospace">{{ claim.dataset_claim_id }}</span>
                 {% endif %}
-
+                <span class="status-badge {{ claim.status }} fs-6">
+                    {{ claim.get_status_display }}
+                </span>
             </div>
-
         </div>
 
-
-        <!-- Fraud Status -->
-        <div class="mt-4">
-
-            {% if fraud_result.fraud_detected %}
-
-            <div class="alert alert-danger mb-0">
-                <strong>⚠ Fraud Detected</strong>
-                <br>
-                This claim requires further investigation.
-            </div>
-
-            {% else %}
-
-            <div class="alert alert-success mb-0">
-                <strong>✓ No Fraud Detected</strong>
-                <br>
-                No significant fraud indicators were identified.
-            </div>
-
+        <!-- Workflow Action Buttons -->
+        <div class="d-flex gap-2">
+            {% if claim.status == "draft" %}
+            <a href="{% url 'submit_claim' claim.id %}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                🚀 Submit Claim for Review
+            </a>
+            {% elif claim.status == "submitted" or claim.status == "under_review" or claim.status == "processing" %}
+            <a href="{% url 'process_claim' claim.id %}" class="btn btn-success rounded-pill px-4 shadow-sm">
+                ⚙️ Run AI & Validation Pipeline
+            </a>
             {% endif %}
-
-        </div>
-
-
-        <!-- Risk Indicators -->
-        {% if fraud_result.reasons %}
-
-        <div class="mt-4">
-
-            <h5>Risk Indicators</h5>
-
-            {% for reason in fraud_result.reasons %}
-
-            <div class="alert alert-warning py-2 mb-2">
-                ⚠ {{ reason }}
-            </div>
-
-            {% endfor %}
-
-        </div>
-
-        {% endif %}
-
-    </div>
-
-
-    <!-- Documents -->
-    <div class="claim-detail-card">
-
-        <div class="section-header">
-            <div>
-                <h2>Documents</h2>
-                <p>Documents attached to this claim.</p>
-            </div>
-
-            <a href="{% url 'upload_document' claim.id %}" class="dashboard-button">
-                + Upload Document
+            <a href="{% url 'upload_document' claim.id %}" class="btn btn-outline-primary rounded-pill px-3">
+                📄 + Add Document
             </a>
         </div>
+    </div>
 
+    <!-- Main Grid: Info + Fraud Engine + Documents -->
+    <div class="row g-4 mb-4">
 
-        <div class="documents-list">
+        <!-- Left Column: Claim Data & Documents -->
+        <div class="col-lg-7">
 
-            {% for document in claim.documents.all %}
+            <!-- Claim Info Card -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">Claim & Clinical Information</h5>
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Patient Name</span>
+                        <strong class="text-dark">{{ claim.patient_name }}</strong>
+                        <div class="text-muted extra-small">{{ claim.patient_age|default:"--" }} yrs • {{ claim.patient_gender|default:"--" }}</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Healthcare Provider / Hospital</span>
+                        <strong class="text-dark">{{ claim.hospital_name }}</strong>
+                        {% if claim.hospital_id %}
+                        <div class="text-muted extra-small">ID: {{ claim.hospital_id }} | Doctor: {{ claim.doctor_id|default:"Assigned" }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Procedure</span>
+                        <span class="badge bg-light text-dark border">{{ claim.procedure }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Diagnosis</span>
+                        <strong class="text-dark">{{ claim.diagnosis|default:"Clinical Observation" }}</strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Claim Amount</span>
+                        <h4 class="fw-bold text-primary mb-0">₹{{ claim.amount }}</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Insurance Coverage</span>
+                        <span class="text-dark fw-semibold">{{ claim.insurance_type|default:"Standard Health Plan" }}</span>
+                    </div>
+                    {% if claim.admission_date or claim.discharge_date %}
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Hospitalization Dates</span>
+                        <span class="text-dark small">{{ claim.admission_date|default:"--" }} to {{ claim.discharge_date|default:"--" }} ({{ claim.days_admitted|default:"1" }} days)</span>
+                    </div>
+                    {% endif %}
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Prior Claims History</span>
+                        <span class="text-dark small">{{ claim.previous_claims }} claims (₹{{ claim.previous_claim_amount|default:"0" }})</span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="document-item">
+            <!-- Documents & OCR Extraction Card -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                    <h5 class="fw-bold text-dark mb-0">Supporting Documents & OCR Intelligence</h5>
+                    <a href="{% url 'upload_document' claim.id %}" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                        + Upload File
+                    </a>
+                </div>
 
-                <div>
-                    <strong>
-                        {{ document.get_document_type_display }}
-                    </strong>
+                <div class="d-flex flex-column gap-3">
+                    {% for doc in claim.documents.all %}
+                    <div class="border rounded-3 p-3 bg-light">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="badge bg-secondary mb-1">{{ doc.get_document_type_display }}</span>
+                                <div class="small fw-semibold text-dark">{{ doc.file.name }}</div>
+                                <div class="text-muted extra-small">Uploaded {{ doc.uploaded_at|date:"M d, Y H:i" }}</div>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge {% if doc.ocr_status == 'completed' %}bg-success{% elif doc.ocr_status == 'processing' %}bg-warning text-dark{% else %}bg-secondary{% endif %} rounded-pill px-3">
+                                    OCR: {{ doc.get_ocr_status_display }}
+                                </span>
+                                {% if doc.match_score %}
+                                <div class="small fw-bold text-success mt-1">Match: {{ doc.match_score }}%</div>
+                                {% endif %}
+                            </div>
+                        </div>
 
-                    <span>
-                        Uploaded {{ document.uploaded_at }}
+                        <!-- OCR Extracted Text / Entity Snapshot -->
+                        {% if doc.extracted_data %}
+                        <div class="bg-white rounded-2 p-2 mt-2 border small">
+                            <strong class="d-block text-muted mb-1 extra-small">OCR Extracted Entities:</strong>
+                            <div class="row g-1">
+                                {% if doc.extracted_data.patient_name %}
+                                <div class="col-6"><strong>Patient:</strong> {{ doc.extracted_data.patient_name }}</div>
+                                {% endif %}
+                                {% if doc.extracted_data.total_amount %}
+                                <div class="col-6"><strong>Extracted Bill:</strong> ₹{{ doc.extracted_data.total_amount }}</div>
+                                {% endif %}
+                                {% if doc.extracted_data.hospital_name %}
+                                <div class="col-12"><strong>Provider:</strong> {{ doc.extracted_data.hospital_name }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="mt-2 d-flex gap-2">
+                            <a href="{{ doc.file.url }}" target="_blank" class="btn btn-sm btn-link p-0 text-decoration-none">
+                                🔗 Open Document File
+                            </a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="text-center py-4 text-muted">
+                        <p class="mb-2">No medical bills or discharge summaries uploaded yet.</p>
+                        <a href="{% url 'upload_document' claim.id %}" class="btn btn-sm btn-primary rounded-pill">
+                            Upload Supporting Bills & Summary
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: AI Fraud Risk & Validation -->
+        <div class="col-lg-5">
+
+            <!-- AI Fraud Risk Assessment Card -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4 border-top border-4 {% if fraud_result.risk_level == 'high' %}border-danger{% elif fraud_result.risk_level == 'medium' %}border-warning{% else %}border-success{% endif %}">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold text-dark mb-0">AI Fraud Risk Assessment</h5>
+                        <span class="text-muted extra-small">Hybrid Rules & Statistical Anomaly Engine</span>
+                    </div>
+                    <span class="badge {% if fraud_result.risk_level == 'high' %}bg-danger{% elif fraud_result.risk_level == 'medium' %}bg-warning text-dark{% else %}bg-success{% endif %} fs-6 px-3 py-2 rounded-pill">
+                        {{ fraud_result.risk_level|upper }} RISK
                     </span>
                 </div>
 
-                <a href="{{ document.file.url }}" target="_blank" class="document-link">
-                    View Document →
-                </a>
+                <!-- Risk Score Bar -->
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="fw-semibold small">Anomaly Risk Score</span>
+                        <strong class="text-dark">{{ fraud_result.risk_score }} / 100</strong>
+                    </div>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar {% if fraud_result.risk_level == 'high' %}bg-danger{% elif fraud_result.risk_level == 'medium' %}bg-warning{% else %}bg-success{% endif %}" 
+                             role="progressbar" 
+                             style="width: {{ fraud_result.risk_score }}%;"></div>
+                    </div>
+                </div>
 
+                <!-- Fraud Alert Message -->
+                {% if fraud_result.fraud_detected %}
+                <div class="alert alert-danger py-2 px-3 small rounded-3 mb-3">
+                    <strong>⚠️ Potential Fraud / Discrepancy Flagged</strong>
+                    <div>This claim exhibits anomalous risk signals requiring auditor inspection.</div>
+                </div>
+                {% else %}
+                <div class="alert alert-success py-2 px-3 small rounded-3 mb-3">
+                    <strong>✓ No Critical Anomalies Detected</strong>
+                    <div>Claim parameters match expected healthcare clinical profiles.</div>
+                </div>
+                {% endif %}
+
+                <!-- Triggered Risk Indicators -->
+                <div class="mb-3">
+                    <h6 class="fw-bold text-dark small mb-2">Detected Risk Indicators:</h6>
+                    {% if fraud_result.reasons %}
+                        {% for reason in fraud_result.reasons %}
+                        <div class="p-2 mb-2 bg-light rounded-2 border-start border-warning border-3 small">
+                            ⚠️ {{ reason }}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-muted small p-2 bg-light rounded-2">
+                            ✓ All diagnostic, procedure, and cost checks passed without flags.
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Recommended Auditor Action -->
+                <div class="border-top pt-3 mt-2 d-flex justify-content-between align-items-center">
+                    <span class="text-muted small">Recommended Action:</span>
+                    <span class="badge {% if fraud_result.recommended_action == 'reject' %}bg-danger{% elif fraud_result.recommended_action == 'review' %}bg-warning text-dark{% else %}bg-success{% endif %} rounded-pill px-3">
+                        {{ fraud_result.recommended_action|upper }}
+                    </span>
+                </div>
             </div>
 
-            {% empty %}
-
-            <div class="empty-documents">
-                <p>No documents uploaded yet.</p>
-
-                <a href="{% url 'upload_document' claim.id %}">
-                    Upload your first document
-                </a>
+            <!-- Clinical Rules Validation Card -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">Clinical & Rule Verification</h5>
+                <div class="d-flex flex-column gap-2">
+                    {% for cond in validation_result.conditions %}
+                    <div class="d-flex align-items-start gap-2 p-2 rounded-2 {% if cond.passed %}bg-success-subtle text-success-emphasis{% else %}bg-danger-subtle text-danger-emphasis{% endif %} small">
+                        <span class="fw-bold">{% if cond.passed %}✓{% else %}✗{% endif %}</span>
+                        <div>
+                            <strong>{{ cond.name }}</strong>
+                            <div class="extra-small">{{ cond.message }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
 
-            {% endfor %}
-
         </div>
 
     </div>
-
-
-    <!-- Claim Actions -->
-    {% if claim.status == "draft" %}
-
-    <div class="claim-action-card">
-
-        <div>
-            <h2>Ready to submit?</h2>
-
-            <p>
-                Make sure all required documents have been uploaded.
-            </p>
-        </div>
-
-        <a href="{% url 'submit_claim' claim.id %}" class="claim-submit-button">
-            Submit Claim
-        </a>
-
-    </div>
-
-    {% elif claim.status == "submitted" %}
-
-    <div class="claim-action-card">
-
-        <div>
-            <h2>Claim submitted</h2>
-
-            <p>
-                Your claim is ready for processing.
-            </p>
-        </div>
-
-        <a href="{% url 'process_claim' claim.id %}" class="claim-submit-button">
-            Process Claim
-        </a>
-
-    </div>
-
-    {% elif claim.status == "processing" %}
-
-    <div class="claim-action-card">
-        <div>
-            <h2>Claim is being processed</h2>
-            <p>Your claim is currently being validated.</p>
-        </div>
-    </div>
-
-    {% endif %}
 
 </div>
-
 {% endblock %}

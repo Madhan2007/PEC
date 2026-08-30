@@ -1,259 +1,105 @@
 {% extends "base.html" %}
 
+{% block title %}Claim Validation Results - HealthGuard PEC{% endblock %}
+
 {% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
 
-<div class="container py-4">
-
-    <!-- Page Header -->
-    <div class="mb-4">
-        <h2 class="fw-bold">Claim Validation</h2>
-        <p class="text-muted mb-0">
-            Automated claim validation and fraud risk assessment
-        </p>
-    </div>
-
-
-    <!-- Claim Summary -->
-    <div class="card shadow-sm border-0 mb-4">
-        <div class="card-body">
-
-            <div class="d-flex justify-content-between align-items-center">
-
-                <div>
-                    <h4 class="fw-bold mb-2">
-                        Claim #{{ claim.id }}
-                    </h4>
-
-                    <p class="mb-0 text-muted">
-                        Patient:
-                        <span class="fw-semibold text-dark">
-                            {{ claim.patient_name }}
-                        </span>
-                    </p>
-                </div>
-
+            <!-- Result Header Card -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5 mb-4 text-center">
                 {% if claim.status == "validated" %}
-                    <span class="badge bg-success fs-6 px-3 py-2">
-                        Validated
-                    </span>
-
-                {% elif claim.status == "rejected" %}
-                    <span class="badge bg-danger fs-6 px-3 py-2">
-                        Rejected
-                    </span>
-
+                <span class="badge bg-success-subtle text-success p-3 rounded-circle fs-2 mb-3">✓</span>
+                <h3 class="fw-bold text-success mb-1">Claim Validated & Approved</h3>
+                <p class="text-muted small">All clinical rules passed and no significant fraud anomalies were detected.</p>
+                {% elif claim.status == "under_review" %}
+                <span class="badge bg-warning-subtle text-warning p-3 rounded-circle fs-2 mb-3">⚠️</span>
+                <h3 class="fw-bold text-warning mb-1">Claim Queued for Manual Review</h3>
+                <p class="text-muted small">Moderate risk indicators detected. Claim routed to auditor queue.</p>
                 {% else %}
-                    <span class="badge bg-secondary fs-6 px-3 py-2">
-                        {{ claim.get_status_display }}
-                    </span>
+                <span class="badge bg-danger-subtle text-danger p-3 rounded-circle fs-2 mb-3">✗</span>
+                <h3 class="fw-bold text-danger mb-1">Claim Flagged / Rejected</h3>
+                <p class="text-muted small">High-risk fraud anomaly or clinical mismatch detected during automated analysis.</p>
                 {% endif %}
 
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- Validation Results -->
-    <div class="card shadow-sm border-0 mb-4">
-
-        <div class="card-header bg-white border-0 pt-4 px-4">
-            <h4 class="fw-bold mb-0">
-                Validation Results
-            </h4>
-        </div>
-
-        <div class="card-body px-4">
-
-            {% for condition in result.conditions %}
-
-                {% if condition.passed %}
-
-                    <div class="alert alert-success d-flex align-items-start">
-                        <span class="me-2 fw-bold">✓</span>
-
-                        <div>
-                            <strong>{{ condition.name }}</strong>
-                            <div class="small">
-                                {{ condition.message }}
-                            </div>
-                        </div>
-                    </div>
-
-                {% else %}
-
-                    <div class="alert alert-danger d-flex align-items-start">
-                        <span class="me-2 fw-bold">✗</span>
-
-                        <div>
-                            <strong>{{ condition.name }}</strong>
-                            <div class="small">
-                                {{ condition.message }}
-                            </div>
-                        </div>
-                    </div>
-
-                {% endif %}
-
-            {% endfor %}
-
-        </div>
-    </div>
-
-
-    <!-- Fraud Risk Analysis -->
-    <div class="card shadow-sm border-0 mb-4">
-
-        <div class="card-header bg-white border-0 pt-4 px-4">
-
-            <div class="d-flex justify-content-between align-items-center">
-
-                <h4 class="fw-bold mb-0">
-                    Fraud Risk Analysis
-                </h4>
-
-                {% if fraud_result.risk_level == "high" %}
-
-                    <span class="badge bg-danger fs-6 px-3 py-2">
-                        HIGH RISK
-                    </span>
-
-                {% elif fraud_result.risk_level == "medium" %}
-
-                    <span class="badge bg-warning text-dark fs-6 px-3 py-2">
-                        MEDIUM RISK
-                    </span>
-
-                {% else %}
-
-                    <span class="badge bg-success fs-6 px-3 py-2">
-                        LOW RISK
-                    </span>
-
-                {% endif %}
-
-            </div>
-
-        </div>
-
-
-        <div class="card-body px-4">
-
-            <!-- Score -->
-            <div class="mb-4">
-
-                <div class="d-flex justify-content-between mb-2">
-
-                    <span class="fw-semibold">
-                        Risk Score
-                    </span>
-
-                    <span class="fw-bold">
-                        {{ fraud_result.risk_score }} / 100
-                    </span>
-
-                </div>
-
-                <div class="progress" style="height: 12px;">
-
-                    {% if fraud_result.risk_level == "high" %}
-
-                        <div
-                            class="progress-bar bg-danger"
-                            role="progressbar"
-                            style="width: {{ fraud_result.risk_score }}%;">
-                        </div>
-
-                    {% elif fraud_result.risk_level == "medium" %}
-
-                        <div
-                            class="progress-bar bg-warning"
-                            role="progressbar"
-                            style="width: {{ fraud_result.risk_score }}%;">
-                        </div>
-
-                    {% else %}
-
-                        <div
-                            class="progress-bar bg-success"
-                            role="progressbar"
-                            style="width: {{ fraud_result.risk_score }}%;">
-                        </div>
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-
-            <!-- Fraud Decision -->
-            {% if fraud_result.fraud_detected %}
-
-                <div class="alert alert-danger">
-
-                    <div class="fw-bold mb-1">
-                        ⚠ Fraud Detected
-                    </div>
-
+                <div class="d-inline-flex gap-3 justify-content-center mt-3 p-3 bg-light rounded-3">
                     <div>
-                        This claim requires further investigation.
+                        <span class="text-muted extra-small d-block">Claim ID</span>
+                        <strong>#{{ claim.id }}</strong>
                     </div>
+                    <div class="border-start ps-3">
+                        <span class="text-muted extra-small d-block">Patient</span>
+                        <strong>{{ claim.patient_name }}</strong>
+                    </div>
+                    <div class="border-start ps-3">
+                        <span class="text-muted extra-small d-block">Amount</span>
+                        <strong class="text-primary">₹{{ claim.amount }}</strong>
+                    </div>
+                    <div class="border-start ps-3">
+                        <span class="text-muted extra-small d-block">Risk Score</span>
+                        <strong class="{% if fraud_result.risk_level == 'high' %}text-danger{% elif fraud_result.risk_level == 'medium' %}text-warning{% else %}text-success{% endif %}">
+                            {{ fraud_result.risk_score }}/100
+                        </strong>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Clinical Rules Checklist -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">Clinical & Administrative Rules</h5>
+                <div class="d-flex flex-column gap-2">
+                    {% for cond in result.conditions %}
+                    <div class="d-flex align-items-start gap-3 p-3 rounded-3 {% if cond.passed %}bg-success-subtle text-success-emphasis{% else %}bg-danger-subtle text-danger-emphasis{% endif %}">
+                        <span class="fs-5">{% if cond.passed %}✓{% else %}✗{% endif %}</span>
+                        <div>
+                            <div class="fw-bold small">{{ cond.name }}</div>
+                            <div class="small">{{ cond.message }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- AI Fraud Evaluation Breakdown -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">AI Fraud & Cost Anomaly Evaluation</h5>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between small fw-semibold mb-1">
+                        <span>Risk Score Assessment</span>
+                        <span>{{ fraud_result.risk_score }} / 100 ({{ fraud_result.risk_level|upper }})</span>
+                    </div>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar {% if fraud_result.risk_level == 'high' %}bg-danger{% elif fraud_result.risk_level == 'medium' %}bg-warning{% else %}bg-success{% endif %}" style="width: {{ fraud_result.risk_score }}%;"></div>
+                    </div>
                 </div>
 
-            {% else %}
-
-                <div class="alert alert-success">
-
-                    <div class="fw-bold mb-1">
-                        ✓ No Fraud Detected
-                    </div>
-
-                    <div>
-                        No significant fraud indicators were identified.
-                    </div>
-
-                </div>
-
-            {% endif %}
-
-
-            <!-- Risk Indicators -->
-            <h5 class="fw-bold mt-4 mb-3">
-                Risk Indicators
-            </h5>
-
-            {% if fraud_result.reasons %}
-
+                {% if fraud_result.reasons %}
+                <h6 class="fw-bold small text-dark mb-2">Triggered Indicators:</h6>
                 {% for reason in fraud_result.reasons %}
-
-                    <div class="alert alert-warning py-2 mb-2">
-                        ⚠ {{ reason }}
-                    </div>
-
+                <div class="p-2 mb-2 bg-light rounded-2 border-start border-warning border-3 small">
+                    ⚠️ {{ reason }}
+                </div>
                 {% endfor %}
+                {% else %}
+                <div class="alert alert-success small mb-0">
+                    ✓ No suspicious fraud anomalies identified across historical records.
+                </div>
+                {% endif %}
+            </div>
 
-            {% else %}
-
-                <p class="text-muted mb-0">
-                    No suspicious indicators detected.
-                </p>
-
-            {% endif %}
+            <!-- Navigation Actions -->
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'claim_detail' claim.id %}" class="btn btn-outline-primary rounded-pill px-4">
+                    ← Back to Claim Details
+                </a>
+                <a href="{% url 'claim_list' %}" class="btn btn-primary rounded-pill px-4">
+                    View All Claims →
+                </a>
+            </div>
 
         </div>
-
     </div>
-
-
-    <!-- Navigation -->
-    <a
-        href="{% url 'claim_detail' claim.id %}"
-        class="btn btn-outline-primary">
-        ← Back to Claim
-    </a>
-
 </div>
-
 {% endblock %}

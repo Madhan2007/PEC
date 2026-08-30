@@ -1,98 +1,144 @@
 {% extends "base.html" %}
 
-{% block title %}
-My Claims
-{% endblock %}
+{% block title %}Claims Directory - HealthGuard PEC{% endblock %}
 
 {% block content %}
+<div class="container-fluid py-4 px-md-5">
 
-<div class="claims-container">
-
-    <div class="claims-header">
-        <div>
-            <h1>My Claims</h1>
-            <p>View and manage your insurance claims.</p>
+    <!-- Header -->
+    <div class="row align-items-center mb-4 g-3">
+        <div class="col-md-6">
+            <h2 class="fw-bold text-dark mb-1">Insurance Claims Directory</h2>
+            <p class="text-muted mb-0">
+                Manage, review, and process healthcare insurance submissions
+            </p>
         </div>
-
-        <a href="{% url 'create_claim' %}" class="dashboard-button">
-            + Submit New Claim
-        </a>
+        <div class="col-md-6 text-md-end">
+            <a href="{% url 'create_claim' %}" class="btn btn-primary shadow-sm rounded-pill px-4">
+                ➕ Submit New Claim
+            </a>
+        </div>
     </div>
 
-
-    <div class="claims-list">
-
-        {% for claim in claims %}
-
-            <div class="claim-card">
-
-                <div class="claim-card-header">
-
-                    <a href="{% url 'claim_detail' claim.id %}">
-                        <h2>Claim #{{ claim.id }}</h2>
-                    </a>
-
-                    <span class="claim-status status-{{ claim.status }}">
-                        {{ claim.get_status_display }}
-                    </span>
-
+    <!-- Filter & Search Bar -->
+    <div class="card border-0 shadow-sm rounded-4 bg-white p-3 mb-4">
+        <form method="GET" class="row g-2 align-items-center">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 text-muted">🔍</span>
+                    <input type="text" name="q" value="{{ query }}" class="form-control border-start-0 ps-0" placeholder="Search by patient, hospital, procedure, or claim ID...">
                 </div>
-
-
-                <div class="claim-info">
-
-                    <div>
-                        <span>Patient</span>
-                        <strong>{{ claim.patient_name }}</strong>
-                    </div>
-
-                    <div>
-                        <span>Hospital</span>
-                        <strong>{{ claim.hospital_name }}</strong>
-                    </div>
-
-                    <div>
-                        <span>Procedure</span>
-                        <strong>{{ claim.procedure }}</strong>
-                    </div>
-
-                    <div>
-                        <span>Amount</span>
-                        <strong>₹{{ claim.amount }}</strong>
-                    </div>
-
-                </div>
-
-
-                <div class="claim-card-footer">
-
-                    <a href="{% url 'claim_detail' claim.id %}">
-                        View Claim →
-                    </a>
-
-                    <a href="{% url 'upload_document' claim.id %}">
-                        Upload Document
-                    </a>
-
-                </div>
-
             </div>
-
-        {% empty %}
-
-            <div class="empty-claims">
-                <h2>No claims yet</h2>
-                <p>You haven't submitted any insurance claims.</p>
-
-                <a href="{% url 'create_claim' %}" class="dashboard-button">
-                    Submit Your First Claim
-                </a>
+            <div class="col-md-4">
+                <select name="status" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Statuses (Draft, Submitted, Validated, etc.)</option>
+                    <option value="draft" {% if status_filter == 'draft' %}selected{% endif %}>Draft</option>
+                    <option value="submitted" {% if status_filter == 'submitted' %}selected{% endif %}>Submitted</option>
+                    <option value="processing" {% if status_filter == 'processing' %}selected{% endif %}>Processing</option>
+                    <option value="validated" {% if status_filter == 'validated' %}selected{% endif %}>Validated / Approved</option>
+                    <option value="under_review" {% if status_filter == 'under_review' %}selected{% endif %}>Under Review</option>
+                    <option value="rejected" {% if status_filter == 'rejected' %}selected{% endif %}>Rejected</option>
+                </select>
             </div>
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary rounded-pill px-4 flex-grow-1">Filter</button>
+                {% if query or status_filter %}
+                <a href="{% url 'claim_list' %}" class="btn btn-outline-secondary rounded-pill px-3">Clear</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
 
-        {% endfor %}
-
+    <!-- Claims Table -->
+    <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-muted small">
+                    <tr>
+                        <th class="ps-4">Claim ID</th>
+                        <th>Patient Name</th>
+                        <th>Hospital & Provider</th>
+                        <th>Procedure & Diagnosis</th>
+                        <th>Amount</th>
+                        <th>Documents</th>
+                        <th>Status</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for claim in claims %}
+                    <tr>
+                        <td class="ps-4">
+                            <a href="{% url 'claim_detail' claim.id %}" class="fw-bold text-decoration-none text-primary">
+                                #{{ claim.id }}
+                            </a>
+                            {% if claim.dataset_claim_id %}
+                            <div class="text-muted small font-monospace">{{ claim.dataset_claim_id }}</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="fw-semibold text-dark">{{ claim.patient_name }}</div>
+                            <div class="text-muted small">
+                                {{ claim.patient_age|default:"--" }} yrs • {{ claim.patient_gender|default:"--" }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="fw-medium text-dark small">{{ claim.hospital_name }}</div>
+                            {% if claim.doctor_id %}
+                            <div class="text-muted extra-small">Dr. ID: {{ claim.doctor_id }}</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="fw-semibold small text-dark">{{ claim.procedure }}</div>
+                            <div class="text-muted small">{{ claim.diagnosis|default:"Standard Inpatient" }}</div>
+                        </td>
+                        <td>
+                            <strong class="text-dark">₹{{ claim.amount }}</strong>
+                            {% if claim.insurance_type %}
+                            <div class="text-muted extra-small">{{ claim.insurance_type }}</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if claim.documents.exists %}
+                            <span class="badge bg-info-subtle text-info border border-info-subtle">
+                                📄 {{ claim.documents.count }} Doc(s)
+                            </span>
+                            {% if claim.documents_verified %}
+                            <span class="badge bg-success-subtle text-success">Verified</span>
+                            {% endif %}
+                            {% else %}
+                            <span class="text-muted small">None</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="status-badge {{ claim.status }}">
+                                {{ claim.get_status_display }}
+                            </span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'claim_detail' claim.id %}" class="btn btn-outline-primary rounded-pill px-3">
+                                    View
+                                </a>
+                                <a href="{% url 'upload_document' claim.id %}" class="btn btn-outline-secondary rounded-pill px-2 ms-1" title="Upload Document">
+                                    📄+
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center py-5 text-muted">
+                            <h5>No claims found</h5>
+                            <p class="mb-3">Try adjusting your filters or submit a new claim.</p>
+                            <a href="{% url 'create_claim' %}" class="btn btn-primary btn-sm rounded-pill px-4">Submit New Claim</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
-
 {% endblock %}

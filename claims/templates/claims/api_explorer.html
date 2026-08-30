@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}REST API Hub & Integration Contract - HealthGuard PEC{% endblock %}
+
+{% block content %}
+<div class="container py-4 px-md-5">
+
+    <div class="mb-4">
+        <span class="badge bg-primary rounded-pill px-3 py-2 mb-2">API Documentation</span>
+        <h2 class="fw-bold text-dark mb-1">Centralized REST API & Module Integration Hub</h2>
+        <p class="text-muted">
+            Standardized JSON endpoints connecting Authentication, Claims, Document OCR, and AI Fraud Detection services.
+        </p>
+    </div>
+
+    <!-- API Overview Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="p-3 bg-white rounded-4 shadow-sm border text-center">
+                <span class="fs-4">🔐</span>
+                <h6 class="fw-bold mt-2 mb-1">Authentication</h6>
+                <span class="text-muted extra-small">Token & Session RBAC</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="p-3 bg-white rounded-4 shadow-sm border text-center">
+                <span class="fs-4">📋</span>
+                <h6 class="fw-bold mt-2 mb-1">Claims Management</h6>
+                <span class="text-muted extra-small">CRUD & Pipeline Actions</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="p-3 bg-white rounded-4 shadow-sm border text-center">
+                <span class="fs-4">📄</span>
+                <h6 class="fw-bold mt-2 mb-1">Document OCR</h6>
+                <span class="text-muted extra-small">Entity Parser & Matching</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="p-3 bg-white rounded-4 shadow-sm border text-center">
+                <span class="fs-4">🛡️</span>
+                <h6 class="fw-bold mt-2 mb-1">AI Fraud Engine</h6>
+                <span class="text-muted extra-small">Hybrid Risk & Anomalies</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Endpoints Accordion / List -->
+    <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+        <h5 class="fw-bold text-dark mb-3">API Specification & Contract</h5>
+
+        <div class="d-flex flex-column gap-3">
+
+            <!-- Endpoint 1: Auth Login -->
+            <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-success">POST</span>
+                    <code class="fw-bold text-dark">/api/auth/login/</code>
+                    <span class="text-muted small ms-auto">User Authentication</span>
+                </div>
+                <p class="small text-muted mb-2">Authenticates user and returns session credentials and role profile.</p>
+                <div class="bg-dark text-light p-2 rounded-2 extra-small font-monospace">
+                    {"username": "Sakthi", "password": "..."}
+                </div>
+            </div>
+
+            <!-- Endpoint 2: Claims List & Create -->
+            <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-primary">GET</span>
+                    <span class="badge bg-success">POST</span>
+                    <code class="fw-bold text-dark">/api/claims/</code>
+                    <span class="text-muted small ms-auto">List & Ingest Claims</span>
+                </div>
+                <p class="small text-muted mb-2">Query claims with pagination, status filtering, and search parameters.</p>
+            </div>
+
+            <!-- Endpoint 3: Complete Pipeline Process -->
+            <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-success">POST</span>
+                    <code class="fw-bold text-dark">/api/claims/{claim_id}/process/</code>
+                    <span class="text-muted small ms-auto">Execute Master Processing Pipeline</span>
+                </div>
+                <p class="small text-muted mb-2">Executes OCR document reconciliation, clinical validation rules, and AI fraud risk scoring.</p>
+            </div>
+
+            <!-- Endpoint 4: Document OCR Trigger -->
+            <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-success">POST</span>
+                    <code class="fw-bold text-dark">/api/documents/{document_id}/ocr/</code>
+                    <span class="text-muted small ms-auto">OCR Document Processing</span>
+                </div>
+                <p class="small text-muted mb-2">Triggers OCR text and entity extraction for uploaded medical records or bills.</p>
+            </div>
+
+            <!-- Endpoint 5: AI Fraud Direct Analyze -->
+            <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-success">POST</span>
+                    <code class="fw-bold text-dark">/api/fraud/analyze/</code>
+                    <span class="badge bg-info text-dark">Alias: /api/ai/analyze/</span>
+                    <span class="text-muted small ms-auto">Direct AI Risk Evaluation</span>
+                </div>
+                <p class="small text-muted mb-2">Accepts either an existing claim ID or raw JSON parameters for real-time anomaly evaluation.</p>
+                <div class="bg-dark text-light p-2 rounded-2 extra-small font-monospace">
+                    {"patient_name": "Meera Iyer", "procedure": "Cataract Surgery", "amount": 65000, "duplicate_claim": false}
+                </div>
+            </div>
+
+            <!-- Endpoint 6: External Claim Ingestion -->
+            <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-success">POST</span>
+                    <code class="fw-bold text-dark">/api/external-claim/</code>
+                    <span class="text-muted small ms-auto">External Webhook / Ingestion</span>
+                </div>
+                <p class="small text-muted mb-2">Ingests external provider claims into the repository.</p>
+            </div>
+
+            <!-- Endpoint 7: System Health -->
+            <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-primary">GET</span>
+                    <code class="fw-bold text-dark">/api/health/</code>
+                    <span class="text-muted small ms-auto">System Status Check</span>
+                </div>
+                <p class="small text-muted mb-0">Returns operational health of databases, AI engine, and services.</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

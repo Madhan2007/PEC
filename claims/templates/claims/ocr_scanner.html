@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}OCR Document Intelligence Scanner - HealthGuard PEC{% endblock %}
+
+{% block content %}
+<div class="container py-4 px-md-5">
+
+    <div class="mb-4">
+        <span class="badge bg-info text-white rounded-pill px-3 py-2 mb-2">Document Intelligence</span>
+        <h2 class="fw-bold text-dark mb-1">Medical Document OCR & Entity Extraction Scanner</h2>
+        <p class="text-muted">
+            Upload hospital bills, discharge summaries, or prescriptions to test multi-tier OCR text extraction and clinical entity parsing.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Upload Form -->
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+                <h5 class="fw-bold text-dark mb-3">Upload Medical Document</h5>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Select File (Image / PDF / Text)</label>
+                        <input type="file" name="document_file" class="form-control" accept=".png,.jpg,.jpeg,.pdf,.txt,.md" required>
+                        <div class="form-text extra-small text-muted">
+                            Supports hospital invoices, clinical discharge summaries, lab tests, prescriptions.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary rounded-pill w-100 py-2 fw-semibold">
+                        ⚡ Scan & Extract Entities
+                    </button>
+                </form>
+
+                <div class="mt-4 p-3 bg-light rounded-3 small">
+                    <strong class="d-block text-dark mb-1">Engine Features:</strong>
+                    <ul class="mb-0 ps-3 text-muted">
+                        <li>PaddleOCR & Computer Vision Fallback</li>
+                        <li>Automated Patient Name & Amount Regex</li>
+                        <li>Provider & Hospital Entity Normalization</li>
+                        <li>Admission & Discharge Date Detection</li>
+                        <li>Automatic Cross-verification against Claim database</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Extraction Results -->
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 h-100">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">Structured Entity Output</h5>
+
+                {% if extracted_data %}
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Extracted Patient</span>
+                        <strong class="text-dark">{{ extracted_data.patient_name|default:"Not Detected" }}</strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Detected Hospital/Provider</span>
+                        <strong class="text-dark">{{ extracted_data.hospital_name|default:"Not Detected" }}</strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Total Invoice Amount</span>
+                        <h4 class="fw-bold text-primary mb-0">
+                            {% if extracted_data.total_amount %}
+                            ₹{{ extracted_data.total_amount }}
+                            {% else %}
+                            <span class="text-muted fs-6">Not Detected</span>
+                            {% endif %}
+                        </h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted small d-block">Attending Doctor</span>
+                        <strong class="text-dark">{{ extracted_data.doctor_name|default:"Not Detected" }}</strong>
+                    </div>
+                    {% if extracted_data.admission_date or extracted_data.discharge_date %}
+                    <div class="col-sm-12">
+                        <span class="text-muted small d-block">Dates Detected</span>
+                        <span class="text-dark">Admission: {{ extracted_data.admission_date|default:"--" }} | Discharge: {{ extracted_data.discharge_date|default:"--" }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <h6 class="fw-bold small text-dark mb-2">Raw OCR Extracted Transcript:</h6>
+                <pre class="bg-light p-3 rounded-3 border small" style="max-height: 250px; overflow-y: auto;">{{ raw_text }}</pre>
+
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <span class="fs-1 d-block mb-2">📄</span>
+                    <h6>No document processed yet</h6>
+                    <p class="small">Upload an image or bill using the form on the left to see live OCR extraction.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

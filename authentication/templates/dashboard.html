@@ -1,41 +1,234 @@
 {% extends "base.html" %}
 
-{% block title %}
-Dashboard
-{% endblock %}
+{% block title %}Healthcare Intelligence Dashboard - HealthGuard PEC{% endblock %}
 
 {% block content %}
+<div class="container-fluid py-4 px-md-5">
 
-<div class="dashboard-container">
-
-    <div class="dashboard-card">
-
-        <h1>
-            Welcome, {{ user.username }}!
-        </h1>
-
-        <p class="dashboard-message">
-            You are logged in.
-        </p>
-
-        <div class="dashboard-actions">
-
-            <a href="{% url 'create_claim' %}" class="dashboard-button">
-                Submit New Claim
+    <!-- Welcome & Action Bar -->
+    <div class="row align-items-center mb-4 g-3">
+        <div class="col-md-7">
+            <h2 class="fw-bold text-dark mb-1">
+                Welcome back, {{ user.first_name|default:user.username }}! 👋
+            </h2>
+            <p class="text-muted mb-0">
+                Healthcare Claim Processing & AI Fraud Intelligence Platform • Role: 
+                <span class="badge bg-secondary">{{ profile.get_role_display }}</span>
+            </p>
+        </div>
+        <div class="col-md-5 text-md-end d-flex flex-wrap justify-content-md-end gap-2">
+            <a href="{% url 'create_claim' %}" class="btn btn-primary shadow-sm rounded-pill px-3">
+                ➕ New Claim
             </a>
-
-            <a href="{% url 'claim_list' %}" class="dashboard-button">
-                My Claims
+            <a href="{% url 'ocr_scanner' %}" class="btn btn-info text-white shadow-sm rounded-pill px-3">
+                📄 OCR Scanner
             </a>
-
-            <a href="{% url 'logout' %}" class="logout-button">
-                Logout
+            <a href="{% url 'fraud_radar' %}" class="btn btn-dark shadow-sm rounded-pill px-3">
+                🛡️ Fraud Radar
             </a>
+        </div>
+    </div>
 
+    <!-- Stat Metric Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white h-100 border-start border-primary border-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted fw-semibold small">Total Claims</span>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill p-2">📋</span>
+                </div>
+                <h3 class="fw-bold text-dark mb-1">{{ analytics.total_claims|default:user_stats.total_claims }}</h3>
+                <div class="text-muted small">Active in repository</div>
+            </div>
         </div>
 
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white h-100 border-start border-success border-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted fw-semibold small">Auto-Approved / Valid</span>
+                    <span class="badge bg-success-subtle text-success rounded-pill p-2">✓</span>
+                </div>
+                <h3 class="fw-bold text-success mb-1">{{ user_stats.validated_claims }}</h3>
+                <div class="text-muted small">Passed rules & fraud screening</div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white h-100 border-start border-warning border-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted fw-semibold small">In Review / Processing</span>
+                    <span class="badge bg-warning-subtle text-warning rounded-pill p-2">⏳</span>
+                </div>
+                <h3 class="fw-bold text-warning mb-1">{{ user_stats.pending_claims }}</h3>
+                <div class="text-muted small">Pending OCR / manual review</div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white h-100 border-start border-danger border-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted fw-semibold small">High Risk / Flagged</span>
+                    <span class="badge bg-danger-subtle text-danger rounded-pill p-2">⚠️</span>
+                </div>
+                <h3 class="fw-bold text-danger mb-1">{{ analytics.fraud_cases_count|default:"0" }}</h3>
+                <div class="text-muted small">AI anomaly detection triggered</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Section: Claims Table & Module Radar -->
+    <div class="row g-4 mb-4">
+        <!-- Recent Claims Feed -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden">
+                <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold text-dark mb-0">Recent Claims</h5>
+                    <a href="{% url 'claim_list' %}" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                        View All Claims →
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0 px-3">
+                        <thead class="table-light text-muted small">
+                            <tr>
+                                <th class="ps-4">Claim ID</th>
+                                <th>Patient</th>
+                                <th>Hospital</th>
+                                <th>Procedure</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th class="text-end pe-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for claim in claims %}
+                            <tr>
+                                <td class="ps-4">
+                                    <span class="fw-bold text-primary">#{{ claim.id }}</span>
+                                    {% if claim.dataset_claim_id %}
+                                    <div class="text-muted small font-monospace">{{ claim.dataset_claim_id }}</div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="fw-semibold text-dark">{{ claim.patient_name }}</div>
+                                    <div class="text-muted small">{{ claim.patient_age|default:"--" }} yrs • {{ claim.patient_gender|default:"--" }}</div>
+                                </td>
+                                <td>
+                                    <div class="text-dark small fw-medium">{{ claim.hospital_name }}</div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-dark border">{{ claim.procedure }}</span>
+                                </td>
+                                <td>
+                                    <strong class="text-dark">₹{{ claim.amount }}</strong>
+                                </td>
+                                <td>
+                                    <span class="status-badge {{ claim.status }}">
+                                        {{ claim.get_status_display }}
+                                    </span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <a href="{% url 'claim_detail' claim.id %}" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center py-5 text-muted">
+                                    <p class="mb-2">No claims registered yet.</p>
+                                    <a href="{% url 'create_claim' %}" class="btn btn-primary btn-sm rounded-pill">Submit First Claim</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integrated Modules & AI Fraud Breakdown -->
+        <div class="col-lg-4">
+            <!-- Platform Module Status -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+                <h5 class="fw-bold text-dark mb-3">Integrated Modules</h5>
+                
+                <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light mb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5">🔐</span>
+                        <div>
+                            <div class="fw-bold small">Authentication & RBAC</div>
+                            <div class="text-muted extra-small">Session & Token Auth</div>
+                        </div>
+                    </div>
+                    <span class="badge bg-success">Active</span>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light mb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5">📋</span>
+                        <div>
+                            <div class="fw-bold small">Healthcare Claims Service</div>
+                            <div class="text-muted extra-small">Dataset & Clinical Ingestion</div>
+                        </div>
+                    </div>
+                    <span class="badge bg-success">Active</span>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light mb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5">📄</span>
+                        <div>
+                            <div class="fw-bold small">OCR Document Intelligence</div>
+                            <div class="text-muted extra-small">Multi-tier Document Parser</div>
+                        </div>
+                    </div>
+                    <span class="badge bg-success">Active</span>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light mb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5">🛡️</span>
+                        <div>
+                            <div class="fw-bold small">AI Fraud Risk Engine</div>
+                            <div class="text-muted extra-small">Rules + Cost Anomaly Detector</div>
+                        </div>
+                    </div>
+                    <span class="badge bg-success">Active</span>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between p-2 rounded-3 bg-light">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5">👥</span>
+                        <div>
+                            <div class="fw-bold small">Unified Patient Records</div>
+                            <div class="text-muted extra-small">Shared Patient Data Model</div>
+                        </div>
+                    </div>
+                    <span class="badge bg-success">Active</span>
+                </div>
+            </div>
+
+            <!-- Quick API & Tool Hub -->
+            <div class="card border-0 shadow-sm rounded-4 bg-gradient p-4 text-white" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+                <h5 class="fw-bold mb-2">Quick Integration Hub</h5>
+                <p class="small text-light text-opacity-75 mb-3">
+                    Interact directly with REST API endpoints or run standalone OCR & AI fraud analysis.
+                </p>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'api_explorer' %}" class="btn btn-outline-light btn-sm rounded-pill">
+                        🔌 Open REST API Explorer
+                    </a>
+                    <a href="{% url 'ocr_scanner' %}" class="btn btn-info text-white btn-sm rounded-pill">
+                        📄 Live Document OCR Scanner
+                    </a>
+                    <a href="{% url 'fraud_radar' %}" class="btn btn-warning text-dark btn-sm rounded-pill">
+                        🛡️ Open AI Fraud Radar
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
-
 {% endblock %}
