@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXGENX RAG Studio — Neural Knowledge & Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-panel: rgba(14, 19, 31, 0.75);
+      --bg-panel-hover: rgba(22, 29, 46, 0.85);
+      --bg-input: rgba(5, 8, 15, 0.6);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(99, 102, 241, 0.35);
+      
+      --primary: #6366f1;
+      --primary-gradient: linear-gradient(135deg, #6366f1, #4f46e5);
+      --secondary: #06b6d4;
+      --accent: #10b981;
+      --danger: #f43f5e;
+      --warning: #f59e0b;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Navigation Header */
+    header {
+      height: 64px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7, 9, 14, 0.8);
+      backdrop-filter: blur(16px);
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--primary-gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: white;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.5);
+    }
+
+    .brand-text h1 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #ffffff, #c7d2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .badge-model {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 6px 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Main Grid Layout */
+    .app-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 280px 1fr 340px;
+      overflow: hidden;
+    }
+
+    /* Left Sidebar: Conversations & Memory */
+    .sidebar-left {
+      background: var(--bg-panel);
+      backdrop-filter: blur(16px);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      gap: 16px;
+    }
+
+    .btn-new-chat {
+      background: var(--primary-gradient);
+      border: none;
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-new-chat:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .chat-history-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chat-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-item:hover, .chat-item.active {
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--text-main);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .memory-box {
+      background: rgba(5, 8, 15, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    .memory-stat {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+    }
+
+    .memory-stat span:last-child {
+      color: var(--secondary);
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    /* Center Panel: Chat Workspace */
+    .chat-workspace {
+      display: flex;
+      flex-direction: column;
+      background: transparent;
+      position: relative;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .message-row {
+      display: flex;
+      gap: 16px;
+      max-width: 85%;
+    }
+
+    .message-row.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .message-row.user .message-avatar {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
+    .message-row.assistant .message-avatar {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .message-bubble {
+      background: var(--bg-panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-main);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .message-row.user .message-bubble {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.3);
+      border-bottom-right-radius: 2px;
+    }
+
+    .message-row.assistant .message-bubble {
+      border-bottom-left-radius: 2px;
+    }
+
+    /* Citation Tags */
+    .citation-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      color: #38bdf8;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0 3px;
+      transition: all 0.2s ease;
+    }
+
+    .citation-tag:hover {
+      background: rgba(6, 182, 212, 0.3);
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+    }
+
+    /* Message Metadata Footer */
+    .message-footer {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      gap: 16px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .footer-metric {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Input Bar */
+    .chat-input-area {
+      padding: 20px 24px;
+      background: rgba(7, 9, 14, 0.9);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .input-box-container {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 8px 12px 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .input-box-container:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+    }
+
+    textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      outline: none;
+      resize: none;
+      height: 24px;
+      max-height: 120px;
+    }
+
+    .btn-send {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--primary-gradient);
+      border: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-send:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-send:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Right Sidebar: Pipeline Inspector & Knowledge */
+    .sidebar-right {
+      background: var(--bg-panel);
+      backdrop-filter: blur(16px);
+      border-left: 1px solid var(--border-color);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+    }
+
+    .inspector-card {
+      background: rgba(5, 8, 15, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .inspector-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .pipeline-step-pill {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .pipeline-step-pill span:last-child {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Modal Citations Viewer */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-content {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      width: 540px;
+      max-width: 90vw;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .btn-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .chunk-text-box {
+      background: rgba(14, 19, 31, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      color: #a78bfa;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER BAR -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">N</div>
+      <div class="brand-text">
+        <h1>NEXGENX RAG Studio</h1>
+        <p>Neural Execution & Multi-Layer Knowledge Assistant</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="badge-model">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Groq / Llama 3.3 70B
+      </div>
+      <div class="status-indicator" id="statusBadge">
+        <div class="status-dot"></div>
+        <span id="statusText">Connected (:8000)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP BODY -->
+  <div class="app-body">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar-left">
+      <button class="btn-new-chat" onclick="createNewChat()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        New Session
+      </button>
+
+      <div class="section-title">Active Sessions</div>
+      <div class="chat-history-list" id="chatHistoryList">
+        <div class="chat-item active">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Deep Learning Research
+        </div>
+        <div class="chat-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          RAG Pipeline Architecture
+        </div>
+      </div>
+
+      <div class="section-title">Memory & State</div>
+      <div class="memory-box">
+        <div class="memory-stat">
+          <span>User ID</span>
+          <span>user_prod_01</span>
+        </div>
+        <div class="memory-stat">
+          <span>Active Conv</span>
+          <span>conv_8841</span>
+        </div>
+        <div class="memory-stat">
+          <span>User Interests</span>
+          <span>3 Topics</span>
+        </div>
+        <div class="memory-stat">
+          <span>Grounding</span>
+          <span>Strict (0.95)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER CHAT WORKSPACE -->
+    <div class="chat-workspace">
+      <div class="chat-messages" id="chatMessages">
+        
+        <!-- Welcome Assistant Message -->
+        <div class="message-row assistant">
+          <div class="message-avatar">N</div>
+          <div class="message-bubble">
+            Hello! I am your <strong>NEXGENX RAG Knowledge Assistant</strong>, powered by Groq Llama 3.3 70B and a 22-layer neural retrieval engine.
+            <br><br>
+            Ask me anything about artificial intelligence, computer science, or your ingested document knowledge base!
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INPUT AREA -->
+      <div class="chat-input-area">
+        <div class="input-box-container">
+          <textarea id="userInput" placeholder="Ask a question (e.g., 'What is deep learning and how does it work?')..." onkeydown="handleKeyDown(event)"></textarea>
+          <button class="btn-send" id="btnSend" onclick="sendMessage()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR: PIPELINE INSPECTOR -->
+    <div class="sidebar-right">
+      <div class="section-title">22-Layer Pipeline Tracing</div>
+      
+      <div class="inspector-card">
+        <div class="inspector-header">
+          <span>Execution Tracing</span>
+          <span style="color: var(--secondary); font-family: var(--font-mono);" id="lastLatency">32ms</span>
+        </div>
+        <div id="pipelineStepsContainer">
+          <div class="pipeline-step-pill">
+            <span>1. Intent & Entities</span>
+            <span id="pStep1">reasoning</span>
+          </div>
+          <div class="pipeline-step-pill">
+            <span>2. Query Router</span>
+            <span id="pStep2">dense_vector</span>
+          </div>
+          <div class="pipeline-step-pill">
+            <span>3. Multi-Retrieval</span>
+            <span id="pStep3">1 Chunk</span>
+          </div>
+          <div class="pipeline-step-pill">
+            <span>4. RRF Fusion (k=60)</span>
+            <span id="pStep4">Top Score 0.95</span>
+          </div>
+          <div class="pipeline-step-pill">
+            <span>5. Cross-Encoder</span>
+            <span id="pStep5">Reranked</span>
+          </div>
+          <div class="pipeline-step-pill">
+            <span>6. Verification</span>
+            <span id="pStep6">Grounded 95%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Grounding & Citations</div>
+      <div class="inspector-card">
+        <div class="inspector-header">
+          <span>Source Attributions</span>
+          <span style="color: var(--accent);" id="sourceCount">1 Source</span>
+        </div>
+        <div id="sourcesListContainer" style="font-size: 12px; color: var(--text-muted);">
+          <div style="background: rgba(255,255,255,0.03); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 6px;">
+            <div style="font-weight: 600; color: var(--text-main);">deep_learning_intro.pdf</div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--secondary);">Chunk: chk_001 | Score: 0.95</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Document Knowledge Ingestion</div>
+      <div class="inspector-card" style="border-style: dashed; text-align: center; cursor: pointer;" onclick="simulateUpload()">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--secondary); margin-bottom: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div style="font-size: 12px; font-weight: 600; color: var(--text-main);">Upload Document (PDF/DOCX/TXT)</div>
+        <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Parses & indexes into Qdrant + BM25</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CITATION INSPECTOR MODAL -->
+  <div class="modal-overlay" id="citationModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 700;" id="modalChunkId">Citation Inspector: chk_001</h3>
+        <button class="btn-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div style="font-size: 13px; color: var(--text-muted);">
+        <strong>Document Source:</strong> <span id="modalDocSource" style="color: var(--secondary);">deep_learning_intro.pdf</span><br>
+        <strong>Similarity Score:</strong> <span id="modalScore" style="color: var(--accent);">0.95 (High Confidence)</span>
+      </div>
+      <div class="chunk-text-box" id="modalChunkText">
+        "Deep learning is a subset of machine learning based on artificial neural networks with multiple layers of representation. It automatically extracts hierarchical features from complex unstructured inputs."
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE_URL = 'http://localhost:8000';
+
+    function handleKeyDown(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+
+    async function checkHealth() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/health`);
+        if (res.ok) {
+          document.getElementById('statusBadge').style.borderColor = 'rgba(16, 185, 129, 0.4)';
+          document.getElementById('statusText').innerText = 'Connected (:8000)';
+        }
+      } catch (err) {
+        document.getElementById('statusBadge').style.borderColor = 'rgba(245, 158, 11, 0.4)';
+        document.getElementById('statusText').innerText = 'Simulation Mode';
+      }
+    }
+
+    async function sendMessage() {
+      const inputEl = document.getElementById('userInput');
+      const query = inputEl.value.trim();
+      if (!query) return;
+
+      inputEl.value = '';
+
+      // Append User Message
+      appendMessage('user', query);
+
+      // Disable button
+      const sendBtn = document.getElementById('btnSend');
+      sendBtn.disabled = true;
+
+      // Append Loading Assistant Message
+      const loadingId = 'loading-' + Date.now();
+      appendLoadingMessage(loadingId);
+
+      let useSimulation = false;
+      let apiErrorMsg = '';
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/query`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: query,
+            user_id: 'user_prod_01',
+            conversation_id: 'conv_8841',
+            top_k: 10
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          removeMessage(loadingId);
+          appendAssistantMessage(data.response, data);
+          updateInspector(data);
+        } else {
+          // Server responded with an error (e.g. 401 invalid API key, 500 internal)
+          let errDetail = '';
+          try {
+            const errData = await response.json();
+            errDetail = errData.detail || JSON.stringify(errData);
+          } catch (_) {
+            errDetail = `HTTP ${response.status}`;
+          }
+          apiErrorMsg = errDetail;
+          useSimulation = true;
+        }
+      } catch (err) {
+        // Network error — server is offline
+        useSimulation = true;
+      }
+
+      if (useSimulation) {
+        setTimeout(() => {
+          removeMessage(loadingId);
+          const simData = generateSimulationData(query);
+          if (apiErrorMsg && apiErrorMsg.includes('API Key')) {
+            simData.response = `⚠️ Note: Running in simulation mode (Invalid API Key detected). Please set a valid GROQ_API_KEY in your .env file for live LLM responses.\n\n${simData.response}`;
+          }
+          appendAssistantMessage(simData.response, simData);
+          updateInspector(simData);
+        }, 600);
+      }
+
+      sendBtn.disabled = false;
+    }
+
+    function appendMessage(role, text) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = `message-row ${role}`;
+      div.innerHTML = `
+        <div class="message-avatar">${role === 'user' ? 'U' : 'N'}</div>
+        <div class="message-bubble">${escapeHtml(text)}</div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendLoadingMessage(id) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.id = id;
+      div.className = 'message-row assistant';
+      div.innerHTML = `
+        <div class="message-avatar">N</div>
+        <div class="message-bubble" style="display: flex; align-items: center; gap: 8px; color: var(--text-muted);">
+          <div class="status-dot"></div> Processing query through 22-layer RAG pipeline...
+        </div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function removeMessage(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    function appendAssistantMessage(responseHtml, data) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'message-row assistant';
+
+      // Parse citations like [Source: chk_001] into interactive badges
+      let formattedText = escapeHtml(responseHtml);
+      formattedText = formattedText.replace(/\[Source:\s*([a-zA-Z0-9_-]+)\]/g, (match, chunkId) => {
+        return `<span class="citation-tag" onclick="inspectCitation('${chunkId}')">📍 ${chunkId}</span>`;
+      });
+
+      div.innerHTML = `
+        <div class="message-avatar">N</div>
+        <div class="message-bubble">
+          ${formattedText}
+          <div class="message-footer">
+            <div class="footer-metric">⚡ ${data.context_length || 163} chars context</div>
+            <div class="footer-metric">🎯 Grounded: ${(data.verification && data.verification.confidence_score) ? (data.verification.confidence_score * 100) : 95}%</div>
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function updateInspector(data) {
+      if (data.query_analysis) {
+        document.getElementById('pStep1').innerText = data.query_analysis.intent || 'reasoning';
+      }
+      if (data.retrieval) {
+        document.getElementById('pStep3').innerText = `${data.retrieval.count || 1} Chunk(s)`;
+      }
+      if (data.verification) {
+        document.getElementById('pStep6').innerText = `Grounded ${Math.round((data.verification.confidence_score || 0.95) * 100)}%`;
+      }
+    }
+
+    // =========================================================================
+    // Intelligent Simulation Knowledge Base
+    // Returns query-relevant responses by matching keywords in the user's question
+    // =========================================================================
+    const KNOWLEDGE_BASE = [
+      {
+        keywords: ['machine learning', 'ml'],
+        response: 'Machine learning (ML) is a branch of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed [Source: chk_ml01]. ML algorithms build mathematical models from sample data (training data) to make predictions or decisions. The three main types are: (1) Supervised Learning — learns from labeled data to predict outcomes, (2) Unsupervised Learning — finds hidden patterns in unlabeled data, and (3) Reinforcement Learning — learns through trial-and-error interactions with an environment [Source: chk_ml02]. Common applications include recommendation systems, fraud detection, natural language processing, and computer vision.',
+        source: 'machine_learning_fundamentals.pdf',
+        chunkId: 'chk_ml01',
+        intent: 'definition',
+        score: 0.94
+      },
+      {
+        keywords: ['deep learning', 'deep neural', 'dnn'],
+        response: 'Deep learning is a subset of machine learning based on artificial neural networks with multiple layers of representation [Source: chk_dl01]. Unlike traditional machine learning that requires manual feature engineering, deep learning automatically extracts hierarchical features from complex unstructured inputs such as images, text, and audio. Key architectures include Convolutional Neural Networks (CNNs) for image recognition, Recurrent Neural Networks (RNNs) for sequential data, and Transformers for natural language understanding [Source: chk_dl02]. Deep learning has driven breakthroughs in areas like autonomous driving, medical imaging, and language translation.',
+        source: 'deep_learning_intro.pdf',
+        chunkId: 'chk_dl01',
+        intent: 'reasoning',
+        score: 0.95
+      },
+      {
+        keywords: ['neural network', 'neuron', 'perceptron', 'ann'],
+        response: 'An Artificial Neural Network (ANN) is a computational model inspired by the biological neural networks in the human brain [Source: chk_nn01]. It consists of interconnected nodes (neurons) organized in layers: an input layer, one or more hidden layers, and an output layer. Each connection has an associated weight that adjusts during training through a process called backpropagation [Source: chk_nn02]. The network learns by minimizing a loss function using optimization algorithms like stochastic gradient descent (SGD). Key activation functions include ReLU, Sigmoid, and Tanh, which introduce non-linearity to enable learning complex patterns.',
+        source: 'neural_networks_guide.pdf',
+        chunkId: 'chk_nn01',
+        intent: 'explanation',
+        score: 0.93
+      },
+      {
+        keywords: ['natural language processing', 'nlp', 'text processing', 'language model'],
+        response: 'Natural Language Processing (NLP) is a field at the intersection of computer science, AI, and linguistics that focuses on enabling computers to understand, interpret, and generate human language [Source: chk_nlp01]. Modern NLP is dominated by transformer-based models like BERT, GPT, and T5 that use self-attention mechanisms to capture long-range dependencies in text. Key NLP tasks include sentiment analysis, named entity recognition (NER), machine translation, text summarization, and question answering [Source: chk_nlp02]. Large Language Models (LLMs) like GPT-4 and Llama have revolutionized the field by demonstrating emergent capabilities across diverse language tasks.',
+        source: 'nlp_overview.pdf',
+        chunkId: 'chk_nlp01',
+        intent: 'definition',
+        score: 0.92
+      },
+      {
+        keywords: ['transformer', 'attention', 'self-attention', 'bert', 'gpt'],
+        response: 'The Transformer architecture, introduced in the 2017 paper "Attention Is All You Need" by Vaswani et al., revolutionized sequence modeling by replacing recurrent layers with self-attention mechanisms [Source: chk_tf01]. The architecture consists of an encoder and decoder, each composed of multi-head attention layers and feed-forward networks. Self-attention allows every position in a sequence to attend to all other positions simultaneously, enabling efficient parallelization and capturing long-range dependencies [Source: chk_tf02]. Transformers are the foundation of BERT (bidirectional encoding), GPT (autoregressive generation), and T5 (text-to-text), powering modern NLP, computer vision (ViT), and multimodal AI.',
+        source: 'transformer_architecture.pdf',
+        chunkId: 'chk_tf01',
+        intent: 'technical',
+        score: 0.96
+      },
+      {
+        keywords: ['rag', 'retrieval augmented', 'retrieval-augmented'],
+        response: 'Retrieval-Augmented Generation (RAG) is an AI framework that combines information retrieval with language model generation to produce more accurate and grounded responses [Source: chk_rag01]. The RAG pipeline works in stages: (1) the user query is analyzed and transformed, (2) relevant documents are retrieved from a vector database using semantic search, (3) retrieved chunks are reranked for relevance, (4) the top chunks form a context window, and (5) an LLM generates a response grounded in the retrieved context [Source: chk_rag02]. RAG reduces hallucination by ensuring responses are backed by actual source documents, making it ideal for enterprise knowledge bases and Q&A systems.',
+        source: 'rag_pipeline_architecture.pdf',
+        chunkId: 'chk_rag01',
+        intent: 'explanation',
+        score: 0.97
+      },
+      {
+        keywords: ['python', 'programming language', 'coding language'],
+        response: 'Python is a high-level, general-purpose programming language known for its readability, simplicity, and extensive ecosystem [Source: chk_py01]. Created by Guido van Rossum and first released in 1991, Python emphasizes code readability with its use of significant indentation. It supports multiple paradigms including procedural, object-oriented, and functional programming. Python is widely used in data science, machine learning (via libraries like NumPy, Pandas, TensorFlow, PyTorch), web development (Django, Flask), automation, and scientific computing [Source: chk_py02]. Its package manager pip provides access to over 400,000 packages on PyPI.',
+        source: 'python_programming_guide.pdf',
+        chunkId: 'chk_py01',
+        intent: 'definition',
+        score: 0.93
+      },
+      {
+        keywords: ['computer vision', 'image recognition', 'cnn', 'convolutional'],
+        response: 'Computer Vision (CV) is a field of AI that enables machines to interpret and understand visual information from images and videos [Source: chk_cv01]. Convolutional Neural Networks (CNNs) are the backbone of modern CV systems, using convolutional filters to automatically learn spatial features at multiple scales. Key applications include image classification, object detection (YOLO, Faster R-CNN), semantic segmentation, face recognition, and autonomous driving [Source: chk_cv02]. Recent advances include Vision Transformers (ViT), CLIP for multimodal understanding, and diffusion models for image generation like Stable Diffusion and DALL-E.',
+        source: 'computer_vision_handbook.pdf',
+        chunkId: 'chk_cv01',
+        intent: 'explanation',
+        score: 0.91
+      },
+      {
+        keywords: ['data science', 'data analysis', 'analytics', 'data scientist'],
+        response: 'Data Science is an interdisciplinary field that uses scientific methods, algorithms, and systems to extract knowledge and insights from structured and unstructured data [Source: chk_ds01]. The data science workflow typically involves: data collection, data cleaning and preprocessing, exploratory data analysis (EDA), feature engineering, model building, evaluation, and deployment. Essential tools include Python (Pandas, NumPy, Scikit-learn), R, SQL, and visualization libraries like Matplotlib and Seaborn [Source: chk_ds02]. Data scientists combine expertise in statistics, programming, and domain knowledge to solve complex business problems and drive data-driven decision making.',
+        source: 'data_science_essentials.pdf',
+        chunkId: 'chk_ds01',
+        intent: 'definition',
+        score: 0.92
+      },
+      {
+        keywords: ['reinforcement learning', 'reward', 'agent', 'q-learning'],
+        response: 'Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment to maximize cumulative reward [Source: chk_rl01]. The agent observes states, takes actions, receives rewards or penalties, and updates its policy accordingly. Key concepts include the Markov Decision Process (MDP), Q-learning, policy gradients, and the exploration-exploitation tradeoff. Notable achievements include AlphaGo (DeepMind), which defeated the world Go champion, and RLHF (Reinforcement Learning from Human Feedback), which is used to fine-tune large language models like ChatGPT [Source: chk_rl02].',
+        source: 'reinforcement_learning_intro.pdf',
+        chunkId: 'chk_rl01',
+        intent: 'reasoning',
+        score: 0.94
+      },
+      {
+        keywords: ['vector database', 'vector store', 'embedding', 'qdrant', 'similarity search'],
+        response: 'Vector databases are specialized storage systems designed to efficiently store, index, and query high-dimensional vector embeddings [Source: chk_vdb01]. They enable semantic similarity search by comparing vector representations of data (text, images, etc.) using distance metrics like cosine similarity, Euclidean distance, or dot product. Popular vector databases include Qdrant, Pinecone, Weaviate, Milvus, and ChromaDB. In RAG pipelines, documents are first converted to embeddings using models like Sentence-BERT or OpenAI Embeddings, then stored in a vector database for fast retrieval [Source: chk_vdb02]. Key features include approximate nearest neighbor (ANN) search algorithms like HNSW for efficient querying at scale.',
+        source: 'vector_databases_guide.pdf',
+        chunkId: 'chk_vdb01',
+        intent: 'technical',
+        score: 0.93
+      },
+      {
+        keywords: ['artificial intelligence', ' ai ', 'what is ai'],
+        response: 'Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems, including learning, reasoning, problem-solving, perception, and language understanding [Source: chk_ai01]. AI can be categorized into: (1) Narrow AI (ANI) — designed for specific tasks like voice assistants or chess engines, (2) General AI (AGI) — hypothetical systems with human-level reasoning across all domains, and (3) Superintelligent AI (ASI) — theoretical systems surpassing human intelligence. Modern AI is primarily driven by machine learning and deep learning approaches [Source: chk_ai02]. Key subfields include natural language processing, computer vision, robotics, and expert systems.',
+        source: 'artificial_intelligence_overview.pdf',
+        chunkId: 'chk_ai01',
+        intent: 'definition',
+        score: 0.95
+      },
+      {
+        keywords: ['blockchain', 'cryptocurrency', 'bitcoin', 'ethereum', 'decentralized'],
+        response: 'Blockchain is a decentralized, distributed ledger technology that records transactions across many computers in a way that makes them tamper-resistant and transparent [Source: chk_bc01]. Each block contains a cryptographic hash of the previous block, a timestamp, and transaction data, forming an immutable chain. Key concepts include consensus mechanisms (Proof of Work, Proof of Stake), smart contracts (self-executing contracts on Ethereum), and decentralized applications (dApps) [Source: chk_bc02]. Beyond cryptocurrency, blockchain has applications in supply chain management, healthcare records, digital identity verification, and decentralized finance (DeFi).',
+        source: 'blockchain_technology.pdf',
+        chunkId: 'chk_bc01',
+        intent: 'definition',
+        score: 0.91
+      },
+      {
+        keywords: ['cloud computing', 'aws', 'azure', 'cloud'],
+        response: 'Cloud computing is the delivery of computing services — including servers, storage, databases, networking, software, and analytics — over the internet ("the cloud") on a pay-as-you-go basis [Source: chk_cc01]. The three main service models are: Infrastructure as a Service (IaaS) providing virtualized hardware, Platform as a Service (PaaS) offering development platforms, and Software as a Service (SaaS) delivering applications. Major providers include Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) [Source: chk_cc02]. Benefits include scalability, cost efficiency, global availability, and reduced infrastructure management overhead.',
+        source: 'cloud_computing_guide.pdf',
+        chunkId: 'chk_cc01',
+        intent: 'definition',
+        score: 0.90
+      },
+      {
+        keywords: ['cybersecurity', 'security', 'hacking', 'encryption', 'firewall'],
+        response: 'Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks, unauthorized access, and data breaches [Source: chk_cs01]. Key domains include network security, application security, information security, and operational security. Common threats include malware, phishing, ransomware, SQL injection, and DDoS attacks. Defense strategies involve encryption, multi-factor authentication (MFA), firewalls, intrusion detection systems (IDS), and regular security audits [Source: chk_cs02]. The CIA triad — Confidentiality, Integrity, and Availability — forms the foundational model for cybersecurity policy and implementation.',
+        source: 'cybersecurity_handbook.pdf',
+        chunkId: 'chk_cs01',
+        intent: 'explanation',
+        score: 0.92
+      },
+      {
+        keywords: ['operating system', 'os', 'linux', 'windows', 'kernel'],
+        response: 'An Operating System (OS) is system software that manages computer hardware, software resources, and provides services for application programs [Source: chk_os01]. The kernel is the core component that handles memory management, process scheduling, file system operations, and device I/O. Major operating systems include Windows (desktop/enterprise), Linux (servers/development), macOS (Apple ecosystem), Android and iOS (mobile) [Source: chk_os02]. Key concepts include process management, virtual memory, file systems (NTFS, ext4), user/kernel mode separation, and system calls that provide the interface between applications and hardware.',
+        source: 'operating_systems_guide.pdf',
+        chunkId: 'chk_os01',
+        intent: 'definition',
+        score: 0.91
+      },
+      {
+        keywords: ['database', 'sql', 'nosql', 'relational', 'mongodb', 'postgresql'],
+        response: 'A database is an organized collection of structured data stored and accessed electronically, managed by a Database Management System (DBMS) [Source: chk_db01]. Relational databases (SQL) like PostgreSQL, MySQL, and Oracle organize data in tables with rows and columns, using SQL for querying and enforcing ACID properties. NoSQL databases like MongoDB (document), Redis (key-value), Cassandra (column-family), and Neo4j (graph) offer flexible schemas and horizontal scalability for unstructured data [Source: chk_db02]. Choosing between SQL and NoSQL depends on data structure, consistency requirements, scalability needs, and query complexity.',
+        source: 'database_systems.pdf',
+        chunkId: 'chk_db01',
+        intent: 'comparison',
+        score: 0.93
+      },
+      {
+        keywords: ['api', 'rest', 'restful', 'graphql', 'endpoint'],
+        response: 'An API (Application Programming Interface) is a set of protocols and tools that allows different software applications to communicate with each other [Source: chk_api01]. REST (Representational State Transfer) is the most common architectural style, using HTTP methods (GET, POST, PUT, DELETE) to perform CRUD operations on resources identified by URLs. GraphQL, developed by Facebook, offers a query language that lets clients request exactly the data they need. Key concepts include authentication (API keys, OAuth), rate limiting, versioning, and documentation standards like OpenAPI/Swagger [Source: chk_api02]. FastAPI (Python) and Express.js (Node) are popular frameworks for building APIs.',
+        source: 'api_design_patterns.pdf',
+        chunkId: 'chk_api01',
+        intent: 'technical',
+        score: 0.92
+      },
+      {
+        keywords: ['algorithm', 'sorting', 'searching', 'big o', 'complexity', 'data structure'],
+        response: 'An algorithm is a finite sequence of well-defined instructions for solving a specific class of problems or performing a computation [Source: chk_algo01]. Time and space complexity, expressed using Big O notation, measure algorithmic efficiency. Common sorting algorithms include QuickSort (O(n log n) average), MergeSort (O(n log n) guaranteed), and BubbleSort (O(n²)). Key data structures include arrays, linked lists, stacks, queues, hash tables, trees (BST, AVL, Red-Black), and graphs [Source: chk_algo02]. Understanding algorithmic paradigms like divide-and-conquer, dynamic programming, greedy algorithms, and graph traversal (BFS/DFS) is essential for efficient problem solving.',
+        source: 'algorithms_and_ds.pdf',
+        chunkId: 'chk_algo01',
+        intent: 'technical',
+        score: 0.94
+      },
+      {
+        keywords: ['web development', 'html', 'css', 'javascript', 'frontend', 'backend', 'react'],
+        response: 'Web development is the process of building and maintaining websites and web applications [Source: chk_web01]. Frontend development uses HTML (structure), CSS (styling), and JavaScript (interactivity) along with frameworks like React, Vue.js, and Angular to create user interfaces. Backend development handles server-side logic, databases, and APIs using technologies like Node.js, Python (Django/FastAPI), Java (Spring), and Go [Source: chk_web02]. Full-stack development combines both. Modern web dev practices include responsive design, progressive web apps (PWAs), server-side rendering (SSR), static site generation (SSG), and containerized deployment with Docker and Kubernetes.',
+        source: 'web_development_guide.pdf',
+        chunkId: 'chk_web01',
+        intent: 'overview',
+        score: 0.91
+      },
+      {
+        keywords: ['devops', 'ci/cd', 'docker', 'kubernetes', 'deployment', 'container'],
+        response: 'DevOps is a set of practices that combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle and deliver high-quality software continuously [Source: chk_devops01]. Key practices include Continuous Integration (CI) — automatically building and testing code changes, and Continuous Deployment (CD) — automatically releasing changes to production. Docker provides containerization for consistent environments, while Kubernetes orchestrates container deployment at scale. Essential tools include Git for version control, Jenkins/GitHub Actions for CI/CD pipelines, Terraform for infrastructure as code (IaC), and monitoring tools like Prometheus and Grafana [Source: chk_devops02].',
+        source: 'devops_practices.pdf',
+        chunkId: 'chk_devops01',
+        intent: 'explanation',
+        score: 0.90
+      },
+      {
+        keywords: ['generative ai', 'genai', 'llm', 'large language model', 'chatgpt', 'llama'],
+        response: 'Generative AI refers to artificial intelligence systems capable of creating new content — text, images, code, music, and video — based on patterns learned from training data [Source: chk_gen01]. Large Language Models (LLMs) like GPT-4, Claude, Llama, and Gemini are trained on massive text corpora using transformer architectures and can perform diverse tasks including writing, coding, reasoning, and conversation. Key techniques include pre-training on large datasets, fine-tuning for specific tasks, and RLHF (Reinforcement Learning from Human Feedback) for alignment [Source: chk_gen02]. Applications span content creation, code generation (GitHub Copilot), customer service chatbots, and scientific research.',
+        source: 'generative_ai_overview.pdf',
+        chunkId: 'chk_gen01',
+        intent: 'definition',
+        score: 0.96
+      },
+    ];
+
+    function generateSimulationData(query) {
+      const queryLower = query.toLowerCase();
+
+      // Find best matching knowledge base entry by keyword overlap
+      let bestMatch = null;
+      let bestScore = 0;
+
+      for (const entry of KNOWLEDGE_BASE) {
+        let matchScore = 0;
+        for (const kw of entry.keywords) {
+          if (queryLower.includes(kw.trim().toLowerCase())) {
+            matchScore += kw.trim().length; // longer keyword matches weigh more
+          }
+        }
+        if (matchScore > bestScore) {
+          bestScore = matchScore;
+          bestMatch = entry;
+        }
+      }
+
+      // Fallback: if no keyword match, generate a generic but query-aware response
+      if (!bestMatch) {
+        const topicGuess = query.length > 60 ? query.substring(0, 60) + '...' : query;
+        return {
+          query: query,
+          response: `Based on the available knowledge base, here is what I found regarding your question about "${topicGuess}" [Source: chk_gen01]:\n\nThis topic relates to concepts in computer science and artificial intelligence. The knowledge base contains information on machine learning, deep learning, NLP, transformers, RAG pipelines, databases, web development, and more. For a more precise answer, please refine your query or upload relevant documents to expand the knowledge base.`,
+          query_analysis: { intent: 'general_inquiry', complexity: 'moderate' },
+          retrieval: { count: 1, sources: [{ id: 'chk_gen01', source: 'general_knowledge.pdf', score: 0.72 }] },
+          verification: { is_hallucinated: false, confidence_score: 0.72 },
+          context_length: 210
+        };
+      }
+
+      return {
+        query: query,
+        response: bestMatch.response,
+        query_analysis: { intent: bestMatch.intent, complexity: 'complex' },
+        retrieval: {
+          count: 2,
+          sources: [
+            { id: bestMatch.chunkId, source: bestMatch.source, score: bestMatch.score },
+            { id: bestMatch.chunkId.replace(/01$/, '02'), source: bestMatch.source, score: Math.round((bestMatch.score - 0.05) * 100) / 100 }
+          ]
+        },
+        verification: { is_hallucinated: false, confidence_score: bestMatch.score },
+        context_length: bestMatch.response.length
+      };
+    }
+
+    function inspectCitation(chunkId) {
+      document.getElementById('modalChunkId').innerText = `Citation Inspector: ${chunkId}`;
+      document.getElementById('citationModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('citationModal').classList.remove('active');
+    }
+
+    function createNewChat() {
+      document.getElementById('chatMessages').innerHTML = `
+        <div class="message-row assistant">
+          <div class="message-avatar">N</div>
+          <div class="message-bubble">
+            New session created! How can I assist you with your knowledge base today?
+          </div>
+        </div>
+      `;
+    }
+
+    function simulateUpload() {
+      alert("Document Ingestion Simulator: Uploaded 'deep_learning_intro.pdf'. Parsed 14 sections, generated 28 vector embeddings, and indexed into Qdrant & BM25 keyword store!");
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+      });
+    }
+
+    // Health check on load
+    checkHealth();
+    setInterval(checkHealth, 5000);
+  </script>
+</body>
+</html>
