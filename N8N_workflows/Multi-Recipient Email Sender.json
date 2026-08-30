@@ -1,0 +1,717 @@
+{
+  "name": "Multi-Recipient Email Sender",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-email",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "d3e6ffbb-e407-4236-a14e-e343c9f3a235",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -928,
+        120
+      ],
+      "webhookId": "send-email"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body ?? $input.first().json;\n\nconst sender = body.sender || '';\nconst message = body.message || '';\nconst subject = body.subject || 'Message from ' + sender;\nlet recipients = body.recipients;\n\nif (!sender) throw new Error('Missing field: sender');\nif (!message) throw new Error('Missing field: message');\nif (!recipients) throw new Error('Missing field: recipients');\n\nif (typeof recipients === 'string') {\n  recipients = recipients.split(',').map(r => r.trim()).filter(Boolean);\n}\n\nif (!Array.isArray(recipients) || recipients.length === 0) {\n  throw new Error('recipients must be a non-empty array or comma-separated string');\n}\n\nconst emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\nconst invalid = recipients.filter(r => !emailRegex.test(r));\nif (invalid.length > 0) {\n  throw new Error('Invalid email addresses: ' + invalid.join(', '));\n}\n\nreturn recipients.map(email => ({\n  json: { sender, subject, message, recipient: email }\n}));"
+      },
+      "id": "bbd8101a-22b0-41ec-9150-d3d9cf101225",
+      "name": "Parse & Split Recipients",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -704,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $json.sender }}",
+        "toEmail": "={{ $json.recipient }}",
+        "subject": "={{ $json.subject }}",
+        "emailFormat": "text",
+        "text": "={{ $json.message }}",
+        "options": {}
+      },
+      "id": "400dcd84-5e78-4001-b39f-900d23ecd40a",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -480,
+        456
+      ],
+      "webhookId": "a9b9ea5e-3983-4453-91d3-3e4a5cd73031",
+      "credentials": {
+        "smtp": {
+          "id": "rDjfRyFAAUtiHAT8",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.all();\n\nconst sent = [];\nconst failed = [];\n\nfor (const item of results) {\n  if (item.json.recipient) {\n    sent.push(item.json.recipient);\n  }\n}\n\nreturn [{\n  json: {\n    status: 'success',\n    sent_count: sent.length,\n    sent_to: sent,\n    failed_count: failed.length,\n    failed_to: failed,\n    message: `Email sent successfully to ${sent.length} recipient(s).`\n  }\n}];"
+      },
+      "id": "7d195156-dcbd-40da-b8c8-fc10ac9d29c5",
+      "name": "Build Success Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        456
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const error = $input.first().json;\n\nreturn [{\n  json: {\n    status: 'failed',\n    sent_count: 0,\n    sent_to: [],\n    failed_count: 1,\n    message: error.message || 'Unknown error occurred while sending email.'\n  }\n}];"
+      },
+      "id": "eaabd2e6-2872-4ca1-94cf-06936ce8dc66",
+      "name": "Build Error Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        648
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "1e939a9c-e365-4483-a19d-4dcfff85ff0a",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -32,
+        552
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 20,
+        "options": {}
+      },
+      "id": "54b9c111-64c8-4794-97e1-64c62b490fd7",
+      "name": "Split In Batches (20 at a time)",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -480,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Personalize the message template with contact's name\nconst name = $json.name || 'there';\nconst rawContent = $json.message || '';\n\n// Convert markdown-style formatting to WhatsApp formatting\n// WhatsApp: *bold* (single asterisk), _italic_ (underscore)\nlet formattedContent = rawContent\n  .replace(/\\*\\*(.*?)\\*\\*/g, '*$1*')   // **bold** -> *bold*\n  .replace(/\\\\n/g, '\\n');               // literal \\n -> real newline\n\n// Build the final message: greeting + AI-generated content\nconst personalized = `Hello ${name}! 👋\\n\\n${formattedContent}`;\n\nreturn [{\n  json: {\n    ...$json,\n    personalizedMessage: personalized\n  }\n}];"
+      },
+      "id": "8cc97cf9-5f90-43ad-a64d-713a90bcdcfb",
+      "name": "Personalize Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        -432
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.twilio.com/2010-04-01/Accounts/AC744519a91990c51ce1bc9345eda149de/Messages.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "To",
+              "value": "=whatsapp:+91{{$json.phone}}"
+            },
+            {
+              "name": "From",
+              "value": "=whatsapp:+14155238886"
+            },
+            {
+              "name": "Body",
+              "value": "={{$json.personalizedMessage}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4939ba7b-11aa-421a-8c31-20d76d977933",
+      "name": "Send WhatsApp (Twilio)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -32,
+        -432
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "3IWUmi12Fp4RhDAJ",
+          "name": "Unnamed credential"
+        }
+      },
+      "notes": "Set Basic Auth credential: username = Account SID, password = Auth Token. Replace 'From' with your sandbox/verified WhatsApp number."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json[\"status\"]}}",
+              "rightValue": "queued",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b0230e04-2260-4bd6-b754-62d94549c4cc",
+      "name": "IF - Sent Successfully?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        192,
+        -432
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "logStatus",
+              "value": "sent",
+              "type": "string"
+            },
+            {
+              "name": "logTimestamp",
+              "value": "={{$now.toISO()}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "45125b95-0f46-4502-875b-148d56e12e31",
+      "name": "Set - Log Success",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        -336
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "logStatus",
+              "value": "failed",
+              "type": "string"
+            },
+            {
+              "name": "logTimestamp",
+              "value": "={{$now.toISO()}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b69a2013-b945-4535-9a9b-4dbebd36693c",
+      "name": "Set - Log Failure",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        -528
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "id": "bfb38084-49ab-4da8-ab31-246f1516a14c",
+      "name": "Wait (rate-limit protection)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        -336
+      ],
+      "webhookId": "3799268c-c947-470a-9c36-55f6653a7e99"
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "id": "a547d4dd-d70d-45a6-8409-434434693047",
+      "name": "Split In Batches (50 at a time)",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -480,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Personalize the message template with contact's name and append opt-out line\nconst template = $('Webhook - Trigger from Frontend').first().json.message || 'Hello {{name}}!';\nconst name = $json.name || 'there';\nlet personalized = template.replace(/{{\\s*name\\s*}}/gi, name);\n\nif (!/stop|unsubscribe/i.test(personalized)) {\n  personalized += ' Reply STOP to unsubscribe.';\n}\n\nreturn [{\n  json: {\n    ...$json,\n    personalizedMessage: personalized\n  }\n}];"
+      },
+      "id": "7f080646-54b2-4fb1-a875-08d3655414d6",
+      "name": "Personalize Message + Opt-out Line",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.twilio.com/2010-04-01/Accounts/YOUR_TWILIO_ACCOUNT_SID/Messages.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "form-urlencoded",
+        "options": {}
+      },
+      "id": "be097466-ea69-4499-832a-02437bb20176",
+      "name": "Send SMS (Twilio)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -32,
+        48
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "3IWUmi12Fp4RhDAJ",
+          "name": "Unnamed credential"
+        }
+      },
+      "notes": "Set Basic Auth credential: username = Account SID, password = Auth Token. Replace YOUR_TWILIO_SMS_NUMBER with your purchased SMS-capable number."
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://firestore.googleapis.com/v1/projects/YOUR_FIREBASE_PROJECT_ID/databases/(default)/documents/campaigns/{{$('Webhook - Trigger from Frontend').first().json[\"workspaceId\"]}}/list/{{$('Webhook - Trigger from Frontend').first().json[\"campaignId\"]}}/results/{{$json[\"phone\"]}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"fields\": {\n    \"status\": {\"stringValue\": \"{{$json[\\\"logStatus\\\"]}}\"},\n    \"timestamp\": {\"stringValue\": \"{{$json[\\\"logTimestamp\\\"]}}\"}\n  }\n}",
+        "options": {}
+      },
+      "id": "c4a27fb3-4fc8-4bec-9f7c-19dd703efeb0",
+      "name": "Write Result to Firestore",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        48
+      ],
+      "notes": "Replace YOUR_FIREBASE_PROJECT_ID. Add Firebase auth credential."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json[\"status\"]}}",
+              "rightValue": "queued",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8167b131-f5b2-4b7f-a63c-3f73c316d476",
+      "name": "IF - Sent Successfully?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        192,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "logStatus",
+              "value": "sent",
+              "type": "string"
+            },
+            {
+              "name": "logTimestamp",
+              "value": "={{$now.toISO()}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8b3afb20-678d-4f83-94b4-95c3421610ce",
+      "name": "Set - Log Success1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "logStatus",
+              "value": "failed",
+              "type": "string"
+            },
+            {
+              "name": "logTimestamp",
+              "value": "={{$now.toISO()}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6118aeae-fd6d-4f98-9690-175555f2f13b",
+      "name": "Set - Log Failure1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "id": "866b858c-ddee-45f7-b666-2fad686decb6",
+      "name": "Wait (rate-limit protection)1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        864,
+        120
+      ],
+      "webhookId": "a0673cac-1e96-451a-b886-2116f05a6637"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse & Split Recipients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse & Split Recipients": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split In Batches (20 at a time)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split In Batches (50 at a time)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Build Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Success Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Error Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches (20 at a time)": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Personalize Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personalize Message": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp (Twilio)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send WhatsApp (Twilio)": {
+      "main": [
+        [
+          {
+            "node": "IF - Sent Successfully?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Sent Successfully?": {
+      "main": [
+        [
+          {
+            "node": "Set - Log Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set - Log Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Log Success": {
+      "main": [
+        [
+          {
+            "node": "Wait (rate-limit protection)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Log Failure": {
+      "main": [
+        [
+          {
+            "node": "Wait (rate-limit protection)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait (rate-limit protection)": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches (20 at a time)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches (50 at a time)": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Personalize Message + Opt-out Line",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personalize Message + Opt-out Line": {
+      "main": [
+        [
+          {
+            "node": "Send SMS (Twilio)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send SMS (Twilio)": {
+      "main": [
+        [
+          {
+            "node": "IF - Sent Successfully?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Result to Firestore": {
+      "main": [
+        [
+          {
+            "node": "Wait (rate-limit protection)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Sent Successfully?1": {
+      "main": [
+        [
+          {
+            "node": "Set - Log Success1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set - Log Failure1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Log Success1": {
+      "main": [
+        [
+          {
+            "node": "Write Result to Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Log Failure1": {
+      "main": [
+        [
+          {
+            "node": "Write Result to Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait (rate-limit protection)1": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches (50 at a time)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "19ba816d-84ed-41c0-b056-0e695e93026f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5f17e978bad7a200c210794095e232a750cf3e3e7cf1ab0aeb5b454f490c893a"
+  },
+  "id": "Dpj78kqFnsxVQHPZ",
+  "tags": []
+}
